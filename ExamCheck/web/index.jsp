@@ -18,15 +18,7 @@
             <input type="password" name="password"/>
             <button type="submit">Login</button>
         </form>
-        <button onclick="fileBrowser()">Try it</button>
+        <input type="file"/>
 
-        <script>
-            //Browse local files to upload MMcN
-            function fileBrowser() {
-                var x = document.createElement("INPUT");
-                x.setAttribute("type", "file");
-                document.body.appendChild(x);
-            }
-        </script>
     </body>  
 </html>

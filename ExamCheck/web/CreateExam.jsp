@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+                <a class="navbar-brand" href="Staff.jsp">Dundee Computing Examination Board</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -150,10 +150,10 @@
             <a href="#" onclick="return confirm('File Uploaded');"><button>Upload Exam</button></a>
             <br>
             <br>
-            <a href="index.jsp" onclick="return confirm('Exam Has Been Created');"><button>Create Exam</button></a>
+            <a href="Staff.jsp" onclick="return confirm('Exam Has Been Created');"><button>Create Exam</button></a>
             <br>
             <br>
-            <a type="button" href="index.jsp">Return to Homepage</a>
+            <a type="button" href="Staff.jsp">Return to Homepage</a>
 
          <!-- jQuery -->
      <script src="vendor/jquery/jquery.min.js"></script>

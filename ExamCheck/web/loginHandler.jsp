@@ -17,7 +17,16 @@
     {
         HttpSession sesh = request.getSession();
         sesh.setAttribute("username", username);
-        response.sendRedirect("index.jsp");
+        
+        if(username == "admin")
+        {
+            response.sendRedirect("Admin.jsp");
+        }
+        else
+        {
+            response.sendRedirect("Staff.jsp");
+        }
+        
     }
     else {
         username = null;
@@ -25,15 +34,3 @@
     }
 
 %>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Result</title>
-    </head>
-    <body>
-        <h1>Username: <%= username%></h1>
-        <h1>Password: <%= password%></h1>
-    </body>
-</html>

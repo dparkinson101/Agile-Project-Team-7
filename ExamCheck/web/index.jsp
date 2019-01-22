@@ -18,7 +18,7 @@
             <input type="password" name="password"/>
             <button type="submit">Login</button>
         </form>
-        <input type="file"/>
+        <input type="file" accept=".doc, .pdf, .dox"/>
 
     </body>  
 </html>

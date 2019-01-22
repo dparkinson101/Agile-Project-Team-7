@@ -15,6 +15,8 @@
     
     if(login)
     {
+        HttpSession sesh = request.getSession();
+        sesh.setAttribute("username", username);
         response.sendRedirect("index.jsp");
     }
     else {

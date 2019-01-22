@@ -16,18 +16,18 @@ import java.sql.Statement;
  * @author Douglas
  */
 public class Database {
-    
+
     private Connection conn = null;
-    
+
     /**
      *
-     * @return Returns an instance of the sql.Connection class which is the 
+     * @return Returns an instance of the sql.Connection class which is the
      * current connection to the database.
      */
     public Connection connect(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } 
+        }
         catch (Exception ex) {
             System.out.println("Failed to register MySQL Connector/J");
             System.out.println(ex);
@@ -37,7 +37,7 @@ public class Database {
         try {
             conn = (Connection) DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam7db","18agileteam7","8302.at7.2038");
             return conn;
-        } 
+        }
         catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -46,7 +46,7 @@ public class Database {
 	    return null;
         }
     }
-    
+
     /**
      *
      * @param query SQL query for the database to process.
@@ -55,9 +55,9 @@ public class Database {
     public ResultSet executeQuery(String query){
         try{
             Statement state = conn.createStatement();
-            
+
             ResultSet rs = state.executeQuery(query);
-            
+
             return rs;
         }
         catch (SQLException ex) {
@@ -68,7 +68,7 @@ public class Database {
 	    return null;
         }
     }
-    
+
     /**
      *
      * @param query SQL query for the database to process.
@@ -77,9 +77,9 @@ public class Database {
     public boolean updateQuery(String query){
         try{
             Statement state = conn.createStatement();
-            
+
             state.executeUpdate(query);
-            
+
             return true;
         }
         catch (SQLException ex) {
@@ -88,6 +88,43 @@ public class Database {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
 	    return false;
+        }
+    }
+
+
+
+
+
+
+     public void blob(String path,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk){
+        try{
+                InputStream inputStream = new FileInputStream(new File(path));
+                String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`examFile`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES("+pk+","+Modulecode+","+title+","+online+","+resit+","+"?"+exam_setter_lect_pk+"1,1,1);";
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setBlob(1, inputStream);
+                statement.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+        public void downloadblob(String exampk,String path,String name){
+        try{
+            Statement state = conn.createStatement();
+            ResultSet rset = state.executeQuery("select examFile from exams where exam_pk="+exampk+";");
+            byte b[];
+            Blob blob;
+            int i=1;
+            String doctype =  rset.getString("doctype");
+            File f=new File(path+"\\"+name+doctype);
+            FileOutputStream fs = new FileOutputStream(f);
+            blob=rset.getBlob("test");
+            b=blob.getBytes(1, (int)blob.length());
+            fs.write(b);
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
     }
 }

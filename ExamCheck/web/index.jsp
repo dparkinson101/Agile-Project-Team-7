@@ -48,7 +48,7 @@ function resizeText(multiplier)
 
 <% 
     HttpSession sesh = request.getSession(); 
-    string username = sesh.getAttribute("username")
+    String username = (String)sesh.getAttribute("username");
 
 %>
 
@@ -103,7 +103,7 @@ function resizeText(multiplier)
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i><% System.out.Println(username);%></a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Accessibility</a>
                         </li>

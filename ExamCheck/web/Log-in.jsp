@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="BackEnd.Main" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,15 +40,16 @@
     }
 </style>
 </head>
+
 <body>
-<div class="login-form">
-    <form action="log-in.php" method="post">
+<div class="login-form" action="index.jsp">
+    <form> 
         <h2 class="text-center">Log in</h2>       
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username" required="required">
+            <input type="text" class="form-control" placeholder="Username" required="required" name="username">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" required="required">
+            <input type="password" class="form-control" placeholder="Password" required="required" name="password">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
@@ -59,4 +61,27 @@
     <p class="text-center"><a href="#">Create an Account</a></p>
 </div>
 </body>
+
+<%
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    
+    Main main = new Main();
+    boolean login = main.loginHandle(username, password);
+    
+    if(login)
+    {
+        String admin = "admin";
+        
+        HttpSession sesh = request.getSession();      
+        sesh.setAttribute("Admin", admin);
+        
+    }
+    else 
+    {
+        username = null;
+        password = null;
+    }
+
+%>
 </html>

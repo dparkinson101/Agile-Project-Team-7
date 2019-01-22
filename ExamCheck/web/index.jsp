@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +20,7 @@
             <button type="submit">Login</button>
         </form>
         <input type="file" accept=".doc, .pdf, .dox"/>
-
+        <input type="submit" value="Save">
+        
     </body>  
 </html>

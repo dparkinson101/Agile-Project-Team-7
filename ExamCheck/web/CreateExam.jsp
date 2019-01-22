@@ -1,6 +1,13 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="BackEnd.Database" %>
+<%
+    Database db = new Database();
+    db.statement("Insert SQL");
+
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -128,14 +135,14 @@
                 Internal Moderator: <br>
                 <input type="text" name="internalModerator"><br><br>
                 <br>
-                <input type="radio" name="examType" value="online"> Online<br>
-                <input type="radio" name="examType" value="written" > Written<br>
+                <input type="radio" name="examType" value="0" id="onlineRad"> Online<br> <!-- 0=Online 1=Written -->
+                <input type="radio" name="examType" value="1" id="writtenRad"> Written<br>
                 <br>
-                <input type="radio" name="examChoice" value="main" > Main Exam<br>
-                <input type="radio" name="examChoice" value="resit" > Resit Exam<br>
+                <input type="radio" name="examChoice" value="0" id="mainRad"> Main Exam<br> <!-- 0=Main Exam 1=Resit Exam -->
+                <input type="radio" name="examChoice" value="1" id="resitRad"> Resit Exam<br>
                 <br>
-                <input type="radio" name="examLevel" value="undergrad" > Undergrad Exam<br>
-                <input type="radio" name="examLevel" value="postgrad" > Postgrad Exam<br>
+                <input type="radio" name="examLevel" value="0" id="UndergradRad"> Undergrad Exam<br> <!-- 0=Undergrad 1=Postgrad -->
+                <input type="radio" name="examLevel" value="1" id="PostgradRad"> Postgrad Exam<br>
                 <br>
                 <br>
             </form>
@@ -146,6 +153,32 @@
             <a href="#" onclick="return confirm('File Uploaded');"><button>Upload Exam</button></a>
             <br>
             <br>
+            <script>
+             function radioCheck(){
+                 var examType;
+                 var examChoice;
+                 var examLevel;
+                if (document.getElementById("onlineRad").checked) {
+                    examType = "0";
+                } else if(document.getElementByID("writtenRad").checked){
+                    examType = "1";
+                }
+                
+                if (document.getElementById("mainRad").checked) {
+                    examChoice = "0";
+                } else if(document.getElementByID("resitRad").checked){
+                    examChoice = "1";
+                }
+                
+                if (document.getElementById("UndergradRad").checked) {
+                    examLevel = "0";
+                } else if(document.getElementByID("PostgradRad").checked){
+                    examLevel = "1";
+                }
+                
+                
+             }                
+            </script>
             <a href="index.jsp" onclick="return confirm('Exam Has Been Created');"><button>Create Exam</button></a>
             <br>
             <br>

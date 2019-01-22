@@ -1,5 +1,5 @@
 <%-- 
-    Document   : index.jsp
+    Document   : Staff.jsp
     Created on : 22-Jan-2019, 10:53:26
     Author     : andrewbrodrick
 --%>
@@ -65,7 +65,7 @@ function resizeText(multiplier)
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+                <a class="navbar-brand" href="Staff.jsp">Dundee Computing Examination Board</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -78,7 +78,7 @@ function resizeText(multiplier)
                     <ul class="dropdown-menu dropdown-access">
                             <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
                             <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                            <li><a href="index.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
+                            <li><a href="Staff.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
                     </ul>
                 </li>
                 <!-- Alerts Dropdown -->

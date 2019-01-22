@@ -19,6 +19,11 @@ public class Database {
     
     private Connection conn = null;
     
+    /**
+     *
+     * @return Returns an instance of the sql.Connection class which is the 
+     * current connection to the database.
+     */
     public Connection connect(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -34,7 +39,7 @@ public class Database {
             return conn;
         } 
         catch (SQLException ex) {
-            // handle any errors
+            // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
@@ -42,7 +47,12 @@ public class Database {
         }
     }
     
-    public ResultSet statement(String query){
+    /**
+     *
+     * @param query SQL query for the database to process.
+     * @return Returns results of query for the database in a sql.ResultSet object.
+     */
+    public ResultSet executeQuery(String query){
         try{
             Statement state = conn.createStatement();
             
@@ -50,9 +60,34 @@ public class Database {
             
             return rs;
         }
-        catch(Exception e){
-            System.out.println(e);
-            return null;
+        catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+	    return null;
+        }
+    }
+    
+    /**
+     *
+     * @param query SQL query for the database to process.
+     * @return Returns results of query for the database in a sql.ResultSet object.
+     */
+    public boolean updateQuery(String query){
+        try{
+            Statement state = conn.createStatement();
+            
+            state.executeUpdate(query);
+            
+            return true;
+        }
+        catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+	    return false;
         }
     }
 }

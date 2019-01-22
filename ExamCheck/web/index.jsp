@@ -18,5 +18,8 @@
             <input type="password" name="password"/>
             <button type="submit">Login</button>
         </form>
+        <br><br>
+        <a href="createAccount.jsp">Create Account</a>
+        
     </body>
 </html>

@@ -79,36 +79,68 @@ public class DatabaseTest {
     /**
      * Test of blob method, of class Database.
      */
+     public void testBlobuploadanddownload() {
+      
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+    }
+    
+    
+     
+    
+    
     @Test
-    public void testBlob() {
-        System.out.println("blob");
-        String path = "";
-        String Modulecode = "";
-        String level = "";
-        String pk = "";
-        String title = "";
-        String online = "";
-        String resit = "";
-        String exam_setter_lect_pk = "";
-        Database instance = new Database();
-        instance.blob(path, Modulecode, level, pk, title, online, resit, exam_setter_lect_pk);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBlobin() {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     /**
      * Test of downloadblob method, of class Database.
      */
     @Test
-    public void testDownloadblob() {
-        System.out.println("downloadblob");
-        String exampk = "";
-        String path = "";
-        String name = "";
-        Database instance = new Database();
-        instance.downloadblob(exampk, path, name);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testblobout() {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
 }

@@ -13,8 +13,9 @@
     Main main = new Main();
     boolean login = main.loginHandle(username, password);
     
-    if(login){
-        //Redirect to home page and give cookie somehow
+    if(login)
+    {
+        response.sendRedirect("index.jsp");
     }
     else {
         username = null;

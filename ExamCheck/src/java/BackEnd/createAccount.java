@@ -61,44 +61,7 @@ public class createAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Sets up variables for POST varaible info
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        //Sets up database connection
-        Database db = new Database();
-        db.connect();
-        
-        //Creates a new user
-        boolean created;
-        try{
-            db.updateQuery("INSERT INTO testuser (username, password, firstName, lastName) VALUES ('"+email+"', '"+password+"', '"+firstName+"', '"+lastName+"');");
-            created = true;
-        }
-        catch(Exception e){
-            created = false;
-            System.out.println(e);
-        }
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet createAccount</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet createAccount at " + request.getContextPath() + "</h1>");
-            out.println("<p>"+ firstName +" "+ lastName+"</p>");
-            if(created){
-                out.println("<p>Account Created Successfully :)</p>");
-            }
-            else{
-                out.println("<p>Error Creating Account</p>");
-            }
-            out.println("</body>");
-            out.println("</html>");
-        }
+        processRequest(request, response);
     }
 
     /**

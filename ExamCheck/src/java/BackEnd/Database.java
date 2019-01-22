@@ -102,7 +102,7 @@ public class Database {
 
 
 
-     public void blob(String path,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk){
+     public void blobin(String path,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk){
         try{
                 InputStream inputStream = new FileInputStream(new File(path));
                 String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`examFile`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES("+pk+","+Modulecode+","+title+","+online+","+resit+","+"?"+exam_setter_lect_pk+"1,1,1);";
@@ -115,7 +115,7 @@ public class Database {
         }
     }
 
-        public void downloadblob(String exampk,String path,String name){
+        public void blobout(String exampk,String path,String name){
         try{
             Statement state = conn.createStatement();
             ResultSet rset = state.executeQuery("select examFile from exams where exam_pk="+exampk+";");

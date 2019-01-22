@@ -5,7 +5,8 @@
  */
 package BackEnd;
 
-import java.sql.Connection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author Douglas
  */
-public class MainTest {
+public class createAccountTest {
     
-    public MainTest() {
+    public createAccountTest() {
     }
     
     @BeforeClass
@@ -39,18 +40,15 @@ public class MainTest {
     }
 
     /**
-     * Test of loginHandle method, of class Main.
+     * Test of getServletInfo method, of class createAccount.
      */
     @Test
-    public void testLoginHandle() {
-        System.out.println("loginHandle");
-        String username = "admin";
-        String password = "1234";
-        Main instance = new Main();
-        boolean expResult = true;
-        boolean result = instance.loginHandle(username, password);
+    public void testGetServletInfo() {
+        System.out.println("getServletInfo");
+        createAccount instance = new createAccount();
+        String expResult = "Used to create a new user account.";
+        String result = instance.getServletInfo();
         assertEquals(expResult, result);
-        
-        //fail("The site cannot login with correct details.");
     }
+    
 }

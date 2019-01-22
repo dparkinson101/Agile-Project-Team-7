@@ -1,10 +1,7 @@
-<%--
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+
+<head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +32,7 @@
 <script>
 function resizeText(multiplier)
 {
-    if (document.body.style.fontSize == "")
+    if (document.body.style.fontSize == "") 
     {
         document.body.style.fontSize = "1.0em";
     }
@@ -44,7 +41,7 @@ function resizeText(multiplier)
 </script>
 
 <body>
-
+ 
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -56,7 +53,7 @@ function resizeText(multiplier)
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+                <a class="navbar-brand" href="index.html">Dundee Computing Examination Board</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -69,7 +66,7 @@ function resizeText(multiplier)
                     <ul class="dropdown-menu dropdown-access">
                             <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
                             <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                            <li><a href="index.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
+                            <li><a href="index.html"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
                     </ul>
                 </li>
                 <!-- Alerts Dropdown -->
@@ -206,7 +203,7 @@ function resizeText(multiplier)
                                 </div>
                             </div>
                         </div>
-                        <a href="CreateExam.jsp">
+                        <a href="CreateExam.html">
                             <div class="panel-footer">
                                 <span class="pull-left">Create</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -226,9 +223,8 @@ function resizeText(multiplier)
 
      <!-- Bootstrap Core JavaScript -->
      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
+ 
      <!-- Custom Theme JavaScript -->
      <script src="dist/js/DCEC.js"></script>
 
 </body>
-</html>

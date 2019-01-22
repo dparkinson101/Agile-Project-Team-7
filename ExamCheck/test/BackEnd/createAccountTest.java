@@ -40,49 +40,13 @@ public class createAccountTest {
     }
 
     /**
-     * Test of processRequest method, of class createAccount.
-     */
-    @Test
-    public void testProcessRequest() throws Exception {
-        System.out.println("processRequest");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        createAccount instance = new createAccount();
-        instance.processRequest(request, response);
-    }
-
-    /**
-     * Test of doGet method, of class createAccount.
-     */
-    @Test
-    public void testDoGet() throws Exception {
-        System.out.println("doGet");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        createAccount instance = new createAccount();
-        instance.doGet(request, response);
-    }
-
-    /**
-     * Test of doPost method, of class createAccount.
-     */
-    @Test
-    public void testDoPost() throws Exception {
-        System.out.println("doPost");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        createAccount instance = new createAccount();
-        instance.doPost(request, response);
-    }
-
-    /**
      * Test of getServletInfo method, of class createAccount.
      */
     @Test
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
         createAccount instance = new createAccount();
-        String expResult = "";
+        String expResult = "Used to create a new user account.";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
     }

@@ -41,7 +41,7 @@
 </head>
 <body>
 <div class="login-form">
-    <form action="log-in.php" method="post">
+    <form action="loginhandler.jsp" method="post">
         <h2 class="text-center">Log in</h2>       
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Username" required="required">

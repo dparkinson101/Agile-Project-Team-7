@@ -6,6 +6,7 @@
 package BackEnd;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author Douglas
  */
-public class MainTest {
+public class DatabaseTest {
     
-    public MainTest() {
+    public DatabaseTest() {
     }
     
     @BeforeClass
@@ -39,18 +40,27 @@ public class MainTest {
     }
 
     /**
-     * Test of loginHandle method, of class Main.
+     * Test of connect method, of class Database.
      */
     @Test
-    public void testLoginHandle() {
-        System.out.println("loginHandle");
-        String username = "admin";
-        String password = "1234";
-        Main instance = new Main();
-        boolean expResult = true;
-        boolean result = instance.loginHandle(username, password);
-        assertEquals(expResult, result);
-        
-        //fail("The site cannot login with correct details.");
+    public void testConnect() {
+        System.out.println("connect");
+        Database instance = new Database();
+        Connection result = instance.connect();
+        assertNotNull(result);
     }
+
+    /**
+     * Test of statement method, of class Database.
+     */
+    @Test
+    public void testStatement() {
+        System.out.println("statement");
+        String query = "SELECT * FROM entity_1;";
+        Database instance = new Database();
+        instance.connect();
+        ResultSet result = instance.statement(query);
+        assertNotNull(result);
+    }
+    
 }

@@ -2,10 +2,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="BackEnd.Database" %>
-<%
+<% //Connects to database.
     Database db = new Database();
-    db.statement("Insert SQL");
-
+    db.connect();
 %>
 
 <!DOCTYPE html>
@@ -150,9 +149,10 @@
                 Select a file to upload: <br><br>
                 <input type="file" name="fileToUpload" id="fileToUpload"><br>
             </form>
-            <a href="#" onclick="return confirm('File Uploaded');"><button>Upload Exam</button></a>
+            <a href="#" onclick="return confirm('File Uploaded');"><button onclick= "radioCheck()">Upload Exam</button></a>
             <br>
             <br>
+            <!-- returns values for radio buttons -->
             <script>
              function radioCheck(){
                  var examType;

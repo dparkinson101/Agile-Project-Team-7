@@ -9,14 +9,13 @@
 <%
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-    
+
     Main main = new Main();
     boolean login = main.loginHandle(username, password);
-    
-    if(login){
+
+    if (login) {
         //Redirect to home page and give cookie somehow
-    }
-    else {
+    } else {
         username = null;
         password = null;
     }

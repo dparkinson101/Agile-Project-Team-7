@@ -30,76 +30,201 @@ public class Database {
      * @return Returns an instance of the sql.Connection class which is the
      * current connection to the database.
      */
-    public Connection connect(){
+    public Connection connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-        }
+        } 
         catch (Exception ex) {
             System.out.println("Failed to register MySQL Connector/J");
             System.out.println(ex);
-	    return null;
+            return null;
         }
 
         try {
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam7db","18agileteam7","8302.at7.2038");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam7db", "18agileteam7", "8302.at7.2038");
             return conn;
-        }
+        } 
         catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-	    return null;
+            return null;
         }
     }
 
     /**
      *
      * @param query SQL query for the database to process.
-     * @return Returns results of query for the database in a sql.ResultSet object.
+     * @return Returns results of query for the database in a sql.ResultSet
+     * object.
      */
-    public ResultSet executeQuery(String query){
-        try{
+    public ResultSet executeQuery(String query) {
+        try {
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(query);
 
             return rs;
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-	    return null;
+            return null;
         }
     }
 
     /**
      *
      * @param query SQL query for the database to process.
-     * @return Returns results of query for the database in a sql.ResultSet object.
+     * @return Returns results of query for the database in a sql.ResultSet
+     * object.
      */
-    public boolean updateQuery(String query){
-        try{
+    public boolean updateQuery(String query) {
+        try {
             Statement state = conn.createStatement();
 
             state.executeUpdate(query);
 
             return true;
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-	    return false;
+            return false;
         }
     }
 
  public String test(){
 return "donedb";
  }
+
+ public String[] checklogin(String username, String password){
+        try{
+          String sql = "select user_pk from users where username ="+username+" and password ="+password+";";
+          //  String sql = "select user_pk from users where username =\"admin\" and password =\"1234\";";
+            
+             Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+
+          
+            String[] roles = new String[5];
+rs.beforeFirst();
+rs.next();
+
+           String user_pk = rs.getString(1);
+           
+           if(user_pk!=null){
+        
+         roles[0]=     this.getexamsetter(user_pk);
+         roles[1]=         this.getinternalmod(user_pk);
+         roles[2]=           this.getexamvetcommit(user_pk);
+         roles[3]=           this.getexternal(user_pk);
+         roles[4]=          this.getoffice(user_pk);
+           }
+         return roles;
+        }
+        catch (SQLException ex) {
+             String[] error = new String[5];
+             error[0]="-1";
+             error[1]="-1";
+             error[2]="-1";
+             error[3]="-1";
+             error[4]="-1";
+           return error;
+        }
+        
+        
+     
+    }
+ 
+ 
+  public String getexamsetter(String pk){
+        try{
+            String sql ="select lect_pk from exam_setter where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+           return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+           return "0";
+        }  
+  }
+public String getinternalmod(String pk){   
+        try{
+            String sql ="select int_mod_pk from internal_moderator where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+                      return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+              return "0";
+        }  
+  }
+public String getexamvetcommit(String pk){
+        try{
+            String sql ="select exmVet_pk from ExmVetComit where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+                    return  rs.getString(1);          
+        }
+        catch (SQLException ex) {
+             return "0";
+        }  
+  }
+
+
+public String getexternal(String pk){
+        try{
+            String sql ="select ext_exam_pk from External_Examiner where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+                   return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+             return "0";
+        }  
+  }
+public String getoffice(String pk){
+        try{
+            String sql ="select school_office_pk from School_office where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+                     return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+            return "0";
+        }  
+  }
 
 
 

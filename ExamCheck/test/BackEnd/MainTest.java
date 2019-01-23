@@ -5,7 +5,6 @@
  */
 package BackEnd;
 
-import java.sql.Connection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,4 +52,19 @@ public class MainTest {
         
         //fail("The site cannot login with correct details.");
     }
+
+    /**
+     * Test of connectDatabase method, of class Main.
+     */
+    @Test
+    public void testConnectDatabase() {
+        System.out.println("connectDatabase");
+        Main instance = new Main();
+        boolean expResult = true;
+        boolean result = instance.connectDatabase();
+        assertEquals(expResult, result);
+        
+        //fail("The the method connectDatabase() could not connect to the SQL database.");
+    }
+    
 }

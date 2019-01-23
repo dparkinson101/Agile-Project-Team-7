@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="1" hostname="Douglas-Laptop" name="BackEnd.MainTest" skipped="0" tests="2" time="12.769" timestamp="2019-01-22T10:24:02">
+<testsuite errors="0" failures="0" hostname="Douglas-Laptop" name="BackEnd.MainTest" skipped="0" tests="2" time="0.39" timestamp="2019-01-21T15:17:41">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="GB" />
@@ -66,7 +66,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner BackEnd.MainTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Douglas\Documents\GitHub\Agile-Project-Team-7\ExamCheck\build\test\results\TEST-BackEnd.MainTest.xml crashfile=C:\Users\Douglas\Documents\GitHub\Agile-Project-Team-7\ExamCheck\build\junitvmwatcher232019901498361897.properties propsfile=C:\Users\Douglas\Documents\GitHub\Agile-Project-Team-7\ExamCheck\build\junit2266211431170781829.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner BackEnd.MainTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Douglas\Documents\GitHub\Agile-Project-Team-7\ExamCheck\build\test\results\TEST-BackEnd.MainTest.xml crashfile=C:\Users\Douglas\Documents\GitHub\Agile-Project-Team-7\ExamCheck\build\junitvmwatcher8487752829415954337.properties propsfile=C:\Users\Douglas\Documents\GitHub\Agile-Project-Team-7\ExamCheck\build\junit8398670274857944811.properties" />
     <property name="build.classes.dir" value="build/web/WEB-INF/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="ap.supported.internal" value="true" />
@@ -445,18 +445,9 @@
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
   <testcase classname="BackEnd.MainTest" name="testLoginHandle" time="0.0" />
-  <testcase classname="BackEnd.MainTest" name="testConnectDatabase" time="12.534">
-    <failure type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError
-	at BackEnd.MainTest.testConnectDatabase(MainTest.java:65)
-</failure>
-  </testcase>
+  <testcase classname="BackEnd.MainTest" name="testConnectDatabase" time="0.328" />
   <system-out><![CDATA[loginHandle
 connectDatabase
-SQLException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-SQLState: 08S01
-VendorError: 0
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

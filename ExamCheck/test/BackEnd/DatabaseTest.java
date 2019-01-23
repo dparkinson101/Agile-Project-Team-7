@@ -75,5 +75,72 @@ public class DatabaseTest {
         boolean result = instance.updateQuery(query);
         assertTrue(result);
     }
+
+    /**
+     * Test of blob method, of class Database.
+     */
+     public void testBlobuploadanddownload() {
+      
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+    }
+    
+    
+     
+    
+    
+    @Test
+    public void testBlobin() {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+
+    /**
+     * Test of downloadblob method, of class Database.
+     */
+    @Test
+    public void testblobout() {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
     
 }

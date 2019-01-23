@@ -1,72 +1,91 @@
 <%--
+    Document   : index
+    Created on : 21-Jan-2019, 10:20:17
+    Author     : Douglas
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="The Mighty Morphin' Matthew Rangers" content="">
-
-        <title>Homepage</title>
-
-        <!-- Bootstrap Core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="dist/css/DCEC.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login</title>
     </head>
-
-    <script>
-        function resizeText(multiplier)
-        {
-            if (document.body.style.fontSize == "")
-            {
-                document.body.style.fontSize = "1.0em";
-            }
-            document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
-        }
-    </script>
-
     <body>
+        <h1>Login</h1>
+        <form action="loginHandler.jsp" method="POST">
+            <input type="text" name="username"/>
+            <input type="password" name="password"/>
+            <button type="submit">Login</button>
+        </form>
+        <input type="file" accept=".doc, .pdf, .dox"/>
+        <input type="submit" value="Save">
 
-        <div id="wrapper">
+    </body>
+=======
 
-            <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
-                </div>
-                <!-- /.navbar-header -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="The Mighty Morphin' Matthew Rangers" content="">
 
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- Accessibility -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-access">
+    <title>Homepage</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="dist/css/DCEC.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<script>
+function resizeText(multiplier)
+{
+    if (document.body.style.fontSize == "")
+    {
+        document.body.style.fontSize = "1.0em";
+    }
+      document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+}
+</script>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- Accessibility -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-access">
                             <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
                             <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
                             <li><a href="index.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
@@ -224,11 +243,12 @@
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+     <!-- Bootstrap Core JavaScript -->
+     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="dist/js/DCEC.js"></script>
+     <!-- Custom Theme JavaScript -->
+     <script src="dist/js/DCEC.js"></script>
 
-    </body>
+</body>
+>>>>>>> master
 </html>

@@ -1,10 +1,11 @@
-<%-- 
-    Document   : CreateExam
-    Created on : 22-Jan-2019, 10:54:58
-    Author     : andrewbrodrick
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="BackEnd.Database" %>
+<% //Connects to database.
+              
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -132,14 +133,14 @@
                 Internal Moderator: <br>
                 <input type="text" name="internalModerator"><br><br>
                 <br>
-                <input type="radio" name="examType" value="online"> Online<br>
-                <input type="radio" name="examType" value="written" > Written<br>
+                <input type="radio" name="examType" value="0" id="onlineRad"> Online<br> <!-- 0=Online 1=Written -->
+                <input type="radio" name="examType" value="1" id="writtenRad"> Written<br>
                 <br>
-                <input type="radio" name="examChoice" value="main" > Main Exam<br>
-                <input type="radio" name="examChoice" value="resit" > Resit Exam<br>
+                <input type="radio" name="examChoice" value="0" id="mainRad"> Main Exam<br> <!-- 0=Main Exam 1=Resit Exam -->
+                <input type="radio" name="examChoice" value="1" id="resitRad"> Resit Exam<br>
                 <br>
-                <input type="radio" name="examLevel" value="undergrad" > Undergrad Exam<br>
-                <input type="radio" name="examLevel" value="postgrad" > Postgrad Exam<br>
+                <input type="radio" name="examLevel" value="0" id="UndergradRad"> Undergrad Exam<br> <!-- 0=Undergrad 1=Postgrad -->
+                <input type="radio" name="examLevel" value="1" id="PostgradRad"> Postgrad Exam<br>
                 <br>
                 <br>
             </form>
@@ -147,10 +148,58 @@
                 Select a file to upload: <br><br>
                 <input type="file" name="fileToUpload" id="fileToUpload"><br>
             </form>
-            <a href="#" onclick="return confirm('File Uploaded');"><button>Upload Exam</button></a>
+            <a href="#" onclick="return confirm('File Uploaded');"><button onclick= "radioCheck()">Upload Exam</button></a>
             <br>
             <br>
-            <a href="index.jsp" onclick="return confirm('Exam Has Been Created');"><button>Create Exam</button></a>
+            <!-- returns values for radio buttons -->
+            <script>
+             function radioCheck(){
+                 var examType;
+                 var examChoice;
+                 var examLevel;
+                if (document.getElementById("onlineRad").checked) {
+                    examType = "0";
+                } else if(document.getElementByID("writtenRad").checked){
+                    examType = "1";
+                }
+                
+                if (document.getElementById("mainRad").checked) {
+                    examChoice = "0";
+                } else if(document.getElementByID("resitRad").checked){
+                    examChoice = "1";
+                }
+                
+                if (document.getElementById("UndergradRad").checked) {
+                    examLevel = "0";
+                } else if(document.getElementByID("PostgradRad").checked){
+                    examLevel = "1";
+                }
+                
+                
+             }                
+           function B(){
+               out.println("start");
+             
+              Database db = new Database();
+                db.connect();
+              // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
+               db.blobin("U:\\Gamers-rise-up-report.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1");  
+             out.println("end");
+            out.println(db.blobin("C:\\Users\\laptop\\Desktop\\test.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1"));
+               
+    }
+           
+           
+           
+           
+            
+             </script>
+          <%              
+                
+               
+        %>
+             <li><a href="#" onclick=B()><i ></i>create exam</a></li>
+       
             <br>
             <br>
             <a type="button" href="index.jsp">Return to Homepage</a>

@@ -2,81 +2,76 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="BackEnd.Database" %>
-<% //Connects to database.
-              
-%>
 
 <!DOCTYPE html>
 <html>
     <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>Create An Exam</title>
+        <title>Create An Exam</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <!-- Custom CSS -->
-    <link href="dist/css/DCEC.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="dist/css/DCEC.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-</head>
+    </head>
 
-<script>
-        function resizeText(multiplier)
-        {
-            if (document.body.style.fontSize == "") 
-            {
+    <body>
+    
+        <script>
+            function resizeText(multiplier){
+                if (document.body.style.fontSize === ""){
                 document.body.style.fontSize = "1.0em";
+                }
+                document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
             }
-              document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
-        }
         </script>
-
-<body>
  
-    <div id="wrapper">
+        <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
-            </div>
-            <!-- /.navbar-header -->
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+                </div>
+                <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
-                 <!-- Accessibility -->
-                 <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-access">
-                                <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-fw"></i>Increase Text Size</a></li>
-                                <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                                <li><a href="CreateExam.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
-                        </ul>
-                    </li>
+                <ul class="nav navbar-top-links navbar-right">
+                <!-- Accessibility -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-access">
+                        <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-fw"></i>Increase Text Size</a></li>
+                        <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
+                        <li><a href="CreateExam.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
+                    </ul>
+                </li>
                 <!-- Alerts Dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -94,44 +89,41 @@
 
                 </li>
                 <!-- User Dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Accessibilty</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Accessibilty</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
                 <!-- /.dropdown -->
-            </ul>
-            <!-- Top Links -->
+                </ul>
+                <!-- Top Links -->
 
             <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Create a new Exam</h1>
+            </nav>
+        
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Create a new Exam</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
+            
 
-            <form>
+            <form action="FileUpload" method="post" id="examDetails">
                 Module Code: <br>
-                <input type="text" name="moduleCode"><br><br>
+                <input type="text" name="moduleCode" id="modCode"><br><br>
                 Module Title: <br>
-                <input type="text" name="moduleTitle"><br><br>
-                Module Coordinator: <br>
-                <input type="text" name="moduleCoordinator"><br><br>
-                Internal Moderator: <br>
-                <input type="text" name="internalModerator"><br><br>
+                <input type="text" name="moduleTitle" id="modTitle"><br><br>
                 <br>
                 <input type="radio" name="examType" value="0" id="onlineRad"> Online<br> <!-- 0=Online 1=Written -->
                 <input type="radio" name="examType" value="1" id="writtenRad"> Written<br>
@@ -143,76 +135,88 @@
                 <input type="radio" name="examLevel" value="1" id="PostgradRad"> Postgrad Exam<br>
                 <br>
                 <br>
-            </form>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
                 Select a file to upload: <br><br>
                 <input type="file" name="fileToUpload" id="fileToUpload"><br>
             </form>
-            <a href="#" onclick="return confirm('File Uploaded');"><button onclick= "radioCheck()">Upload Exam</button></a>
+                <button type="submit" form="examDetails" value="submit">Submit Exam</button>
             <br>
             <br>
             <!-- returns values for radio buttons -->
-            <script>
-             function radioCheck(){
-                 var examType;
-                 var examChoice;
-                 var examLevel;
-                if (document.getElementById("onlineRad").checked) {
-                    examType = "0";
-                } else if(document.getElementByID("writtenRad").checked){
-                    examType = "1";
+            <script>                
+                function submitExam( file, code, level, subject, type , choice){
+                    out.println("start");
+
+                    Database db = new Database();
+                    db.connect();
+                    // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
+                    db.blobin( file, code, level, "34", subject, type, choice, "1");  
+                    out.println("end");
+                    // out.println(db.blobin(file, code, level, "34", subject, type, choice, "1")); 
+                    window.alert(db.blobin(file, code, level, "34", subject, type, choice, "1"));
+                } 
+
+                function getModCode(){
+                    return document.getElementById("modCode");
                 }
-                
-                if (document.getElementById("mainRad").checked) {
-                    examChoice = "0";
-                } else if(document.getElementByID("resitRad").checked){
-                    examChoice = "1";
+
+                function getModTitle(){
+                    return document.getElementById("modTitle");
                 }
-                
-                if (document.getElementById("UndergradRad").checked) {
-                    examLevel = "0";
-                } else if(document.getElementByID("PostgradRad").checked){
-                    examLevel = "1";
+
+                function getFilePath(){
+                    return document.getElementById("fileToUpload");
                 }
-                
-                
-             }                
-           function B(){
-               out.println("start");
-             
-              Database db = new Database();
-                db.connect();
-              // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
-               db.blobin("U:\\Gamers-rise-up-report.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1");  
-             out.println("end");
-            out.println(db.blobin("C:\\Users\\laptop\\Desktop\\test.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1"));
-               
-    }
-           
-           
-           
-           
+
+                function getLevel(){
+                    var radios = document.getElementByName("examLevel");
+                    for (var i = 0, length = radios.length; i < length; i++){
+                        if (radios[i].checked){
+                            return (radios[i].value);
+                            break;
+                        }
+                    }
+                }
+
+                function getChoice(){
+                    var radios = document.getElementByName("examChoice");
+                    for (var i = 0, length = radios.length; i < length; i++){
+                        if (radios[i].checked){
+                            return (radios[i].value);
+                            break;
+                        }
+                    }
+                }
+
+                function getType(){
+                    var radios = document.getElementByName("examType");
+                    for (var i = 0, length = radios.length; i < length; i++){
+                        if (radios[i].checked){
+                            return (radios[i].value);
+                            break;
+                        }
+                    }
+                }
+            </script>
             
-             </script>
-          <%              
-                
-               
-        %>
-             <li><a href="#" onclick=B()><i ></i>create exam</a></li>
+            
+             
+                <a href="#" onclick="SubmitExam(getFilePath(), getModCode(),  getLevel(), getModTitle(), getType(), getChoice())"><i ></i>create exam</a>
+             
        
-            <br>
-            <br>
-            <a type="button" href="index.jsp">Return to Homepage</a>
+                <br>
+                <br>
+                <a href="index.jsp">Return to Homepage</a>
 
-         <!-- jQuery -->
-     <script src="vendor/jquery/jquery.min.js"></script>
+                <!-- jQuery -->
+                <script src="vendor/jquery/jquery.min.js"></script>
 
-     <!-- Bootstrap Core JavaScript -->
-     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+                <!-- Bootstrap Core JavaScript -->
+                <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
  
  
-     <!-- Custom Theme JavaScript -->
-     <script src="dist/js/DCEC.js"></script>
-
-</body>
+                <!-- Custom Theme JavaScript -->
+                <script src="dist/js/DCEC.js"></script>
+            </div>
+            </div>
+    </body>
 </html>

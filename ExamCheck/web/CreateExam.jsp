@@ -3,8 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="BackEnd.Database" %>
 <% //Connects to database.
-    Database db = new Database();
-    db.connect();
+              
 %>
 
 <!DOCTYPE html>
@@ -178,11 +177,29 @@
                 
                 
              }                
-            </script>
-            <a href="index.jsp" onclick="return confirm('Exam Has Been Created');"><button>Create Exam</button></a>
-            <%
-             db.blobin("U:\\Gamers-rise-up-report.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1");  
-            %>
+           function B(){
+               out.println("start");
+             
+              Database db = new Database();
+                db.connect();
+              // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
+               db.blobin("U:\\Gamers-rise-up-report.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1");  
+             out.println("end");
+            out.println(db.blobin("C:\\Users\\laptop\\Desktop\\test.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1"));
+               
+    }
+           
+           
+           
+           
+            
+             </script>
+          <%              
+                
+               
+        %>
+             <li><a href="#" onclick=B()><i ></i>create exam</a></li>
+       
             <br>
             <br>
             <a type="button" href="index.jsp">Return to Homepage</a>

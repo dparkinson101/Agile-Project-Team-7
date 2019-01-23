@@ -105,10 +105,8 @@ function resizeText(multiplier)
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Accessibility</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="Log-in.jsp" onclick="return confirm('Logged Out Successfully');"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                 </li>

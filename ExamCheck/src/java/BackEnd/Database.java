@@ -103,8 +103,8 @@ return "donedb";
 
  public String[] checklogin(String username, String password){
         try{
-         // String sql = "select user_pk from users where username ="+username+" and password ="+password+";";
-            String sql = "select user_pk from users where username =\"amin\" and password =\"1234\";";
+          String sql = "select user_pk from users where username ="+username+" and password ="+password+";";
+          //  String sql = "select user_pk from users where username =\"admin\" and password =\"1234\";";
             
              Statement state = conn.createStatement();
 

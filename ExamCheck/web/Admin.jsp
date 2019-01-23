@@ -106,7 +106,7 @@ function resizeText(multiplier)
                         <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="Log-in.jsp" onclick="return confirm('Logged Out Successfully');"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="Log-in.jsp" onclick="return confirm('Are you sure you want to log out?');"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
@@ -210,7 +210,7 @@ function resizeText(multiplier)
                                 </div>
                             </div>
                         </div>
-                        <a href="CreateExam.jsp">
+                        <a href="AddUser.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">Add User</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

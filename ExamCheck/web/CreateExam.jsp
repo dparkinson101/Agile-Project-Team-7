@@ -180,6 +180,9 @@
              }                
             </script>
             <a href="index.jsp" onclick="return confirm('Exam Has Been Created');"><button>Create Exam</button></a>
+            <%
+             db.blobin("U:\\Gamers-rise-up-report.docx", "AC42012", "0", "34", "Matmatics", "1", "MatLaB", "1");  
+            %>
             <br>
             <br>
             <a type="button" href="index.jsp">Return to Homepage</a>

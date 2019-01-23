@@ -18,7 +18,7 @@
         HttpSession sesh = request.getSession();
         sesh.setAttribute("username", username);
         
-        if(username == "admin")
+        if(username.equals("admin"))
         {
             response.sendRedirect("Admin.jsp");
         }

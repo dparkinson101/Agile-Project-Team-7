@@ -101,6 +101,131 @@ public class Database {
 return "donedb";
  }
 
+ public String[] checklogin(String username, String password){
+        try{
+         // String sql = "select user_pk from users where username ="+username+" and password ="+password+";";
+            String sql = "select user_pk from users where username =\"amin\" and password =\"1234\";";
+            
+             Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+
+          
+            String[] roles = new String[5];
+rs.beforeFirst();
+rs.next();
+
+           String user_pk = rs.getString(1);
+           
+           if(user_pk!=null){
+        
+         roles[0]=     this.getexamsetter(user_pk);
+         roles[1]=         this.getinternalmod(user_pk);
+         roles[2]=           this.getexamvetcommit(user_pk);
+         roles[3]=           this.getexternal(user_pk);
+         roles[4]=          this.getoffice(user_pk);
+           }
+         return roles;
+        }
+        catch (SQLException ex) {
+             String[] error = new String[5];
+             error[0]="-1";
+             error[1]="-1";
+             error[2]="-1";
+             error[3]="-1";
+             error[4]="-1";
+           return error;
+        }
+        
+        
+     
+    }
+ 
+ 
+  public String getexamsetter(String pk){
+        try{
+            String sql ="select lect_pk from exam_setter where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+           return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+           return "0";
+        }  
+  }
+public String getinternalmod(String pk){   
+        try{
+            String sql ="select int_mod_pk from internal_moderator where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+                      return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+              return "0";
+        }  
+  }
+public String getexamvetcommit(String pk){
+        try{
+            String sql ="select exmVet_pk from ExmVetComit where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+                    return  rs.getString(1);          
+        }
+        catch (SQLException ex) {
+             return "0";
+        }  
+  }
+
+
+public String getexternal(String pk){
+        try{
+            String sql ="select ext_exam_pk from External_Examiner where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+                   return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+             return "0";
+        }  
+  }
+public String getoffice(String pk){
+        try{
+            String sql ="select school_office_pk from School_office where user_user_pk ="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+                     return  rs.getString(1);
+            
+            
+        }
+        catch (SQLException ex) {
+            return "0";
+        }  
+  }
+
 
 
 

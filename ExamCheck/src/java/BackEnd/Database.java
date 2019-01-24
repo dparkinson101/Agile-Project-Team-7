@@ -28,7 +28,7 @@ public class Database {
 
     private Connection conn;
 
-    Database(){
+    public Database(){
         conn = null;
     }
     

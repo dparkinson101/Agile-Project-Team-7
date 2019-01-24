@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author Douglas
  */
-public class createAccountTest {
+public class FileDownloadTest {
     
-    public createAccountTest() {
+    public FileDownloadTest() {
     }
     
     @BeforeClass
@@ -40,55 +40,57 @@ public class createAccountTest {
     }
 
     /**
-     * Test of getServletInfo method, of class createAccount.
-     */
-    @Test
-    public void testGetServletInfo() {
-        System.out.println("getServletInfo");
-        createAccount instance = new createAccount();
-        String expResult = "Used to create a new user account.";
-        String result = instance.getServletInfo();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of processRequest method, of class createAccount.
+     * Test of processRequest method, of class FileDownload.
      */
     @Test
     public void testProcessRequest() throws Exception {
         System.out.println("processRequest");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        createAccount instance = new createAccount();
+        FileDownload instance = new FileDownload();
         instance.processRequest(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of doGet method, of class createAccount.
+     * Test of doGet method, of class FileDownload.
      */
     @Test
     public void testDoGet() throws Exception {
         System.out.println("doGet");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        createAccount instance = new createAccount();
+        FileDownload instance = new FileDownload();
         instance.doGet(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of doPost method, of class createAccount.
+     * Test of doPost method, of class FileDownload.
      */
     @Test
     public void testDoPost() throws Exception {
         System.out.println("doPost");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        createAccount instance = new createAccount();
+        FileDownload instance = new FileDownload();
         instance.doPost(request, response);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getServletInfo method, of class FileDownload.
+     */
+    @Test
+    public void testGetServletInfo() {
+        System.out.println("getServletInfo");
+        FileDownload instance = new FileDownload();
+        String expResult = "";
+        String result = instance.getServletInfo();
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

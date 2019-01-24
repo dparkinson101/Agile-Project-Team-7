@@ -13,8 +13,12 @@ package BackEnd;
 
 public class Main {
     
-    
-    
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean loginHandle(String username, String password){
         if(username.equals("admin") && password.equals("1234")){
             return true;

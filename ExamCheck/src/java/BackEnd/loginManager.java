@@ -31,6 +31,9 @@ public class loginManager extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        
+        HttpSession spoons = request.getSession();
+        spoons.setAttribute("email", email);
 
         Database db = new Database();
         db.connect();
@@ -68,6 +71,10 @@ public class loginManager extends HttpServlet {
                 }
             }
         }
+        
+        if(loginResults.equals("1")){
+            perms += " admin";
+        }
 
         if (loginResults.equals("1")) {
             perms += " admin";
@@ -86,7 +93,18 @@ public class loginManager extends HttpServlet {
         response.addCookie(credentials);
         response.addCookie(permissions);
 
-        response.sendRedirect("/ExamCheck/index.jsp");
+        if(perms.contains("admin"))
+        {
+            response.sendRedirect("/ExamCheck/Admin.jsp");
+        }
+        else if(perms.contains("examSetter"))
+        {
+            response.sendRedirect("/ExamCheck/examSetter.jsp");
+        }
+        else
+        {
+            response.sendRedirect("/ExamCheck/Staff.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

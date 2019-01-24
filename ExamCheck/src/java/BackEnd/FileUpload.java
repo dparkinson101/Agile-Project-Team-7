@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import BackEnd.Database;
 import java.util.Random;
+import javax.servlet.http.Cookie;
 /**
  *
  * @author matthewmcneil
@@ -72,12 +73,22 @@ public class FileUpload extends HttpServlet {
         //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
         db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", examPK);
         out.println("end");
+        response.sendRedirect("/ExamCheck/index.jsp");
         
         try (PrintWriter out = response.getWriter()) {
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<meta charset=\"utf-8\">");
+            out.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
+            out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+            out.println("<meta name=\"description\" content=\"\">");
+            out.println("<meta name=\"author\" content=\"\">");
             out.println("<title>Servlet createAccount</title>");
+            out.println("<link href=\"vendor/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">");
+            out.println("<link href=\"dist/css/DCEC.css\" rel=\"stylesheet\">");
+            out.println("<link href=\"vendor/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">");
             out.println("File passed");
             out.println("</head>");
             out.println("</html>");

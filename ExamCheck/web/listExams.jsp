@@ -122,7 +122,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Exam Name</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Exam Setter</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
@@ -161,7 +161,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Exam Name</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Internal Moderator</a>
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
@@ -169,9 +169,61 @@
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Exam Vetting Committee</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p class="mb-1">Module Code</p>
+                            <p class="mb-1">Date</p>
+                            <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">External Moderator</a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p class="mb-1">Module Code</p>
+                            <p class="mb-1">Date</p>
+                            <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">School Office</a>
+                        </h4>
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p class="mb-1">Module Code</p>
+                            <p class="mb-1">Date</p>
+                            <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
+                        </div>
+                    </div>
+                </div>
+                
+
             </div> 
         </div>                   
 

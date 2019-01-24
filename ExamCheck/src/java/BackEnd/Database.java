@@ -108,23 +108,25 @@ public class Database {
 
             ResultSet rs = state.executeQuery(sql);
 
-            
             rs.beforeFirst();
             rs.next();
 
             String user_pk = rs.getString(1);
 
             if (user_pk != null) {
- return user_pk;
-               // roles[0] = this.getexamsetter(user_pk);
-            //    roles[1] = this.getinternalmod(user_pk);
-            //    roles[2] = this.getexamvetcommit(user_pk);
-            //    roles[3] = this.getexternal(user_pk);
-            //    roles[4] = this.getoffice(user_pk);
+                
+                System.out.println("UserPK: " + user_pk);
+                
+                return user_pk;
+                // roles[0] = this.getexamsetter(user_pk);
+                //    roles[1] = this.getinternalmod(user_pk);
+                //    roles[2] = this.getexamvetcommit(user_pk);
+                //    roles[3] = this.getexternal(user_pk);
+                //    roles[4] = this.getoffice(user_pk);
             }
-           
-        } catch (SQLException ex) {     
-            
+
+        } catch (SQLException ex) {
+
             return "-1";
         }
         return "-1";
@@ -317,7 +319,6 @@ public ResultSet view_unsigned_exams(){
         }
 }
      */
-
     public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk) {
         try {
 

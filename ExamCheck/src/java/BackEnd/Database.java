@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package BackEnd;
+import java.lang.System.*;
+
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import static java.lang.System.console;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -385,7 +388,39 @@ public class Database {
             return "0";
         }
     }
-
+/**
+     *
+     * @param inputStream
+     * @param Modulecode
+     * @param level
+     * @param pk
+     * @param title
+     * @param online
+     * @param resit
+     * @param exam_setter_lect_pk
+     * @return
+     */
+     public String blobin(InputStream inputStream,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk){
+        try{
+              
+           
+           //     InputStream inputStream = new FileInputStream(new File(path));         
+            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(95362,\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\"txt\",1,1,1,1);";
+             //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
+                
+        //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setBlob(1, inputStream);
+                statement.executeUpdate();
+            }
+       
+        catch(Exception e){
+          System.out.println("error");
+          System.out.println(e);
+            return e.toString();
+        }
+        return "end of blob in";
+    }
     public ResultSet info_examslinkedtopkvetcommit(String pk) {
         try {
             String sql = "select * from exams where ExmVetComit_exmVet_pk=" + pk + ";";
@@ -450,35 +485,6 @@ public class Database {
 //            return null;
 //        }
 //    }
-
-    /**
-     *
-     * @param inputStream
-     * @param Modulecode
-     * @param level
-     * @param pk
-     * @param title
-     * @param online
-     * @param resit
-     * @param exam_setter_lect_pk
-     * @return
-     */
-    public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk) {
-        try {
-
-            //       InputStream inputStream = new FileInputStream(new File(path));
-            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`examFile`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(" + pk + "," + Modulecode + "," + title + "," + online + "," + resit + "," + "?" + exam_setter_lect_pk + "1,1,1);";
-            //String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(8,null);";
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setBlob(1, inputStream);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-            return e.toString();
-        }
-        return "end of blob in";
-    }
 
     /**
      *

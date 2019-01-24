@@ -49,8 +49,8 @@
     <%
         HttpSession spoons = request.getSession();
         String username = (String) spoons.getAttribute("email");
-
-        String perms = "";
+        
+          String perms = "";
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -61,7 +61,7 @@
             }
         }
         
-
+        String examSetter = perms.substring(0, 16);
     %>
 
     <body>
@@ -115,7 +115,7 @@
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>Completed Exams</a>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username); %></a>
                             </li>
                             <li class="divider"></li>
                             <li><a href="Log-in.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -152,7 +152,7 @@
                                                 out.print(noCompletedExams);
                                             %>
                                         </div>
-                                        <div><%out.print(perms);%></div>
+                                        <div>Completed Exams</div>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
+                                <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
@@ -191,6 +191,7 @@
                                 </div>
                             </a>
                         </div>
+                        
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
@@ -226,6 +227,87 @@
                     <br/>
                     <br/>
                     <br/>
+                </div>
+                                        
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                    <%
+                    if(perms.contains("admin"))
+                    {
+                %>
+                    <div class="panel panel-white">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-13 text-middle-center">
+                                    <div><font size="5">Add New User</font></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="AddUser.jsp">
+                            <div class="panel-footer">
+                                <span class="pull-left">Add User</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                    <% } %>
+                    
+                    <div class="row">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+                                        
+                <div class="row">
+                
+                <div class="col-lg-3 col-md-6">
+                    <%
+                    if(perms.contains("admin"))
+                    {
+                %>
+                    <div class="panel panel-white">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-13 text-middle-center">
+                                    <div><font size="5">View Unsigned Exams</font></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="CreateExam.jsp">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Exams</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                    <% } %>
+                    
+                <div class="col-lg-3 col-md-6">
+                        <% if(perms.contains("examSetter")) {%>
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-13 text-middle-center">
+                                        <div><font size="6">Create New Exam</font></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="CreateExam.jsp">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Create</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <% } %>
+                    </div>
+            </div>
                 </div>
             </div>
             <!-- /#page-wrapper -->

@@ -500,17 +500,16 @@ public class Database {
             byte b[];
             Blob blob;
             int i = 1;
-            String doctype = rset.getString("doctype");
-            File f = new File(path + "\\" + name + doctype);
-            FileOutputStream fs = new FileOutputStream(f);
-            blob = rset.getBlob("test");
-            b = blob.getBytes(1, (int) blob.length());
-            fs.write(b);
-            return f;
+           // String doctype = rset.getString("doctype");
+            //File f = new File(path + "\\" + name + doctype);
+            //FileOutputStream fs = new FileOutputStream(f);
+            blob = rset.getBlob("examFile");
+        
+return blob;
         } catch (Exception e) {
             System.out.println(e);
             File v = new File("Csbxfgfgn");
-            return v;
+            return null;
         }
 
     }

@@ -125,7 +125,7 @@ public class loginManager extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Lets a user login and returns cookie credentials for them.";
     }// </editor-fold>
 
 }

@@ -42,9 +42,9 @@ public class loginManager extends HttpServlet {
 
         String[] roles = new String[5];
         roles[0] = db.getexamsetter(loginResults);
-        roles[1] = db.getexamvetcommit(loginResults);
-        roles[2] = db.getexternal(loginResults);
-        roles[3] = db.getinternalmod(loginResults);
+        roles[1] = db.getinternalmod(loginResults);
+        roles[2] = db.getexamvetcommit(loginResults);
+        roles[3] = db.getexternal(loginResults);
         roles[4] = db.getoffice(loginResults);
 
         for (int i = 0; i < roles.length; i++) {

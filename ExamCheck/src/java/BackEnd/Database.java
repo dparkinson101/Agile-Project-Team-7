@@ -23,8 +23,18 @@ import java.sql.Statement;
  */
 public class Database {
 
-    private Connection conn = null;
+    private Connection conn;
 
+    Database(){
+        conn = null;
+    }
+    
+    @Override
+    protected void finalize() throws Throwable{
+        conn.close();
+        super.finalize();
+    }
+    
     /**
      *
      * @return Returns an instance of the sql.Connection class which is the
@@ -93,14 +103,6 @@ public class Database {
             System.out.println("VendorError: " + ex.getErrorCode());
             return false;
         }
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String test() {
-        return "donedb";
     }
 
     /**

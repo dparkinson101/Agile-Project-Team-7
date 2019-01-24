@@ -13,12 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
 
 /**
  *
  * @author Douglas
  */
-public class createAccountTest {
+public class createAccountTest extends Mockito{
     
     public createAccountTest() {
     }
@@ -57,12 +58,20 @@ public class createAccountTest {
     @Test
     public void testProcessRequest() throws Exception {
         System.out.println("processRequest");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        
+        when(request.getParameter("firstName")).thenReturn("Douglas");
+        when(request.getParameter("lastName")).thenReturn("Parkinson");
+        when(request.getParameter("email")).thenReturn("dparkinson@dundee.ac.uk");
+        when(request.getParameter("password")).thenReturn("1234");
+        
         createAccount instance = new createAccount();
         instance.processRequest(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        Database db = new Database();
+        db.connect();
+        
     }
 
     /**

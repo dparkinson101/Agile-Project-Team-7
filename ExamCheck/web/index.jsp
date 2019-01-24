@@ -134,7 +134,7 @@ function resizeText(multiplier)
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="listExams.jsp">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Exams</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

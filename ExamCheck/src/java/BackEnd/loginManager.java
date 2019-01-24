@@ -6,7 +6,6 @@
 package BackEnd;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -49,7 +48,7 @@ public class loginManager extends HttpServlet {
         roles[4] = db.getoffice(loginResults);
 
         for (int i = 0; i < roles.length; i++) {
-            if (roles[i] != "0") {
+            if (!"0".equals(roles[i])) {
                 loggedIn = true;
                 switch (i) {
                     case 0:
@@ -69,6 +68,10 @@ public class loginManager extends HttpServlet {
                         break;
                 }
             }
+        }
+        
+        if(loginResults.equals("1")){
+            perms += " admin";
         }
 
         Cookie login = new Cookie("login", String.valueOf(loggedIn));

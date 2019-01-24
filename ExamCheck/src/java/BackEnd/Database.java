@@ -95,10 +95,20 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String test() {
         return "donedb";
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public String checkLogin(String username, String password) {
         try {
             String sql = "select user_pk from users where username = '" + username + "' and password = '" + password + "';";
@@ -114,9 +124,9 @@ public class Database {
             String user_pk = rs.getString(1);
 
             if (user_pk != null) {
-                
+
                 System.out.println("UserPK: " + user_pk);
-                
+
                 return user_pk;
                 // roles[0] = this.getexamsetter(user_pk);
                 //    roles[1] = this.getinternalmod(user_pk);
@@ -133,6 +143,11 @@ public class Database {
 
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String getexamsetter(String pk) {
         try {
             String sql = "select lect_pk from exam_setter where user_user_pk =" + pk + ";";
@@ -149,6 +164,11 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String getinternalmod(String pk) {
         try {
             String sql = "select int_mod_pk from internal_moderator where user_user_pk =" + pk + ";";
@@ -168,6 +188,11 @@ public class Database {
         return null;
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String getexamvetcommit(String pk) {
         try {
             String sql = "select exmVet_pk from ExmVetComit where user_user_pk =" + pk + ";";
@@ -181,6 +206,11 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String getexternal(String pk) {
         try {
             String sql = "select ext_exam_pk from External_Examiner where user_user_pk =" + pk + ";";
@@ -197,6 +227,11 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String getoffice(String pk) {
         try {
             String sql = "select school_office_pk from School_office where user_user_pk =" + pk + ";";
@@ -213,6 +248,11 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String number_of_completed_exams(String pk) {
         try {
             String sql = "select count(*) from exams where ExmVetComit_exmVet_pk=2;";
@@ -230,6 +270,11 @@ public class Database {
 
     }
 
+    /**
+     *
+     * @param pk
+     * @return
+     */
     public String number_of_in_progress_exams(String pk) {
         try {
             String sql = "select count(*) from exams where exams_External_Examiner_FK!=2 and exams_ExmVetComit_FK!=2 and exams_internal_moderator_FK!=2 and exams_External_Examiner_FK!=1 and exams_ExmVetComit_FK!=1 and exams_internal_moderator_FK!=1;";
@@ -244,8 +289,13 @@ public class Database {
         }
     }
 
-    
-    
+    /**
+     *
+     * @param pk
+     * @return
+     */
+
+
         public String number_examslinkedtopk(String pk) {
         try {
             String sql = "select count(*) from exams where exam_setter_lect_pk="+pk+";";
@@ -269,9 +319,9 @@ public class Database {
             return null;
         }
     }
-        
-        
-        
+
+
+
     public String number_of_new_exams(String pk) {
         try {
             String sql = "select count(*) from exams where exams_External_Examiner_FK=1 and exams_ExmVetComit_FK=1 and exams_internal_moderator_FK=1;";
@@ -286,6 +336,12 @@ public class Database {
         }
 
     }
+
+    /**
+     *
+     * @param pk
+     * @return
+     */
 /*
     public boolean changeStage(String pk) {
         try {
@@ -304,7 +360,7 @@ public class Database {
 
     }
 
-   
+
 public ResultSet view_unsigned_exams(){
 
     try {
@@ -321,6 +377,18 @@ public ResultSet view_unsigned_exams(){
             return null;
         }
 }
+     */
+    /**
+     *
+     * @param inputStream
+     * @param Modulecode
+     * @param level
+     * @param pk
+     * @param title
+     * @param online
+     * @param resit
+     * @param exam_setter_lect_pk
+     * @return
      */
     public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk) {
         try {
@@ -339,6 +407,13 @@ public ResultSet view_unsigned_exams(){
         return "end of blob in";
     }
 
+    /**
+     *
+     * @param exampk
+     * @param path
+     * @param name
+     * @return
+     */
     public File blobout(String exampk, String path, String name) {
         try {
             Statement state = conn.createStatement();

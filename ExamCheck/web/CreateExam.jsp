@@ -136,102 +136,26 @@
                 <br>
                 <br>
                 Select a file to upload: <br><br>
-                <input type="file" name="fileToUpload" id="fileToUpload"><br>
+                <input type="text" name="fileToUpload" id="fileToUpload"><br>
                 <button type="submit" form="examDetails" value="submit">Submit Exam</button>
             </form>
                 
             <br>
+            <br>      
             <br>
-            <!-- returns values for radio buttons -->
+            <br>
+            <a href="index.jsp">Return to Homepage</a>
 
-            
-            
-                <a href="#" onclick=check()><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a>
-                <button onclick="submitExam(getFilePath(), getModCode(),  getLevel(), getModTitle(), getType(), getChoice())"><i ></i>create exam</button>
-                         <script>                
-                
-                function submitExam( tesf, code, level, subject, type , choice){
-                      document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (8 * 0.2) + "em";
-                    System.out.println("CAtch");
-                   import BackEnd.Database;
-                    Database db = new Database();
-                    db.connect();
-                       InputStream inputStream = new FileInputStream(new File(tesf));
-                    // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
-                   // db.blobin( inputStream, code, level, "34", subject, type, choice, "1");  
-                      db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
-                    out.println("end");
-                    // out.println(db.blobin(file, code, level, "34", subject, type, choice, "1")); 
-                } 
-
-                function getModCode(){
-                    return document.getElementById("modCode");
-                    window.alert("Fat");
-                }
-
-                function getModTitle(){
-                    return document.getElementById("modTitle");
-                    window.alert("Cat");
-                }
-
-                function getFilePath(){
-                    alert("Cat");
-                    document.write(document.getElementById("fileToUpload"))
-                    return document.getElementById("fileToUpload");
-                }
-
-                function getLevel(){
-                    var radios = document.getElementByName("examLevel");
-                    for (var i = 0, length = radios.length; i < length; i++){
-                        if (radios[i].checked){
-                            return (radios[i].value);
-                            break;
-                        }
-                    }
-                }
-
-                function getChoice(){
-                    var radios = document.getElementByName("examChoice");
-                    for (var i = 0, length = radios.length; i < length; i++){
-                        if (radios[i].checked){
-                            return (radios[i].value);
-                            break;
-                        }
-                    }
-                }
-
-                function getType(){
-                    var radios = document.getElementByName("examType");
-                    for (var i = 0, length = radios.length; i < length; i++){
-                        if (radios[i].checked){
-                            return (radios[i].value);
-                            break;
-                        }
-                    }
-                }
-                 function check(){
-                   if (document.body.style.fontSize == "")
-                {
-                document.body.style.fontSize = "1.0em";
-                }
-                 document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
-                 }
-            </script>
-       
-                <br>
-                <br>
-                <a href="index.jsp">Return to Homepage</a>
-
-                <!-- jQuery -->
-                <script src="vendor/jquery/jquery.min.js"></script>
+            <!-- jQuery -->
+            <script src="vendor/jquery/jquery.min.js"></script>
 
                 <!-- Bootstrap Core JavaScript -->
-                <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
  
  
                 <!-- Custom Theme JavaScript -->
-                <script src="dist/js/DCEC.js"></script>
-            </div>
-            </div>
+            <script src="dist/js/DCEC.js"></script>
+        </div>
+        </div>
     </body>
 </html>

@@ -42,20 +42,30 @@ public class FileUpload extends HttpServlet {
         
         //get inputs
         //InputStream fileContent = filePart.getInputStream();
-        //String filePath = request.getParameter("fileToUpload");
-        //String moduleCode = request.getParameter("moduleCode");
-        //String moduleTitle = request.getParameter("moduleTitle");
-        //String examType = request.getParameter("examType");
-        //String examChoice = request.getParameter("examChoice");
-        //String examLevel = request.getParameter("examLevel");
+
+        String filePath = request.getParameter("fileToUpload");
+        String moduleCode = request.getParameter("moduleCode");
+        String moduleTitle = request.getParameter("moduleTitle");
+        String examType = request.getParameter("examType");
+        String examChoice = request.getParameter("examChoice");
+        String examLevel = request.getParameter("examLevel");
+        
+        out.println(filePath);
+        out.println(moduleCode);
+        out.println(moduleTitle);
+        out.println(examType);
+        out.println(examChoice);
+        out.println(examLevel);
         
         //Connect to database
         Database db = new Database();
         db.connect();
         
         //
-        //InputStream inputStream = new FileInputStream(new File(filePath));
-        db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
+        InputStream inputStream = new FileInputStream(new File(filePath));
+        out.println(inputStream);
+        //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
+        db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1");
         out.println("end");
         
         try (PrintWriter out = response.getWriter()) {

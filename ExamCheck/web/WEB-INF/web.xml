@@ -4,9 +4,17 @@
         <servlet-name>createAccount</servlet-name>
         <servlet-class>BackEnd.createAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginManager</servlet-name>
+        <servlet-class>BackEnd.loginManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>createAccount</servlet-name>
         <url-pattern>/createAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginManager</servlet-name>
+        <url-pattern>/loginManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

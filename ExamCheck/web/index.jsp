@@ -8,23 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
-    </head>
-    <body>
-        <h1>Login</h1>
-        <form action="loginHandler.jsp" method="POST">
-            <input type="text" name="username"/>
-            <input type="password" name="password"/>
-            <button type="submit">Login</button>
-        </form>
-        <input type="file" accept=".doc, .pdf, .dox"/>
-        <input type="submit" value="Save">
-
-    </body>
-=======
-
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -250,5 +234,4 @@ function resizeText(multiplier)
      <script src="dist/js/DCEC.js"></script>
 
 </body>
->>>>>>> master
 </html>

@@ -1,7 +1,7 @@
 <%-- 
     Document   : createAccount
-    Created on : 23-Jan-2019, 13:16:16
-    Author     : Andrew
+    Created on : 22-Jan-2019, 11:16:16
+    Author     : Douglas
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +14,7 @@
     <body>
         <h1>Create New Account</h1>
         <br><br>
-        <form action="CreateAccount" method="POST">
+        <form action="createAccount" method="POST">
             <h6>First Name:</h6>
             <input type="text" name="firstName"/>
             <br>

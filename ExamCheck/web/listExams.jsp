@@ -4,8 +4,25 @@
     Author     : stevenshearer
 --%>
 
+<%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+ HttpSession spoons = request.getSession();
+        String username = (String) spoons.getAttribute("email");
+        
+          String perms = "";
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("permissions")) {
+                    perms = cookie.getValue();
+                }
+            }
+        }   
+%>
 <html>
     <head>
 
@@ -46,10 +63,10 @@
         }
     </script>
 
-    <%
+    <%/*
         HttpSession sesh = request.getSession();
         String username = (String) sesh.getAttribute("username");
-
+        */
     %>
 
     <body>
@@ -117,38 +134,127 @@
             </nav>
         </div>
 
+        <%
+            /*
+            Database db = new Database();
+            db.connect();
+            
+            String user_pk = db.getUserPK();
+            String result = db.number_examslinkedtopk("1");
+            int count = Integer.getInteger(result);
+            */
+        %>
+                          
         <div class="container">
             <div class="panel-group" id="exams">
+                <% if (perms.contains("examSetter")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Exam Name</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Exam Setter</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
+                        
+                        
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
-                            <a href=""><button class="fa fa-download"> Download exam </button> </a>
-                            <button class="fa fa-pencil"> Update exam </button>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>                     
                     </div>
                 </div>
+                <%} %>
+                <% if (perms.contains("internalModerator")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Exam Name</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Internal Moderator</a>
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
+                        
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>
+                        
                     </div>
                 </div>
+                <%} %>
+                        <% if (perms.contains("examVetCommittee")) { %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Exam Vetting Committee</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <% for (int i=0; i< 5; i++){ %>
+                        <div class="panel-body">
+                            <p class="mb-1">Module Code</p>
+                            <p class="mb-1">Date</p>
+                            <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
+                        </div>
+                        <%} %>
+                        
+                    </div>
+                </div>
+                 <%} %>
+                 <% if (perms.contains("externalModerator")) { %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">External Moderator</a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <% for (int i=0; i< 5; i++){ %>
+                        <div class="panel-body">
+                            <p class="mb-1">Module Code</p>
+                            <p class="mb-1">Date</p>
+                            <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
+                        </div>
+                        <%} %>
+                        
+                    </div>
+                </div>
+                <%} %>
+                <% if (perms.contains("office")) { %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">School Office</a>
+                        </h4>
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse">
+                        <% for (int i=0; i< 5; i++){ %>
+                        <div class="panel-body">
+                            <p class="mb-1">Module Code</p>
+                            <p class="mb-1">Date</p>
+                            <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
+                        </div>
+                        <%} %>
+                    </div>
+                </div>
+              <%} %>         
+                
+
             </div> 
         </div>                   
 

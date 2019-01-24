@@ -1,7 +1,7 @@
-<%-- 
-    Document   : Staff.jsp
-    Created on : 22-Jan-2019, 10:53:26
-    Author     : andrewbrodrick
+<%--
+    Document   : index
+    Created on : 21-Jan-2019, 10:20:17
+    Author     : Douglas
 --%>
 <%@page import="BackEnd.Database" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

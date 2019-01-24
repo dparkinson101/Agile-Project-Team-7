@@ -42,10 +42,10 @@ public class FileDownload extends HttpServlet {
          Database db = new Database();
         db.connect();
 
-        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = 999999;");
+        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = 15758;");
         try {
             if (rs.next()) {
-                String fileName = "TextFile.docx";
+                String fileName = "test.docx";
                 Blob blob = rs.getBlob("examFile");
 
                 InputStream is = blob.getBinaryStream();

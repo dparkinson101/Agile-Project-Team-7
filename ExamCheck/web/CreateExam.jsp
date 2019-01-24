@@ -1,7 +1,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="BackEnd.Database" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -136,27 +136,30 @@
                 <br>
                 <br>
                 Select a file to upload: <br><br>
-                <input type="file" name="fileToUpload" id="fileToUpload"><br>
+                <input type="file" name="fileToUpload" id="fileToUpload" accept="application/pdf, application/msword"><br>
+                
             </form>
-                <button type="submit" form="examDetails" value="submit">Submit Exam</button>
+                <!--<button type="submit" form="examDetails" value="submit">Submit Exam</button>-->
             <br>
             <br>
             <!-- returns values for radio buttons -->
             <script>                
                 function submitExam( file, code, level, subject, type , choice){
-                    out.println("start");
-
+                    window.alert("start");
+                   import BackEnd.Database;
                     Database db = new Database();
                     db.connect();
+                       InputStream inputStream = new FileInputStream(new File(file));
                     // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
                     db.blobin( file, code, level, "34", subject, type, choice, "1");  
                     out.println("end");
                     // out.println(db.blobin(file, code, level, "34", subject, type, choice, "1")); 
-                    window.alert(db.blobin(file, code, level, "34", subject, type, choice, "1"));
+                    window.alert(db.blobin(inputStream, code, level, "34", subject, type, choice, "1"));
                 } 
 
                 function getModCode(){
                     return document.getElementById("modCode");
+                    window.alert;
                 }
 
                 function getModTitle(){

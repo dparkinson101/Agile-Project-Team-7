@@ -1,3 +1,5 @@
+package BackEnd;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -36,7 +38,15 @@ public class FileUpload extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Part filePart = request.getPart("file");
         InputStream fileContent = filePart.getInputStream();
-        out.print("Matthew Is Awesome");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet createAccount</title>");
+            out.println("File passed");
+            out.println("</head>");
+            out.println("</html>");
+        }
         
         
     }

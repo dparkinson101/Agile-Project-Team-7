@@ -107,11 +107,12 @@ public class Database {
             return false;
         }
     }
-    
-    public void addcomment(String comments,String pk ,String date) {
+public void addcomment(String comments,String pk ,String date) {
         try {
             Statement state = conn.createStatement();
-            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(\""+pk+"\",\""+comments+"\",\""+date+"\""+pk+";";
+           // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
+
+String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(\""+pk+"\",\""+comments+"\",\""+date+"\""+pk+";";
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -121,7 +122,6 @@ public class Database {
             System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
-
     /**
      *
      * @param username the username / email of the user
@@ -414,12 +414,11 @@ public class Database {
      * @param exam_setter_lect_pk
      * @return
      */
-     public String blobin(InputStream inputStream,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk, String examPK){
+     public String blobin(InputStream inputStream,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk, String examPK, String docType){
         try{
-              
            
            //     InputStream inputStream = new FileInputStream(new File(path));         
-            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\""+examPK+"\",\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\"txt\",1,1,1,1);";
+            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\""+examPK+"\",\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\""+docType+"\",1,1,1,1);";
              //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
                 
         //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");

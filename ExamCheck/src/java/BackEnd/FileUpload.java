@@ -1,4 +1,3 @@
-
 package BackEnd;
 
 /*
@@ -6,7 +5,6 @@ package BackEnd;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,8 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import BackEnd.Database;
+import java.nio.file.Paths;
 import java.util.Random;
 import javax.servlet.http.Cookie;
+
 /**
  *
  * @author matthewmcneil
@@ -41,12 +41,20 @@ public class FileUpload extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Part filePart = request.getPart("file");
-        
+
         //get inputs
         //InputStream fileContent = filePart.getInputStream();
+        Part filePart = request.getPart("fileToUpload");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        InputStream fileContent = filePart.getInputStream();
 
-        String filePath = request.getParameter("fileToUpload");
+        String docType = filePart.getSubmittedFileName();
+        int i = docType.lastIndexOf('.');
+        if (i > 0) {
+            docType = docType.substring(i + 1);
+        }
+
+        //String filePath = request.getParameter("fileToUpload");
         String moduleCode = request.getParameter("moduleCode");
         String moduleTitle = request.getParameter("moduleTitle");
         String examType = request.getParameter("examType");
@@ -54,29 +62,30 @@ public class FileUpload extends HttpServlet {
         String examLevel = request.getParameter("examLevel");
         Random Random = new Random();
         String examPK = Integer.toString(Random.nextInt(99999));
-        
-        out.println(filePath);
+
+        //out.println(filePath);
         out.println(moduleCode);
         out.println(moduleTitle);
         out.println(examType);
         out.println(examChoice);
         out.println(examLevel);
         out.println(examPK);
-        
+        out.println(docType);
+
         //Connect to database
         Database db = new Database();
         db.connect();
-        
+
         //
-        InputStream inputStream = new FileInputStream(new File(filePath));
-        out.println(inputStream);
+        //InputStream inputStream = new FileInputStream(new File(filePath));
+        //out.println(inputStream);
         //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
-        db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", examPK);
+        db.blobin(fileContent, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", examPK, docType);
         out.println("end");
         response.sendRedirect("/ExamCheck/index.jsp");
-        
+
         try (PrintWriter out = response.getWriter()) {
-            
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

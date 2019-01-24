@@ -415,42 +415,40 @@ public class Database {
      * @param pk
      * @return
      */
-    /*
-    public boolean changeStage(String pk) {
-        try {
-            Statement state = conn.createStatement();
+//    public boolean changeStage(String pk) {
+//        try {
+//            Statement state = conn.createStatement();
+//
+//            state.executeUpdate("");
+//
+//            return true;
+//        } catch (SQLException ex) {
+//            // handle any sql errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//            return false;
+//        }
+//
+//    }
 
-            state.executeUpdate("");
+//    public ResultSet view_unsigned_exams() {
+//
+//        try {
+//            Statement state = conn.createStatement();
+//
+//            ResultSet rs = state.executeQuery(query);
+//
+//            return rs;
+//        } catch (SQLException ex) {
+//            // handle any sql errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//            return null;
+//        }
+//    }
 
-            return true;
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-            return false;
-        }
-
-    }
-
-
-public ResultSet view_unsigned_exams(){
-
-    try {
-            Statement state = conn.createStatement();
-
-            ResultSet rs = state.executeQuery(query);
-
-            return rs;
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-            return null;
-        }
-}
-     */
     /**
      *
      * @param inputStream

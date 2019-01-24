@@ -191,7 +191,7 @@ function resizeText(multiplier)
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">
                                         <%
-                                            String noNewExams = db.number_of_new_exams("1");
+                                            //String noNewExams = db.number_of_new_exams("1");
                                             out.print(noCompletedExams);
                                         %>
                                     </div>

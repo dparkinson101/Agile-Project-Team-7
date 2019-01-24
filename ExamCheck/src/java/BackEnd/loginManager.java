@@ -75,13 +75,16 @@ public class loginManager extends HttpServlet {
         }
 
         Cookie login = new Cookie("login", String.valueOf(loggedIn));
+        Cookie credentials = new Cookie("user", loginResults);
         Cookie permissions = new Cookie("permissions", perms);
 
         //Sets cookie max age for log-in to 10 mins
         login.setMaxAge(60 * 60 * 24);
+        credentials.setMaxAge(60*60*24);
         permissions.setMaxAge(60 * 60 * 24);
 
         response.addCookie(login);
+        response.addCookie(credentials);
         response.addCookie(permissions);
 
         response.sendRedirect("/ExamCheck/index.jsp");

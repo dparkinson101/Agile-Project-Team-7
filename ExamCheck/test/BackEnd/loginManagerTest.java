@@ -13,14 +13,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
 
 /**
  *
  * @author Douglas
  */
-public class createAccountTest {
+public class loginManagerTest extends Mockito {
     
-    public createAccountTest() {
+    public loginManagerTest() {
     }
     
     @BeforeClass
@@ -40,55 +41,63 @@ public class createAccountTest {
     }
 
     /**
-     * Test of getServletInfo method, of class createAccount.
-     */
-    @Test
-    public void testGetServletInfo() {
-        System.out.println("getServletInfo");
-        createAccount instance = new createAccount();
-        String expResult = "Used to create a new user account.";
-        String result = instance.getServletInfo();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of processRequest method, of class createAccount.
+     * Test of processRequest method, of class loginManager.
      */
     @Test
     public void testProcessRequest() throws Exception {
         System.out.println("processRequest");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        createAccount instance = new createAccount();
+        
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        
+        loginManager instance = new loginManager();
+        HttpServletResponse result;
+        
         instance.processRequest(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        //TODO: Write in correct testing mechanisisms in
+        fail("No proper testing in here currently");
+        
     }
 
     /**
-     * Test of doGet method, of class createAccount.
+     * Test of doGet method, of class loginManager.
      */
     @Test
     public void testDoGet() throws Exception {
         System.out.println("doGet");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        createAccount instance = new createAccount();
+        loginManager instance = new loginManager();
         instance.doGet(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of doPost method, of class createAccount.
+     * Test of doPost method, of class loginManager.
      */
     @Test
     public void testDoPost() throws Exception {
         System.out.println("doPost");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        createAccount instance = new createAccount();
+        loginManager instance = new loginManager();
         instance.doPost(request, response);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getServletInfo method, of class loginManager.
+     */
+    @Test
+    public void testGetServletInfo() {
+        System.out.println("getServletInfo");
+        loginManager instance = new loginManager();
+        String expResult = "";
+        String result = instance.getServletInfo();
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

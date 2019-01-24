@@ -5,16 +5,24 @@
         <servlet-class>BackEnd.createAccount</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FileUpload</servlet-name>
-        <servlet-class>BackEnd.FileUpload</servlet-class>
+        <servlet-name>loginManager</servlet-name>
+        <servlet-class>BackEnd.loginManager</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>FileUpload</servlet-name>
+      <servlet-class>BackEnd.FileUpload</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>createAccount</servlet-name>
         <url-pattern>/createAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FileUpload</servlet-name>
-        <url-pattern>/FileUpload</url-pattern>
+        <servlet-name>loginManager</servlet-name>
+        <url-pattern>/loginManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>FileUpload</servlet-name>
+      <url-pattern>/FileUpload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

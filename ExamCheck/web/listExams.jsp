@@ -4,8 +4,25 @@
     Author     : stevenshearer
 --%>
 
+<%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+ HttpSession spoons = request.getSession();
+        String username = (String) spoons.getAttribute("email");
+        
+          String perms = "";
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("permissions")) {
+                    perms = cookie.getValue();
+                }
+            }
+        }   
+%>
 <html>
     <head>
 
@@ -46,10 +63,10 @@
         }
     </script>
 
-    <%
+    <%/*
         HttpSession sesh = request.getSession();
         String username = (String) sesh.getAttribute("username");
-
+        */
     %>
 
     <body>
@@ -117,8 +134,20 @@
             </nav>
         </div>
 
+        <%
+            /*
+            Database db = new Database();
+            db.connect();
+            
+            String user_pk = db.getUserPK();
+            String result = db.number_examslinkedtopk("1");
+            int count = Integer.getInteger(result);
+            */
+        %>
+                          
         <div class="container">
             <div class="panel-group" id="exams">
+                <% if (perms.contains("examSetter")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -126,29 +155,9 @@
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
-                        <script>
-                            function LoopExams()
-                            {
-                                var i=0;
-                                var end= 5;
-                                
-                                for(i=0; i<end;i++)
-                                { 
-                                    
-                                    document.write('<div class="panel-body">');
-                                    document.write('<p> Exam count: ' + i );
-                                    document.write('<p class="mb-1">Module Code</p>');
-                                    document.write('<p class="mb-1">Date</p>');
-                                    document.write('<p class="mb-1">Resit</p>');
-                                    document.write('<p class="mb-1">Exam</p>');
-                                    document.write('<p class="mb-1">Grade</p>');
-                                    document.write('<a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>');
-                                    document.write('<button class="fa fa-pencil "> Update exam </button>');
-                                    document.write('</div>');
-                                }
-                                
-                            }
-                        </script>
+                        
+                        
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
@@ -156,8 +165,11 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>                     
                     </div>
                 </div>
+                <%} %>
+                <% if (perms.contains("internalModerator")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -165,6 +177,8 @@
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
+                        
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
@@ -172,8 +186,12 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>
+                        
                     </div>
                 </div>
+                <%} %>
+                        <% if (perms.contains("examVetCommittee")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -181,6 +199,7 @@
                         </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
@@ -188,8 +207,12 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>
+                        
                     </div>
                 </div>
+                 <%} %>
+                 <% if (perms.contains("externalModerator")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -197,6 +220,7 @@
                         </h4>
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
@@ -204,8 +228,12 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>
+                        
                     </div>
                 </div>
+                <%} %>
+                <% if (perms.contains("office")) { %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -213,6 +241,7 @@
                         </h4>
                     </div>
                     <div id="collapse5" class="panel-collapse collapse">
+                        <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
@@ -220,8 +249,10 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                         </div>
+                        <%} %>
                     </div>
                 </div>
+              <%} %>         
                 
 
             </div> 

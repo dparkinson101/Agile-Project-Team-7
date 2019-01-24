@@ -11,7 +11,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author Douglas
@@ -42,9 +41,9 @@ public class loginManager extends HttpServlet {
 
         String[] roles = new String[5];
         roles[0] = db.getexamsetter(loginResults);
-        roles[1] = db.getexamvetcommit(loginResults);
-        roles[2] = db.getexternal(loginResults);
-        roles[3] = db.getinternalmod(loginResults);
+        roles[1] = db.getinternalmod(loginResults);
+        roles[2] = db.getexamvetcommit(loginResults);
+        roles[3] = db.getexternal(loginResults);
         roles[4] = db.getoffice(loginResults);
 
         for (int i = 0; i < roles.length; i++) {
@@ -69,19 +68,22 @@ public class loginManager extends HttpServlet {
                 }
             }
         }
-        
-        if(loginResults.equals("1")){
+
+        if (loginResults.equals("1")) {
             perms += " admin";
         }
 
         Cookie login = new Cookie("login", String.valueOf(loggedIn));
+        Cookie credentials = new Cookie("user", loginResults);
         Cookie permissions = new Cookie("permissions", perms);
 
         //Sets cookie max age for log-in to 10 mins
-        login.setMaxAge(60 * 10);
-        permissions.setMaxAge(60 * 10);
+        login.setMaxAge(60 * 60 * 24);
+        credentials.setMaxAge(60*60*24);
+        permissions.setMaxAge(60 * 60 * 24);
 
         response.addCookie(login);
+        response.addCookie(credentials);
         response.addCookie(permissions);
 
         response.sendRedirect("/ExamCheck/index.jsp");

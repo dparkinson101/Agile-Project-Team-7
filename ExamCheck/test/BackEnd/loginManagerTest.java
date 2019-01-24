@@ -13,12 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
 
 /**
  *
  * @author Douglas
  */
-public class loginManagerTest {
+public class loginManagerTest extends Mockito {
     
     public loginManagerTest() {
     }
@@ -45,12 +46,18 @@ public class loginManagerTest {
     @Test
     public void testProcessRequest() throws Exception {
         System.out.println("processRequest");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
+        
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        
         loginManager instance = new loginManager();
+        HttpServletResponse result;
+        
         instance.processRequest(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        //TODO: Write in correct testing mechanisisms in
+        fail("No proper testing in here currently");
+        
     }
 
     /**

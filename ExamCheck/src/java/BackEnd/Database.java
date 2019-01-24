@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package BackEnd;
+import java.lang.System.*;
+
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import static java.lang.System.console;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,8 +26,18 @@ import java.sql.Statement;
  */
 public class Database {
 
-    private Connection conn = null;
+    private Connection conn;
 
+    Database(){
+        conn = null;
+    }
+    
+    @Override
+    protected void finalize() throws Throwable{
+        conn.close();
+        super.finalize();
+    }
+    
     /**
      *
      * @return Returns an instance of the sql.Connection class which is the
@@ -97,17 +110,10 @@ public class Database {
 
     /**
      *
-     * @return
-     */
-    public String test() {
-        return "donedb";
-    }
-
-    /**
-     *
-     * @param username
-     * @param password
-     * @return
+     * @param username the username / email of the user
+     * @param password the password of the user
+     * @return Returns the user_pk of the if they are a valid user in the
+     * database
      */
     public String checkLogin(String username, String password) {
         try {
@@ -182,7 +188,7 @@ public class Database {
 
         } catch (SQLException ex) {
             return "0";
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Something broke.");
         }
         return null;
@@ -294,11 +300,9 @@ public class Database {
      * @param pk
      * @return
      */
-
-
-        public String number_examslinkedtopk(String pk) {
+    public String number_examslinkedtopk(String pk) {
         try {
-            String sql = "select count(*) from exams where exam_setter_lect_pk="+pk+";";
+            String sql = "select count(*) from exams where exam_setter_lect_pk=" + pk + ";";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -309,9 +313,10 @@ public class Database {
             return "0";
         }
     }
-      public ResultSet info_examslinkedtopk(String pk) {
+
+    public ResultSet info_examslinkedtopk(String pk) {
         try {
-            String sql = "select * from exams where exam_setter_lect_pk="+pk+";";
+            String sql = "select * from exams where exam_setter_lect_pk=" + pk + ";";
             Statement state = conn.createStatement();
             ResultSet rs = state.executeQuery(sql);
             return rs;
@@ -320,9 +325,9 @@ public class Database {
         }
     }
 
-        public String number_examslinkedtopkintmod(String pk) {
+    public String number_examslinkedtopkintmod(String pk) {
         try {
-            String sql = "select count(*) from exams where internal_moderator_int_mod_pk="+pk+";";
+            String sql = "select count(*) from exams where internal_moderator_int_mod_pk=" + pk + ";";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -333,9 +338,10 @@ public class Database {
             return "0";
         }
     }
-      public ResultSet info_examslinkedtopkintmod(String pk) {
+
+    public ResultSet info_examslinkedtopkintmod(String pk) {
         try {
-            String sql = "select * from exams where internal_moderator_int_mod_pk="+pk+";";
+            String sql = "select * from exams where internal_moderator_int_mod_pk=" + pk + ";";
             Statement state = conn.createStatement();
             ResultSet rs = state.executeQuery(sql);
             return rs;
@@ -344,9 +350,9 @@ public class Database {
         }
     }
 
-       public String number_examslinkedtopkextmod(String pk) {
+    public String number_examslinkedtopkextmod(String pk) {
         try {
-            String sql = "select count(*) from exams where External_Examiner_ext_exam_pk="+pk+";";
+            String sql = "select count(*) from exams where External_Examiner_ext_exam_pk=" + pk + ";";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -357,9 +363,10 @@ public class Database {
             return "0";
         }
     }
-      public ResultSet info_examslinkedtopkextmod(String pk) {
+
+    public ResultSet info_examslinkedtopkextmod(String pk) {
         try {
-            String sql = "select * from exams where External_Examiner_ext_exam_pk="+pk+";";
+            String sql = "select * from exams where External_Examiner_ext_exam_pk=" + pk + ";";
             Statement state = conn.createStatement();
             ResultSet rs = state.executeQuery(sql);
             return rs;
@@ -368,10 +375,9 @@ public class Database {
         }
     }
 
-
-            public String number_examslinkedtopkvetcommit(String pk) {
+    public String number_examslinkedtopkvetcommit(String pk) {
         try {
-            String sql = "select count(*) from exams where ExmVetComit_exmVet_pk="+pk+";";
+            String sql = "select count(*) from exams where ExmVetComit_exmVet_pk=" + pk + ";";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -382,9 +388,42 @@ public class Database {
             return "0";
         }
     }
-      public ResultSet info_examslinkedtopkvetcommit(String pk) {
+/**
+     *
+     * @param inputStream
+     * @param Modulecode
+     * @param level
+     * @param pk
+     * @param title
+     * @param online
+     * @param resit
+     * @param exam_setter_lect_pk
+     * @return
+     */
+     public String blobin(InputStream inputStream,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk){
+        try{
+              
+           
+           //     InputStream inputStream = new FileInputStream(new File(path));         
+            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(95362,\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\"txt\",1,1,1,1);";
+             //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
+                
+        //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setBlob(1, inputStream);
+                statement.executeUpdate();
+            }
+       
+        catch(Exception e){
+          System.out.println("error");
+          System.out.println(e);
+            return e.toString();
+        }
+        return "end of blob in";
+    }
+    public ResultSet info_examslinkedtopkvetcommit(String pk) {
         try {
-            String sql = "select * from exams where ExmVetComit_exmVet_pk="+pk+";";
+            String sql = "select * from exams where ExmVetComit_exmVet_pk=" + pk + ";";
             Statement state = conn.createStatement();
             ResultSet rs = state.executeQuery(sql);
             return rs;
@@ -393,23 +432,6 @@ public class Database {
         }
     }
 
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     public String number_of_new_examsextmod(String pk) {
         try {
             String sql = "select count(*) from exams where External_Examiner_ext_exam_pk=1 AND ExmVetComit_exmVet_pk=1 AND internal_moderator_int_mod_pk=1;";
@@ -430,70 +452,39 @@ public class Database {
      * @param pk
      * @return
      */
-/*
-    public boolean changeStage(String pk) {
-        try {
-            Statement state = conn.createStatement();
+//    public boolean changeStage(String pk) {
+//        try {
+//            Statement state = conn.createStatement();
+//
+//            state.executeUpdate("");
+//
+//            return true;
+//        } catch (SQLException ex) {
+//            // handle any sql errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//            return false;
+//        }
+//
+//    }
 
-            state.executeUpdate("");
-
-            return true;
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-            return false;
-        }
-
-    }
-
-
-public ResultSet view_unsigned_exams(){
-
-    try {
-            Statement state = conn.createStatement();
-
-            ResultSet rs = state.executeQuery(query);
-
-            return rs;
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-            return null;
-        }
-}
-     */
-    /**
-     *
-     * @param inputStream
-     * @param Modulecode
-     * @param level
-     * @param pk
-     * @param title
-     * @param online
-     * @param resit
-     * @param exam_setter_lect_pk
-     * @return
-     */
-    public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk) {
-        try {
-
-            //       InputStream inputStream = new FileInputStream(new File(path));
-            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`examFile`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(" + pk + "," + Modulecode + "," + title + "," + online + "," + resit + "," + "?" + exam_setter_lect_pk + "1,1,1);";
-            //String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(8,null);";
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setBlob(1, inputStream);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-            return e.toString();
-        }
-        return "end of blob in";
-    }
+//    public ResultSet view_unsigned_exams() {
+//
+//        try {
+//            Statement state = conn.createStatement();
+//
+//            ResultSet rs = state.executeQuery(query);
+//
+//            return rs;
+//        } catch (SQLException ex) {
+//            // handle any sql errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//            return null;
+//        }
+//    }
 
     /**
      *

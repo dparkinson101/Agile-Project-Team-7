@@ -30,27 +30,34 @@ public class loginManager extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        
+
         Database db = new Database();
         db.connect();
         String[] loginResults = db.checkLogin(email, password);
         boolean loggedIn = false;
-        
-        for(int i=0; i<loginResults.length; i++){
-            if(loginResults[i].equals("1")){ loggedIn = true; }
+
+        for (String loginResult : loginResults) {
+            if (loginResults[0].equals("-1")) {
+                loggedIn = false;
+                System.out.println("Error: Login Not Valid");
+                break;
+            }
+            if (loginResult.equals("1")) {
+                loggedIn = true;
+            }
         }
-        
+
         Cookie cookie = new Cookie("login", String.valueOf(loggedIn));
-        
+
         //Sets cookie max age for log-in to 10 mins
-        cookie.setMaxAge(60*10);
-        
+        cookie.setMaxAge(60 * 10);
+
         response.addCookie(cookie);
-        
-        //response.sendRedirect("/index.jsp");
+
+        response.sendRedirect("/ExamCheck/index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

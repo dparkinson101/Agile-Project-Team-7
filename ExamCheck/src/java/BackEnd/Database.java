@@ -101,7 +101,7 @@ public class Database {
 
     public String[] checkLogin(String username, String password) {
         try {
-            String sql = "select user_pk from users where username =" + username + " and password =" + password + ";";
+            String sql = "select user_pk from users where username = '" + username + "' and password = '" + password + "';";
             //  String sql = "select user_pk from users where username =\"admin\" and password =\"1234\";";
 
             Statement state = conn.createStatement();
@@ -130,6 +130,12 @@ public class Database {
             error[2] = "-1";
             error[3] = "-1";
             error[4] = "-1";
+            
+            //Prints Useful Errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
             return error;
         }
 
@@ -241,19 +247,6 @@ public class Database {
         } catch (SQLException ex) {
             return "0";
         }
-    }
-    
-
-    String blobin(String path, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk) {
-        try {
-
-            InputStream inputStream = new FileInputStream(new File(path));
-            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`examFile`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(" + pk + "," + Modulecode + "," + title + "," + online + "," + resit + "," + "?" + exam_setter_lect_pk + "1,1,1);";
-            //String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(8,null);";
-        } catch (Exception e) {
-
-        }
-        return "";
     }
 
     public String number_of_new_exams(String pk) {

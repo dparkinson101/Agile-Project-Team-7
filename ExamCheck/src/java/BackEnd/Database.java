@@ -152,7 +152,10 @@ public class Database {
             rs.next();
 
             return rs.getString(1);
+        } catch(Exception e) {
+            System.out.println("Something broke.");
         }
+        return null;
     }
 
     public String getexamvetcommit(String pk) {

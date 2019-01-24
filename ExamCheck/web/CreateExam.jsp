@@ -135,7 +135,10 @@
                 <br>
                 <br>
                 Select a file to upload: <br><br>
-                <input type="text" name="fileToUpload" id="fileToUpload"><br>
+                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                
+                <!--<input type="text" name="fileToUpload" id="fileToUpload">-->
+                <br>
                 <button type="submit" form="examDetails" value="submit">Submit Exam</button>
             </form>
                 

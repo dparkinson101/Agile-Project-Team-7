@@ -37,39 +37,38 @@ public class loginManager extends HttpServlet {
         Database db = new Database();
         db.connect();
         String loginResults = db.checkLogin(email, password);
+
         boolean loggedIn = false;
         String perms = "guest";
-        int i=0;
-        
-        for (String loginResult : loginResults) {
-            if (loginResults[0].equals("-1")) {
-                loggedIn = false;
-                System.out.println("Error: Login Not Valid");
-                break;
-            }
-            if (loginResult.equals("1")) {
+
+        String[] roles = new String[5];
+        roles[0] = db.getexamsetter(loginResults);
+        roles[1] = db.getexamvetcommit(loginResults);
+        roles[2] = db.getexternal(loginResults);
+        roles[3] = db.getinternalmod(loginResults);
+        roles[4] = db.getoffice(loginResults);
+
+        for (int i = 0; i < roles.length; i++) {
+            if (roles[i] != "0") {
                 loggedIn = true;
-                
-                switch(i){
+                switch (i) {
                     case 0:
-                        perms+= " examSetter";
+                        perms += " examSetter";
                         break;
                     case 1:
-                        perms+= " internalModerator";
+                        perms += " internalModerator";
                         break;
                     case 2:
-                        perms+= " examVetCommittee";
+                        perms += " examVetCommittee";
                         break;
                     case 3:
-                        perms+= " externalModerator";
+                        perms += " externalModerator";
                         break;
                     case 4:
-                        perms+= " office";
+                        perms += " office";
                         break;
                 }
             }
-            
-            i++;
         }
 
         Cookie login = new Cookie("login", String.valueOf(loggedIn));

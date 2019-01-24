@@ -110,7 +110,9 @@ public class Database {
 public void addcomment(String comments,String pk ,String date) {
         try {
             Statement state = conn.createStatement();
-String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`comment`,`date_time`)VALUES(\""+pk+"\",\""+comments+"\",\""+date+"\");";
+           // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
+
+String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(\""+pk+"\",\""+comments+"\",\""+date+"\""+pk+";";
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {

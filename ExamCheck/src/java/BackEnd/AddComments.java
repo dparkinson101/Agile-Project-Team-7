@@ -11,5 +11,5 @@ package BackEnd;
  */
 public class AddComments 
 {
-    String examPK = request.getParameter();
+    
 }

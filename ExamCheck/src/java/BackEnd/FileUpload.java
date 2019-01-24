@@ -42,7 +42,7 @@ public class FileUpload extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Part filePart = request.getPart("file");
-        
+
         //get inputs
         //InputStream fileContent = filePart.getInputStream();
 
@@ -54,7 +54,7 @@ public class FileUpload extends HttpServlet {
         String examLevel = request.getParameter("examLevel");
         Random Random = new Random();
         String examPK = Integer.toString(Random.nextInt(99999));
-        
+
         out.println(filePath);
         out.println(moduleCode);
         out.println(moduleTitle);
@@ -62,11 +62,11 @@ public class FileUpload extends HttpServlet {
         out.println(examChoice);
         out.println(examLevel);
         out.println(examPK);
-        
+
         //Connect to database
         Database db = new Database();
         db.connect();
-        
+
         //
         InputStream inputStream = new FileInputStream(new File(filePath));
         out.println(inputStream);
@@ -74,9 +74,9 @@ public class FileUpload extends HttpServlet {
         db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", examPK);
         out.println("end");
         response.sendRedirect("/ExamCheck/index.jsp");
-        
+
         try (PrintWriter out = response.getWriter()) {
-            
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

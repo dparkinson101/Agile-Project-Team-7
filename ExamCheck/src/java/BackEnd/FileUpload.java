@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import BackEnd.Database;
+import java.util.Random;
 /**
  *
  * @author matthewmcneil
@@ -50,6 +51,8 @@ public class FileUpload extends HttpServlet {
         String examType = request.getParameter("examType");
         String examChoice = request.getParameter("examChoice");
         String examLevel = request.getParameter("examLevel");
+        Random Random = new Random();
+        String examPK = Integer.toString(Random.nextInt(99999));
         
         out.println(filePath);
         out.println(moduleCode);
@@ -57,6 +60,7 @@ public class FileUpload extends HttpServlet {
         out.println(examType);
         out.println(examChoice);
         out.println(examLevel);
+        out.println(examPK);
         
         //Connect to database
         Database db = new Database();
@@ -66,7 +70,7 @@ public class FileUpload extends HttpServlet {
         InputStream inputStream = new FileInputStream(new File(filePath));
         out.println(inputStream);
         //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
-        db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1");
+        db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", examPK);
         out.println("end");
         
         try (PrintWriter out = response.getWriter()) {

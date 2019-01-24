@@ -5,7 +5,6 @@
  */
 package BackEnd;
 
-import java.sql.ResultSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.After;
@@ -73,9 +72,6 @@ public class createAccountTest extends Mockito{
         Database db = new Database();
         db.connect();
         
-        ResultSet rs = db.executeQuery("select * from users where email = 'dparkinson@dundee.ac.uk'");
-        assertTrue(rs.first());
-        
     }
 
     /**
@@ -84,17 +80,12 @@ public class createAccountTest extends Mockito{
     @Test
     public void testDoGet() throws Exception {
         System.out.println("doGet");
-        
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        
-        when(request.getParameter("firstName")).thenReturn("Douglas");
-        when(request.getParameter("lastName")).thenReturn("Parkinson");
-        when(request.getParameter("email")).thenReturn("dparkinson@dundee.ac.uk");
-        when(request.getParameter("password")).thenReturn("1234");
-        
+        HttpServletRequest request = null;
+        HttpServletResponse response = null;
         createAccount instance = new createAccount();
         instance.doGet(request, response);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -103,17 +94,12 @@ public class createAccountTest extends Mockito{
     @Test
     public void testDoPost() throws Exception {
         System.out.println("doPost");
-        
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        
-        when(request.getParameter("firstName")).thenReturn("Douglas");
-        when(request.getParameter("lastName")).thenReturn("Parkinson");
-        when(request.getParameter("email")).thenReturn("dparkinson@dundee.ac.uk");
-        when(request.getParameter("password")).thenReturn("1234");
-        
+        HttpServletRequest request = null;
+        HttpServletResponse response = null;
         createAccount instance = new createAccount();
         instance.doPost(request, response);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }

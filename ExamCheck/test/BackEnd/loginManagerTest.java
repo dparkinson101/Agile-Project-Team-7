@@ -5,7 +5,6 @@
  */
 package BackEnd;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.After;
@@ -14,15 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.jmock.integration.junit4.JUnit4Mockery;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.mockito.Mockito;
 
 /**
  *
  * @author Douglas
  */
-public class loginManagerTest extends org.jmock.integration.junit4.JUnit4Mockery{
+public class loginManagerTest extends Mockito {
     
     public loginManagerTest() {
     }
@@ -48,69 +45,47 @@ public class loginManagerTest extends org.jmock.integration.junit4.JUnit4Mockery
      */
     @Test
     public void testProcessRequest() throws Exception {
-        System.out.println("loginManager processRequest");
+        System.out.println("processRequest");
         
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         
-        when(request.getParameter("username")).thenReturn("admin");
-        when(request.getParameter("password")).thenReturn("1234");
-        
         loginManager instance = new loginManager();
+        HttpServletResponse result;
         
         instance.processRequest(request, response);
-
-        Cookie[] cookies = request.getCookies();
         
-        String value = cookies[0].getValue();
-        assertEquals(value, "true");
+        //TODO: Write in correct testing mechanisisms in
+        fail("No proper testing in here currently");
         
     }
 
     /**
      * Test of doGet method, of class loginManager.
-     * @throws java.lang.Exception
      */
     @Test
     public void testDoGet() throws Exception {
-        System.out.println("loginManager doGet");
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        
-        when(request.getParameter("username")).thenReturn("admin");
-        when(request.getParameter("password")).thenReturn("1234");
-        
+        System.out.println("doGet");
+        HttpServletRequest request = null;
+        HttpServletResponse response = null;
         loginManager instance = new loginManager();
-        
         instance.doGet(request, response);
-
-        Cookie[] cookies = request.getCookies();
-        
-        String value = cookies[0].getValue();
-        assertEquals(value, "true");
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
      * Test of doPost method, of class loginManager.
-     * @throws java.lang.Exception
      */
     @Test
     public void testDoPost() throws Exception {
-        System.out.println("loginManager doPost");
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        
-        when(request.getParameter("username")).thenReturn("admin");
-        when(request.getParameter("password")).thenReturn("1234");
-        
+        System.out.println("doPost");
+        HttpServletRequest request = null;
+        HttpServletResponse response = null;
         loginManager instance = new loginManager();
-        
         instance.doPost(request, response);
-
-        Cookie[] cookies = request.getCookies();
-        
-        String value = cookies[0].getValue();
-        assertEquals(value, "true");
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -120,9 +95,11 @@ public class loginManagerTest extends org.jmock.integration.junit4.JUnit4Mockery
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
         loginManager instance = new loginManager();
-        String expResult = "Lets a user login and returns cookie credentials for them.";
+        String expResult = "";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }

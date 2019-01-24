@@ -118,8 +118,8 @@
                     <!-- /.col-lg-12 -->
                 </div>
             
-
-            <form action="FileUpload" method="post" id="examDetails">
+                
+            <form action="FileUpload" method="post" id="examDetails" enctype="multipart/form-data">
                 Module Code: <br>
                 <input type="text" name="moduleCode" id="modCode"><br><br>
                 Module Title: <br>
@@ -136,37 +136,47 @@
                 <br>
                 <br>
                 Select a file to upload: <br><br>
-                <input type="file" name="fileToUpload" id="fileToUpload" accept="application/pdf, application/msword"><br>
-                
+                <input type="file" name="fileToUpload" id="fileToUpload"><br>
+                <button type="submit" form="examDetails" value="submit">Submit Exam</button>
             </form>
-                <!--<button type="submit" form="examDetails" value="submit">Submit Exam</button>-->
+                
             <br>
             <br>
             <!-- returns values for radio buttons -->
-            <script>                
-                function submitExam( file, code, level, subject, type , choice){
-                    window.alert("start");
+
+            
+            
+                <a href="#" onclick=check()><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a>
+                <button onclick="submitExam(getFilePath(), getModCode(),  getLevel(), getModTitle(), getType(), getChoice())"><i ></i>create exam</button>
+                         <script>                
+                
+                function submitExam( tesf, code, level, subject, type , choice){
+                      document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (8 * 0.2) + "em";
+                    System.out.println("CAtch");
                    import BackEnd.Database;
                     Database db = new Database();
                     db.connect();
-                       InputStream inputStream = new FileInputStream(new File(file));
+                       InputStream inputStream = new FileInputStream(new File(tesf));
                     // boolean test= db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(9,null);");
-                    db.blobin( file, code, level, "34", subject, type, choice, "1");  
+                   // db.blobin( inputStream, code, level, "34", subject, type, choice, "1");  
+                      db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
                     out.println("end");
                     // out.println(db.blobin(file, code, level, "34", subject, type, choice, "1")); 
-                    window.alert(db.blobin(inputStream, code, level, "34", subject, type, choice, "1"));
                 } 
 
                 function getModCode(){
                     return document.getElementById("modCode");
-                    window.alert;
+                    window.alert("Fat");
                 }
 
                 function getModTitle(){
                     return document.getElementById("modTitle");
+                    window.alert("Cat");
                 }
 
                 function getFilePath(){
+                    alert("Cat");
+                    document.write(document.getElementById("fileToUpload"))
                     return document.getElementById("fileToUpload");
                 }
 
@@ -199,12 +209,14 @@
                         }
                     }
                 }
+                 function check(){
+                   if (document.body.style.fontSize == "")
+                {
+                document.body.style.fontSize = "1.0em";
+                }
+                 document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+                 }
             </script>
-            
-            
-             
-                <a href="#" onclick="SubmitExam(getFilePath(), getModCode(),  getLevel(), getModTitle(), getType(), getChoice())"><i ></i>create exam</a>
-             
        
                 <br>
                 <br>

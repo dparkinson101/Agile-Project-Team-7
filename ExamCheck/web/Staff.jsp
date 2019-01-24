@@ -5,10 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-    <head>
-
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,158 +78,160 @@ function resizeText(multiplier)
                     <ul class="dropdown-menu dropdown-access">
                             <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
                             <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                            <li><a href="Staff.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
-                    </ul>
-                </li>
-                <!-- Alerts Dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
+                            <li><a href="index.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
+                        </ul>
+                    </li>
+                    <!-- Alerts Dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> No New Comments
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <!-- User Dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Accessibilty</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Top Links -->
+
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Exams</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">0</div>
+                                        <div>Completed Exams</div>
+                                    </div>
+                                </div>
+                            </div>
                             <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> No New Comments
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Exams</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
                                 </div>
                             </a>
-                        </li>
-                    </ul>
-
-                </li>
-                <!-- User Dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="Log-in.jsp" onclick="return confirm('Are you sure you want to log out?');"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Top Links -->
-
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Exams</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
-                                    <div>Completed Exams</div>
-                                </div>
-                            </div>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Exams</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">0</div>
+                                        <div>Exams In Progress</div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Exams</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-file fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">0</div>
+                                        <div>New Exams</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Exams</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
-                                    <div>Exams In Progress</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Exams</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
+
+                <div class="row">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-file fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
-                                    <div>New Exams</div>
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-plus fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-13 text-middle-center">
+                                        <div><font size="6">Create New Exam</font></div>
+                                    </div>
                                 </div>
                             </div>
+                            <a href="CreateExam.jsp">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Create</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Exams</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
             </div>
+            <!-- /#page-wrapper -->
 
-            <div class="row">
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-white">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-plus fa-4x"></i>
-                                </div>
-                                <div class="col-xs-13 text-middle-center">
-                                    <div><font size="6">Create New Exam</font></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="CreateExam.jsp">
-                            <div class="panel-footer">
-                                <span class="pull-left">Create</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
-        <!-- /#page-wrapper -->
 
-    </div>
-
-     <!-- jQuery -->
-     <script src="vendor/jquery/jquery.min.js"></script>
+        <!-- jQuery -->
+        <script src="vendor/jquery/jquery.min.js"></script>
 
      <!-- Bootstrap Core JavaScript -->
      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

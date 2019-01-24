@@ -9,26 +9,13 @@
 <%
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-    
+
     Main main = new Main();
     boolean login = main.loginHandle(username, password);
-    
-    if(login)
-    {
-        HttpSession sesh = request.getSession();
-        sesh.setAttribute("username", username);
-        
-        if(username.equals("admin"))
-        {
-            response.sendRedirect("Admin.jsp");
-        }
-        else
-        {
-            response.sendRedirect("Staff.jsp");
-        }
-        
-    }
-    else {
+
+    if (login) {
+        //Redirect to home page and give cookie somehow
+    } else {
         username = null;
         password = null;
     }

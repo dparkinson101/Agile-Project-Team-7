@@ -493,7 +493,7 @@ public class Database {
      * @param name
      * @return
      */
-    public Blob blobout(String exampk, String path, String name) {
+    public Blob blobout(String exampk) {
          try {
             Statement state = conn.createStatement();
             ResultSet rset = state.executeQuery("select examFile from exams where exam_pk=" + exampk + ";");

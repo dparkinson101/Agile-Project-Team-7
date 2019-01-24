@@ -94,18 +94,7 @@ public class loginManager extends HttpServlet {
         response.addCookie(credentials);
         response.addCookie(permissions);
 
-        if(perms.contains("admin"))
-        {
-            response.sendRedirect("/ExamCheck/Admin.jsp");
-        }
-        else if(perms.contains("examSetter"))
-        {
-            response.sendRedirect("/ExamCheck/examSetter.jsp");
-        }
-        else
-        {
-            response.sendRedirect("/ExamCheck/Staff.jsp");
-        }
+        response.sendRedirect("index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

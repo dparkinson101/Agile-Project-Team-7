@@ -107,6 +107,20 @@ public class Database {
             return false;
         }
     }
+    
+    public void addcomment(String comments,String pk ,String date) {
+        try {
+            Statement state = conn.createStatement();
+            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(\""+pk+"\",\""+comments+"\",\""+date+"\""+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
 
     /**
      *

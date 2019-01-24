@@ -203,7 +203,7 @@
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
                                             <%
-                                                String noNewExams = db.number_of_new_exams("1");
+                                                String noNewExams = db.number_of_new_examsextmod("1");
                                                 out.print(noNewExams);
                                             %>
                                         </div>

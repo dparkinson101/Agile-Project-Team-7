@@ -105,9 +105,10 @@ public class Database {
 
     /**
      *
-     * @param username
-     * @param password
-     * @return
+     * @param username the username / email of the user
+     * @param password the password of the user
+     * @return Returns the user_pk of the if they are a valid user in the
+     * database
      */
     public String checkLogin(String username, String password) {
         try {
@@ -291,11 +292,9 @@ public class Database {
      * @param pk
      * @return
      */
-
-
-        public String number_examslinkedtopk(String pk) {
+    public String number_examslinkedtopk(String pk) {
         try {
-            String sql = "select count(*) from exams where exam_setter_lect_pk="+pk+";";
+            String sql = "select count(*) from exams where exam_setter_lect_pk=" + pk + ";";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -306,9 +305,10 @@ public class Database {
             return "0";
         }
     }
-      public ResultSet info_examslinkedtopk(String pk) {
+
+    public ResultSet info_examslinkedtopk(String pk) {
         try {
-            String sql = "select * from exams where exam_setter_lect_pk="+pk+";";
+            String sql = "select * from exams where exam_setter_lect_pk=" + pk + ";";
             Statement state = conn.createStatement();
             ResultSet rs = state.executeQuery(sql);
             return rs;
@@ -316,8 +316,6 @@ public class Database {
             return null;
         }
     }
-
-
 
     public String number_of_new_exams(String pk) {
         try {
@@ -339,7 +337,7 @@ public class Database {
      * @param pk
      * @return
      */
-/*
+    /*
     public boolean changeStage(String pk) {
         try {
             Statement state = conn.createStatement();

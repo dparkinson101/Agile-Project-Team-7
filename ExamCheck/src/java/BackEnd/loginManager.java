@@ -69,8 +69,8 @@ public class loginManager extends HttpServlet {
                 }
             }
         }
-        
-        if(loginResults.equals("1")){
+
+        if (loginResults.equals("1")) {
             perms += " admin";
         }
 
@@ -78,8 +78,8 @@ public class loginManager extends HttpServlet {
         Cookie permissions = new Cookie("permissions", perms);
 
         //Sets cookie max age for log-in to 10 mins
-        login.setMaxAge(60 * 10);
-        permissions.setMaxAge(60 * 10);
+        login.setMaxAge(60 * 60 * 24);
+        permissions.setMaxAge(60 * 60 * 24);
 
         response.addCookie(login);
         response.addCookie(permissions);

@@ -320,11 +320,99 @@ public class Database {
         }
     }
 
-
-
-    public String number_of_new_exams(String pk) {
+        public String number_examslinkedtopkintmod(String pk) {
         try {
-            String sql = "select count(*) from exams where exams_External_Examiner_FK=1 and exams_ExmVetComit_FK=1 and exams_internal_moderator_FK=1;";
+            String sql = "select count(*) from exams where internal_moderator_int_mod_pk="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+      public ResultSet info_examslinkedtopkintmod(String pk) {
+        try {
+            String sql = "select * from exams where internal_moderator_int_mod_pk="+pk+";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+       public String number_examslinkedtopkextmod(String pk) {
+        try {
+            String sql = "select count(*) from exams where External_Examiner_ext_exam_pk="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+      public ResultSet info_examslinkedtopkextmod(String pk) {
+        try {
+            String sql = "select * from exams where External_Examiner_ext_exam_pk="+pk+";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+
+            public String number_examslinkedtopkvetcommit(String pk) {
+        try {
+            String sql = "select count(*) from exams where ExmVetComit_exmVet_pk="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+      public ResultSet info_examslinkedtopkvetcommit(String pk) {
+        try {
+            String sql = "select * from exams where ExmVetComit_exmVet_pk="+pk+";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    public String number_of_new_examsextmod(String pk) {
+        try {
+            String sql = "select count(*) from exams where External_Examiner_ext_exam_pk=1 AND ExmVetComit_exmVet_pk=1 AND internal_moderator_int_mod_pk=1;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);

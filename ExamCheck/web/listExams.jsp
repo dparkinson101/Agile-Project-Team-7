@@ -130,6 +130,8 @@
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
+                            <a href=""><button class="fa fa-download"> Download exam </button> </a>
+                            <button class="fa fa-pencil"> Update exam </button>
                         </div>
                     </div>
                 </div>

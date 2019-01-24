@@ -7,7 +7,13 @@
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+    private Connection conn;
 
+    public Database(){
+        conn = null;
+    }
+    
+    
 <%
  HttpSession spoons = request.getSession();
         String username = (String) spoons.getAttribute("email");
@@ -22,6 +28,17 @@
                 }
             }
         }   
+
+        String creds = "";
+        Cookie[] cookies2 = request.getCookies();
+
+        if (cookies2 != null) {
+            for (Cookie cookie : cookies2) {
+                if (cookie.getName().equals("user")) {
+                    creds = cookie.getValue();
+                }
+            }
+        }
 %>
 <html>
     <head>
@@ -62,12 +79,13 @@
             document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
         }
     </script>
-
-    <%/*
-        HttpSession sesh = request.getSession();
-        String username = (String) sesh.getAttribute("username");
-        */
-    %>
+        <%
+           Database db = new Database();
+           db.connect();
+           String noCompletedExams = db.number_of_completed_exams("1");
+           out.print(noCompletedExams);
+         
+        %>
 
     <body>
 
@@ -157,19 +175,23 @@
                     <div id="collapse1" class="panel-collapse collapse in">
                         
                         
-                        <% for (int i=0; i< 5; i++){ %>
+                        <% for (int i=0; i< 5; i++){ 
+                            String no = db.number_examslinkedtopk(creds);
+                                                 %>
                         <div class="panel-body">
+                               <% out.print(no); %>
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
-                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <a href=""><button class="fa fa-download" onclick=""> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                         </div>
                         <%} %>                     
                     </div>
                 </div>
                 <%} %>
-                <% if (perms.contains("internalModerator")) { %>
+                <% if (perms.contains("internalModerator")) { 
+                String no = db.number_examslinkedtopk(creds);%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -180,6 +202,7 @@
                         
                         <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
+                            <% out.print(no); %>
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
@@ -191,7 +214,8 @@
                     </div>
                 </div>
                 <%} %>
-                        <% if (perms.contains("examVetCommittee")) { %>
+                        <% if (perms.contains("examVetCommittee")) { 
+                        String no = db.number_examslinkedtopk(creds);%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -201,6 +225,7 @@
                     <div id="collapse3" class="panel-collapse collapse">
                         <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
+                                                        <% out.print(no); %>
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
@@ -212,7 +237,8 @@
                     </div>
                 </div>
                  <%} %>
-                 <% if (perms.contains("externalModerator")) { %>
+                 <% if (perms.contains("externalModerator")) { 
+                 String no = db.number_examslinkedtopk(creds);%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -222,6 +248,7 @@
                     <div id="collapse4" class="panel-collapse collapse">
                         <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
+                            <% out.print(no); %>
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
@@ -233,7 +260,8 @@
                     </div>
                 </div>
                 <%} %>
-                <% if (perms.contains("office")) { %>
+                <% if (perms.contains("office")) { 
+                String no = db.number_examslinkedtopk(creds);%>%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -243,6 +271,7 @@
                     <div id="collapse5" class="panel-collapse collapse">
                         <% for (int i=0; i< 5; i++){ %>
                         <div class="panel-body">
+                            <% out.print(no); %>
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>

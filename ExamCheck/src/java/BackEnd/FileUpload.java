@@ -6,27 +6,26 @@ package BackEnd;
  * and open the template in the editor.
  */
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.Part;
+import BackEnd.Database;
+import BackEnd.Database;
 /**
  *
- * @author laptop
+ * @author matthewmcneil
  */
-@WebServlet(urlPatterns = {"/FileDownload"})
-public class FileDownload extends HttpServlet {
+@MultipartConfig
+public class FileUpload extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,52 +38,46 @@ public class FileDownload extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         Database db = new Database();
+        response.setContentType("text/html;charset=UTF-8");
+        Part filePart = request.getPart("file");
+        
+        //get inputs
+        //InputStream fileContent = filePart.getInputStream();
+
+        String filePath = request.getParameter("fileToUpload");
+        String moduleCode = request.getParameter("moduleCode");
+        String moduleTitle = request.getParameter("moduleTitle");
+        String examType = request.getParameter("examType");
+        String examChoice = request.getParameter("examChoice");
+        String examLevel = request.getParameter("examLevel");
+        
+        out.println(filePath);
+        out.println(moduleCode);
+        out.println(moduleTitle);
+        out.println(examType);
+        out.println(examChoice);
+        out.println(examLevel);
+        
+        //Connect to database
+        Database db = new Database();
         db.connect();
-
-        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = 999999;");
-        try {
-            if (rs.next()) {
-                String fileName = "TextFile.docx";
-                Blob blob = rs.getBlob("examFile");
-
-                InputStream is = blob.getBinaryStream();
-                int fileLength = is.available();
-
-                System.out.println("File Length: " + fileLength);
-
-                ServletContext context = getServletContext();
-
-                // sets MIME type for the file download
-                String mimeType = context.getMimeType(fileName);
-                if (mimeType == null) {
-                    mimeType = "application/octet-stream";
-                }
-
-                // set content properties and header attributes for the response
-                response.setContentType(mimeType);
-                response.setContentLength(fileLength);
-                String headerKey = "Content-Disposition";
-                String headerValue = String.format("attachment; filename=\"%s\"", fileName);
-                response.setHeader(headerKey, headerValue);
-
-                // writes the file to the client
-                OutputStream outStream = response.getOutputStream();
-
-                byte[] buffer = new byte[4096];
-                int bytesRead = -1;
-
-                while ((bytesRead = is.read(buffer)) != -1) {
-                    outStream.write(buffer, 0, bytesRead);
-                }
-
-                is.close();
-                outStream.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FileDownload.class.getName()).log(Level.SEVERE, null, ex);
+        
+        //
+        InputStream inputStream = new FileInputStream(new File(filePath));
+        out.println(inputStream);
+        //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
+        db.blobin( inputStream, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1");
+        out.println("end");
+        
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet createAccount</title>");
+            out.println("File passed");
+            out.println("</head>");
+            out.println("</html>");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

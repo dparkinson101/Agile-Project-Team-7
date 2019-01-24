@@ -38,7 +38,9 @@ public class loginManager extends HttpServlet {
         db.connect();
         String[] loginResults = db.checkLogin(email, password);
         boolean loggedIn = false;
-
+        String perms = "guest";
+        int i=0;
+        
         for (String loginResult : loginResults) {
             if (loginResults[0].equals("-1")) {
                 loggedIn = false;
@@ -47,15 +49,38 @@ public class loginManager extends HttpServlet {
             }
             if (loginResult.equals("1")) {
                 loggedIn = true;
+                
+                switch(i){
+                    case 0:
+                        perms+= " examSetter";
+                        break;
+                    case 1:
+                        perms+= " internalModerator";
+                        break;
+                    case 2:
+                        perms+= " examVetCommittee";
+                        break;
+                    case 3:
+                        perms+= " externalModerator";
+                        break;
+                    case 4:
+                        perms+= " office";
+                        break;
+                }
             }
+            
+            i++;
         }
 
-        Cookie cookie = new Cookie("login", String.valueOf(loggedIn));
+        Cookie login = new Cookie("login", String.valueOf(loggedIn));
+        Cookie permissions = new Cookie("permissions", perms);
 
         //Sets cookie max age for log-in to 10 mins
-        cookie.setMaxAge(60 * 10);
+        login.setMaxAge(60 * 10);
+        permissions.setMaxAge(60 * 10);
 
-        response.addCookie(cookie);
+        response.addCookie(login);
+        response.addCookie(permissions);
 
         response.sendRedirect("/ExamCheck/index.jsp");
     }

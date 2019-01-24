@@ -33,7 +33,7 @@ public class Database {
     public Connection connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } 
+        }
         catch (Exception ex) {
             System.out.println("Failed to register MySQL Connector/J");
             System.out.println(ex);
@@ -43,7 +43,7 @@ public class Database {
         try {
             conn = (Connection) DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam7db", "18agileteam7", "8302.at7.2038");
             return conn;
-        } 
+        }
         catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -105,20 +105,20 @@ return "donedb";
         try{
           String sql = "select user_pk from users where username ="+username+" and password ="+password+";";
           //  String sql = "select user_pk from users where username =\"admin\" and password =\"1234\";";
-            
+
              Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
 
-          
+
             String[] roles = new String[5];
 rs.beforeFirst();
 rs.next();
 
            String user_pk = rs.getString(1);
-           
+
            if(user_pk!=null){
-        
+
          roles[0]=     this.getexamsetter(user_pk);
          roles[1]=         this.getinternalmod(user_pk);
          roles[2]=           this.getexamvetcommit(user_pk);
@@ -136,12 +136,12 @@ rs.next();
              error[4]="-1";
            return error;
         }
-        
-        
-     
+
+
+
     }
- 
- 
+
+
   public String getexamsetter(String pk){
         try{
             String sql ="select lect_pk from exam_setter where user_user_pk ="+pk+";";
@@ -152,14 +152,14 @@ rs.next();
             rs.next();
 
            return  rs.getString(1);
-            
-            
+
+
         }
         catch (SQLException ex) {
            return "0";
-        }  
+        }
   }
-public String getinternalmod(String pk){   
+public String getinternalmod(String pk){
         try{
             String sql ="select int_mod_pk from internal_moderator where user_user_pk ="+pk+";";
             Statement state = conn.createStatement();
@@ -169,12 +169,12 @@ public String getinternalmod(String pk){
             rs.next();
 
                       return  rs.getString(1);
-            
-            
+
+
         }
         catch (SQLException ex) {
               return "0";
-        }  
+        }
   }
 public String getexamvetcommit(String pk){
         try{
@@ -183,11 +183,11 @@ public String getexamvetcommit(String pk){
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-                    return  rs.getString(1);          
+                    return  rs.getString(1);
         }
         catch (SQLException ex) {
              return "0";
-        }  
+        }
   }
 
 
@@ -201,12 +201,12 @@ public String getexternal(String pk){
             rs.next();
 
                    return  rs.getString(1);
-            
-            
+
+
         }
         catch (SQLException ex) {
              return "0";
-        }  
+        }
   }
 public String getoffice(String pk){
         try{
@@ -218,12 +218,12 @@ public String getoffice(String pk){
             rs.next();
 
                      return  rs.getString(1);
-            
-            
+
+
         }
         catch (SQLException ex) {
             return "0";
-        }  
+        }
   }
 public String number_of_completed_exams(String pk){
   try{
@@ -232,16 +232,16 @@ public String number_of_completed_exams(String pk){
 
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
-            rs.next();    
-            
-            
+            rs.next();
+
+
                      return  rs.getString(1);
-            
-            
+
+
         }
         catch (SQLException ex) {
             return "0";
-        }  
+        }
 
 
 }
@@ -252,12 +252,12 @@ try{
 
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
-            rs.next();               
-            return  rs.getString(1);            
+            rs.next();
+            return  rs.getString(1);
         }
         catch (SQLException ex) {
             return "0";
-        }  
+        }
 
 
 
@@ -269,12 +269,12 @@ try{
 
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
-            rs.next();               
-            return  rs.getString(1);            
+            rs.next();
+            return  rs.getString(1);
         }
         catch (SQLException ex) {
             return "0";
-        }  
+        }
 
 
 }
@@ -319,27 +319,27 @@ public ResultSet view_unsigned_exams(){
 
      public String blobin(InputStream inputStream ,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk){
         try{
-              
-           
+
+
          //       InputStream inputStream = new FileInputStream(new File(path));
                 String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`examFile`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES("+pk+","+Modulecode+","+title+","+online+","+resit+","+"?"+exam_setter_lect_pk+"1,1,1);";
                 //String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(8,null);";
-                
-                
+
+
                 PreparedStatement statement = conn.prepareStatement(sql);
                 statement.setBlob(1, inputStream);
                 statement.executeUpdate();
             }
-       
+
         catch(Exception e){
             System.out.println(e);
             return e.toString();
         }
         return "end of blob in";
     }
-     
-     
-     
+
+
+
 
         public File blobout(String exampk,String path,String name){
         try{
@@ -361,6 +361,6 @@ public ResultSet view_unsigned_exams(){
            File v= new File("Csbxfgfgn");
            return v;
         }
-        
+
     }
 }

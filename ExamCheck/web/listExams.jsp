@@ -126,12 +126,35 @@
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
+                        <script>
+                            function LoopExams()
+                            {
+                                var i=0;
+                                var end= 5;
+                                
+                                for(i=0; i<end;i++)
+                                { 
+                                    
+                                    document.write('<div class="panel-body">');
+                                    document.write('<p> Exam count: ' + i );
+                                    document.write('<p class="mb-1">Module Code</p>');
+                                    document.write('<p class="mb-1">Date</p>');
+                                    document.write('<p class="mb-1">Resit</p>');
+                                    document.write('<p class="mb-1">Exam</p>');
+                                    document.write('<p class="mb-1">Grade</p>');
+                                    document.write('<a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>');
+                                    document.write('<button class="fa fa-pencil "> Update exam </button>');
+                                    document.write('</div>');
+                                }
+                                
+                            }
+                        </script>
                         <div class="panel-body">
                             <p class="mb-1">Module Code</p>
                             <p class="mb-1">Date</p>
                             <p class="mb-1">Resit</p>
-                            <a href=""><button class="fa fa-download"> Download exam </button> </a>
-                            <button class="fa fa-pencil"> Update exam </button>
+                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
+                            <button class="fa fa-pencil "> Update exam </button>
                         </div>
                     </div>
                 </div>

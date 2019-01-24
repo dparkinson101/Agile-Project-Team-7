@@ -28,7 +28,7 @@ public class Database {
 
     private Connection conn;
 
-    Database(){
+    public Database(){
         conn = null;
     }
     
@@ -493,24 +493,23 @@ public class Database {
      * @param name
      * @return
      */
-    public File blobout(String exampk, String path, String name) {
-        try {
+    public Blob blobout(String exampk, String path, String name) {
+         try {
             Statement state = conn.createStatement();
             ResultSet rset = state.executeQuery("select examFile from exams where exam_pk=" + exampk + ";");
             byte b[];
             Blob blob;
             int i = 1;
-            String doctype = rset.getString("doctype");
-            File f = new File(path + "\\" + name + doctype);
-            FileOutputStream fs = new FileOutputStream(f);
-            blob = rset.getBlob("test");
-            b = blob.getBytes(1, (int) blob.length());
-            fs.write(b);
-            return f;
+           // String doctype = rset.getString("doctype");
+            //File f = new File(path + "\\" + name + doctype);
+            //FileOutputStream fs = new FileOutputStream(f);
+            blob = rset.getBlob("examFile");
+        
+return blob;
         } catch (Exception e) {
             System.out.println(e);
             File v = new File("Csbxfgfgn");
-            return v;
+            return null;
         }
 
     }

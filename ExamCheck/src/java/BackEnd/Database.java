@@ -291,6 +291,34 @@ public class Database {
      * @param pk
      * @return
      */
+
+
+        public String number_examslinkedtopk(String pk) {
+        try {
+            String sql = "select count(*) from exams where exam_setter_lect_pk="+pk+";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+      public ResultSet info_examslinkedtopk(String pk) {
+        try {
+            String sql = "select * from exams where exam_setter_lect_pk="+pk+";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+
+
     public String number_of_new_exams(String pk) {
         try {
             String sql = "select count(*) from exams where exams_External_Examiner_FK=1 and exams_ExmVetComit_FK=1 and exams_internal_moderator_FK=1;";
@@ -311,6 +339,7 @@ public class Database {
      * @param pk
      * @return
      */
+/*
     public boolean changeStage(String pk) {
         try {
             Statement state = conn.createStatement();
@@ -328,7 +357,7 @@ public class Database {
 
     }
 
-    /*
+
 public ResultSet view_unsigned_exams(){
 
     try {

@@ -36,7 +36,7 @@ public class loginManager extends HttpServlet {
 
         Database db = new Database();
         db.connect();
-        String[] loginResults = db.checkLogin(email, password);
+        String loginResults = db.checkLogin(email, password);
         boolean loggedIn = false;
         String perms = "guest";
         int i=0;

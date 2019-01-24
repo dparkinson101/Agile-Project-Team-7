@@ -133,7 +133,7 @@ function resizeText(multiplier)
                                     <i class="fa fa-check fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge"><!-- VIEW ALL COMPLETED EXAMS !-->0</div>
                                     <div>Completed Exams</div>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@ function resizeText(multiplier)
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge"><!-- VIEW ALL IN PROGRESS EXAMS !-->0</div>
                                     <div>Exams In Progress</div>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@ function resizeText(multiplier)
                                     <i class="fa fa-file fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">0</div>
+                                    <div class="huge"><!-- View all exams that have not been assigned any moderators !-->0</div>
                                     <div>New Exams</div>
                                 </div>
                             </div>

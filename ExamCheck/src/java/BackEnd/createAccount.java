@@ -110,5 +110,3 @@ public class createAccount extends HttpServlet {
     public String getServletInfo() {
         return "Used to create a new user account.";
     }// </editor-fold>
-
-}

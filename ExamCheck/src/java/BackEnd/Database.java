@@ -162,7 +162,10 @@ public class Database {
 
         } catch (SQLException ex) {
             return "0";
+        } catch(Exception e) {
+            System.out.println("Something broke.");
         }
+        return null;
     }
 
     public String getexamvetcommit(String pk) {

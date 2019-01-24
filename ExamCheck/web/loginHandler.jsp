@@ -22,9 +22,6 @@ roles[0] = db.getexamsetter(user_pk);
              roles[3] = db.getexternal(user_pk);
               roles[4] = db.getoffice(user_pk);
 
-
-
-
 %>
 
 <!DOCTYPE html>

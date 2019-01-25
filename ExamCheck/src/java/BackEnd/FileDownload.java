@@ -41,7 +41,7 @@ public class FileDownload extends HttpServlet {
         Database db = new Database();
         db.connect();
 
-        String examPK = "96788";
+        String examPK = request.getParameter("examPK");
 
         ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = " + examPK + ";");
         try {

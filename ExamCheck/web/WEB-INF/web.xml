@@ -16,6 +16,10 @@
         <servlet-name>FileUploadUpdate</servlet-name>
         <servlet-class>BackEnd.FileUploadUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddComments</servlet-name>
+        <servlet-class>BackEnd.AddComments</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>createAccount</servlet-name>
         <url-pattern>/createAccount</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>FileUploadUpdate</servlet-name>
         <url-pattern>/FileUploadUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddComments</servlet-name>
+        <url-pattern>/AddComments</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -440,7 +440,7 @@ public class Database {
 
         try {
 
-            String sql = "update exams set doctype =" + docType + " , set examFile =? where exam_pk =" + pk + " ;";
+            String sql = "update exams set doctype ='" + docType + "' , examFile =? where exam_pk =" + pk + " ;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 

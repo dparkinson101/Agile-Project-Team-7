@@ -488,9 +488,11 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
      
      
      
-          public String blobintwo(InputStream inputStream, String docType,String pk){
+          public String updateblob(InputStream inputStream, String docType,String pk){
         try{
            
+            
+            
            //     InputStream inputStream = new FileInputStream(new File(path));         
           //  String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\""+examPK+"\",\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\""+docType+"\",1,1,1,1);";
            String sql = "update exams set doctype ="+docType+" , set examFile =? where exam_pk ="+pk+" ;";

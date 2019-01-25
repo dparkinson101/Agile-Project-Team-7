@@ -114,7 +114,7 @@ public class Database {
 
             Statement state = conn.createStatement();
 
-            String sql = "update exams set internal_moderator_int_mod_pk=2 =" + pk + ";";
+            String sql = "update exams set internal_moderator_int_mod_pk=2 where exam_pk=" + pk + ";";
 
             state.executeUpdate(sql);
 
@@ -137,7 +137,7 @@ public class Database {
 
             Statement state = conn.createStatement();
 
-            String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 =" + pk + ";";
+            String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
 
             state.executeUpdate(sql);
 
@@ -160,7 +160,7 @@ public class Database {
 
             Statement state = conn.createStatement();
 
-            String sql = "update exams set External_Examiner_ext_exam_pk=2 =" + pk + ";";
+            String sql = "update exams set External_Examiner_ext_exam_pk=2 where exam_pk = " + pk + ";";
 
             state.executeUpdate(sql);
 
@@ -199,7 +199,7 @@ public class Database {
             Statement state = conn.createStatement();
             // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
 
-            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
+            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk+pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {

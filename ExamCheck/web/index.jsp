@@ -49,8 +49,8 @@
     <%
         HttpSession spoons = request.getSession();
         String username = (String) spoons.getAttribute("email");
-        
-          String perms = "";
+
+        String perms = "";
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -60,7 +60,7 @@
                 }
             }
         }
-        
+
         String examSetter = perms.substring(0, 16);
     %>
 
@@ -146,7 +146,8 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
-                                            <%                                            Database db = new Database();
+                                            <%
+                                                Database db = new Database();
                                                 db.connect();
                                                 String noCompletedExams = db.number_of_completed_exams("1");
                                                 out.print(noCompletedExams);
@@ -166,7 +167,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                                <div class="panel panel-yellow">
+                        <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
@@ -183,7 +184,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="listExams.jsp">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Exams</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -191,7 +192,7 @@
                                 </div>
                             </a>
                         </div>
-                        
+
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
@@ -202,18 +203,15 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
-                                            <%
-                                                //String noNewExams = db.number_of_new_exams("1");
-                                                //out.print(noNewExams);
-                                            %>
+                                            🙏
                                         </div>
                                         <div>New Exams</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="./createExam.jsp">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Exams</span>
+                                    <span class="pull-left">Add Exam</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -228,72 +226,55 @@
                     <br/>
                     <br/>
                 </div>
-                                        
+
                 <div class="row">
+                    <%                            if (perms.contains("admin")) {
+                    %>
                     <div class="col-lg-3 col-md-6">
-                    <%
-                    if(perms.contains("admin"))
-                    {
-                %>
-                    <div class="panel panel-white">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-13 text-middle-center">
-                                    <div><font size="5">Add New User</font></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="AddUser.jsp">
-                            <div class="panel-footer">
-                                <span class="pull-left">Add User</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                    <% } %>
-                    
-                    <div class="row">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                </div>
-                                        
-                <div class="row">
-                
-                <div class="col-lg-3 col-md-6">
-                    <%
-                    if(perms.contains("admin"))
-                    {
-                %>
-                    <div class="panel panel-white">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-13 text-middle-center">
-                                    <div><font size="5">View Unsigned Exams</font></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="CreateExam.jsp">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Exams</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                    <% } %>
-                    
-                <div class="col-lg-3 col-md-6">
-                        <% if(perms.contains("examSetter")) {%>
                         <div class="panel panel-white">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-xs-13 text-middle-center">
-                                        <div><font size="6">Create New Exam</font></div>
+                                    <div class="col-xs-13 text-center">
+                                        <div><font size="5">Add New User</font></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="AddUser.jsp">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Add User</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-12 text-middle-center">
+                                        <div><font size="5">View Unsigned Exams</font></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="listExams.jsp">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Exams</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <% if (perms.contains("examSetter")) {%>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <div><font size="5">Create New Exam</font></div>
                                     </div>
                                 </div>
                             </div>
@@ -305,23 +286,23 @@
                                 </div>
                             </a>
                         </div>
-                        <% } %>
                     </div>
-            </div>
+                    <% }%>
                 </div>
             </div>
-            <!-- /#page-wrapper -->
-
         </div>
+        <!-- /#page-wrapper -->
 
-        <!-- jQuery -->
-        <script src="vendor/jquery/jquery.min.js"></script>
+    </div>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="dist/js/DCEC.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    </body>
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/DCEC.js"></script>
+
+</body>
 </html>

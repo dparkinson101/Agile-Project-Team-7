@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : listExams
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
@@ -6,7 +6,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>    
+<!DOCTYPE html>
 <%
     HttpSession spoons = request.getSession();
     String username = (String) spoons.getAttribute("email");
@@ -158,7 +158,7 @@
             /*
             Database db = new Database();
             db.connect();
-            
+
             String user_pk = db.getUserPK();
             String result = db.number_examslinkedtopk("1");
             int count = Integer.getInteger(result);
@@ -208,19 +208,19 @@
                                 <button class="fa fa-download" type="submit"> Download exam </button>
                             </form>
                             <br>
-                            <form action="FileUploadUpdate" method="POST">
+                            <form action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
                                 <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
                                 <input type="hidden" name="examPK" value="<%= pk %>"/>
                                 <button class="fa fa-pencil" type="submit"> Update exam </button>
                             </form>
                             <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="<%= pk%>"> 
+                                <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
                             </form>
                         </div>
-                        <%} %>                     
+                        <%} %>
                     </div>
                 </div>
                 <%}
@@ -260,7 +260,7 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                             <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
@@ -305,7 +305,7 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                             <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
@@ -350,7 +350,7 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                             <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
@@ -397,7 +397,7 @@
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
                             <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
@@ -406,11 +406,11 @@
                         <%} %>
                     </div>
                 </div>
-                <%}%>         
+                <%}%>
 
 
-            </div> 
-        </div>                   
+            </div>
+        </div>
 
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>

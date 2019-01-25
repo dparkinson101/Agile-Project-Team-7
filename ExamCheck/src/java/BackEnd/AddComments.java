@@ -47,7 +47,8 @@ public class AddComments extends HttpServlet {
             System.out.println(comment);
             System.out.println(pk);
             System.out.println(currentDateTime);
-            db.addcomment(comment, pk, currentDateTime);
+            //Hardcoded to moving exam setter exam onto stage 2
+            db.addcomment(comment, pk, currentDateTime, 1);
             response.sendRedirect("index.jsp");
         } catch (Exception e) {
             e.getMessage();

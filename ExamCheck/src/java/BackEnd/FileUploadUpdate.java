@@ -63,29 +63,10 @@ public class FileUploadUpdate extends HttpServlet {
         Database db = new Database();
         db.connect();
 
-        db.blobinUpdate(fileContent, examPK, docType);
+        db.updateblob(fileContent, docType, examPK);
         out.println("end");
-        response.sendRedirect("/ExamCheck/index.jsp");
 
-        try (PrintWriter out = response.getWriter()) {
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset=\"utf-8\">");
-            out.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
-            out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-            out.println("<meta name=\"description\" content=\"\">");
-            out.println("<meta name=\"author\" content=\"\">");
-            out.println("<title>Servlet createAccount</title>");
-            out.println("<link href=\"vendor/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">");
-            out.println("<link href=\"dist/css/DCEC.css\" rel=\"stylesheet\">");
-            out.println("<link href=\"vendor/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">");
-            out.println("File passed");
-            out.println("</head>");
-            out.println("</html>");
-        }
-    }
+        response.sendRedirect("/ExamCheck/listExams.jsp");    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

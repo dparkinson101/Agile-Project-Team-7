@@ -122,6 +122,56 @@ String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssss
             System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
+
+
+public void movetoexamvettingcommite(String pk) {
+              try {
+            Statement state = conn.createStatement();
+
+String sql = "update exams set internal_moderator_int_mod_pk=2 ="+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+public void movetoexamvetexternalmodderator(String pk) {
+                   try {
+            Statement state = conn.createStatement();
+
+String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 ="+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+public void finish_exam(String pk) {
+                   try {
+            Statement state = conn.createStatement();
+
+String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+
+
+
     /**
      *
      * @param username the username / email of the user
@@ -412,6 +462,7 @@ String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssss
      * @param online
      * @param resit
      * @param exam_setter_lect_pk
+     * @param examPK
      * @return
      */
      public String blobin(InputStream inputStream,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk, String examPK, String docType){
@@ -427,7 +478,7 @@ String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssss
                 statement.executeUpdate();
             }
        
-        catch(Exception e){
+        catch(SQLException e){
           System.out.println("error");
           System.out.println(e);
             return e.toString();

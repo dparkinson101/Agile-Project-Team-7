@@ -5,7 +5,6 @@ package BackEnd;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -39,13 +38,15 @@ public class FileDownload extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         Database db = new Database();
+        Database db = new Database();
         db.connect();
 
-        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = 15758;");
+        String examPK = "96788";
+
+        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = " + examPK + ";");
         try {
             if (rs.next()) {
-                String fileName = "test.docx";
+                String fileName = "test" + "." + rs.getString("doctype");
                 Blob blob = rs.getBlob("examFile");
 
                 InputStream is = blob.getBinaryStream();

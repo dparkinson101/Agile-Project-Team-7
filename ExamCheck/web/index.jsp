@@ -236,7 +236,7 @@
                         <div class="panel panel-white">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-xs-13 text-middle-center">
+                                    <div class="col-xs-13 text-center">
                                         <div><font size="5">Add New User</font></div>
                                     </div>
                                 </div>
@@ -253,21 +253,14 @@
                     <% } %>
 
                     <div class="row">
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-
-                    <div class="row">
-                            <%
-                                if (perms.contains("admin")) {
-                            %>
-                            <div class="col-lg-5 col-md-10">
+                        <%
+                            if (perms.contains("admin")) {
+                        %>
+                        <div class="col-lg-3 col-md-6">
                             <div class="panel panel-white">
                                 <div class="panel-heading">
                                     <div class="row">
-                                        <div class="col-xs-13 text-middle-center">
+                                        <div class="col-xs-12 text-middle-center">
                                             <div><font size="5">View Unsigned Exams</font></div>
                                         </div>
                                     </div>
@@ -284,24 +277,24 @@
                         <% } %>
 
                         <% if (perms.contains("examSetter")) {%>
-                            <div class="col-md-12 col-lg-12">
-                                <div class="panel panel-white">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-xs-13 text-center">
-                                                <div><font size="6">Create New Exam</font></div>
-                                            </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="panel panel-white">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div><font size="5">Create New Exam</font></div>
                                         </div>
                                     </div>
-                                    <a href="CreateExam.jsp">
-                                        <div class="panel-footer">
-                                            <span class="pull-left">Create</span>
-                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </a>
                                 </div>
+                                <a href="CreateExam.jsp">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Create</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
                             </div>
+                        </div>
                         <% }%>
                     </div>
                 </div>

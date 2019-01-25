@@ -208,7 +208,7 @@
                                 <button class="fa fa-download" type="submit"> Download exam </button>
                             </form>
                             <br>
-                            <form action="FileUploadUpdate" method="POST">
+                            <form action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
                                 <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
                                 <input type="hidden" name="examPK" value="<%= pk %>"/>
                                 <button class="fa fa-pencil" type="submit"> Update exam </button>

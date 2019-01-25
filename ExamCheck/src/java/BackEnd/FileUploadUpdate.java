@@ -63,7 +63,7 @@ public class FileUploadUpdate extends HttpServlet {
         Database db = new Database();
         db.connect();
 
-        //db.blobintwo(fileContent, examPK, docType);
+        db.updateblob(fileContent, docType, examPK);
         out.println("end");
         response.sendRedirect("/ExamCheck/index.jsp");
 

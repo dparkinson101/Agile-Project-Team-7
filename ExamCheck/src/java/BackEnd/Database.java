@@ -436,6 +436,32 @@ public class Database {
         return "end of blob in";
     }
 
+    public String updateblob(InputStream inputStream, String docType, String pk) {
+
+        try {
+
+            String sql = "update exams set doctype =" + docType + " , set examFile =? where exam_pk =" + pk + " ;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setBlob(1, inputStream);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            System.out.println("error");
+
+            System.out.println(e);
+
+            return e.toString();
+
+        }
+
+        return "end of blob in";
+
+    }
+
     public ResultSet info_examslinkedtopkvetcommit(String pk) {
         try {
             String sql = "select * from exams where ExmVetComit_exmVet_pk=" + pk + ";";

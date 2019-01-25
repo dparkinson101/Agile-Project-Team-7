@@ -124,6 +124,55 @@ public class Database {
         }
     }
 
+
+public void movetoexamvettingcommite(String pk) {
+              try {
+            Statement state = conn.createStatement();
+
+String sql = "update exams set internal_moderator_int_mod_pk=2 ="+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+public void movetoexamvetexternalmodderator(String pk) {
+                   try {
+            Statement state = conn.createStatement();
+
+String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 ="+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+public void finish_exam(String pk) {
+                   try {
+            Statement state = conn.createStatement();
+
+String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+
+
+
     /**
      *
      * @param username the username / email of the user
@@ -415,12 +464,13 @@ public class Database {
      * @param online
      * @param resit
      * @param exam_setter_lect_pk
+     * @param examPK
      * @return
      */
     public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk, String examPK, String docType) {
         try {
 
-            //     InputStream inputStream = new FileInputStream(new File(path));         
+            //     InputStream inputStream = new FileInputStream(new File(path));
             String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\"" + examPK + "\",\"" + Modulecode + "\",\"" + title + "\",\"" + online + "\",\"" + resit + "\",\"1\",\"" + level + "\",?,\"" + docType + "\",1,1,1,1);";
             //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
 

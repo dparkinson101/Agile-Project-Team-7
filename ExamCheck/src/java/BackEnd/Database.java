@@ -347,7 +347,7 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
      */
     public String number_of_in_progress_exams(String pk) {
         try {
-            String sql = "select count(*) from exams where exams_External_Examiner_FK!=2 and exams_ExmVetComit_FK!=2 and exams_internal_moderator_FK!=2 and exams_External_Examiner_FK!=1 and exams_ExmVetComit_FK!=1 and exams_internal_moderator_FK!=1;";
+            String sql = "select count(*) from exams where exams_External_Examiner_FK!=2 and exams_ExmVetComit_FK!=2 and exams_internal_moderator_FK!=2 and exams_External_Examiner_FK!=1 and exams_ExmVetComit_FK!=1 and exams_internal_moderator_FK!=1 where exam_setter_lect_pk="+pk+";";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);

@@ -5,27 +5,29 @@ package BackEnd;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import BackEnd.Database;
+import java.nio.file.Paths;
+import java.util.Random;
+import javax.servlet.http.Cookie;
 
 /**
  *
- * @author laptop
+ * @author matthewmcneil
  */
-@WebServlet(urlPatterns = {"/FileDownload"})
-public class FileDownload extends HttpServlet {
+@MultipartConfig
+public class FileUploadUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,55 +40,33 @@ public class FileDownload extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Database db = new Database();
-        db.connect();
+        response.setContentType("text/html;charset=UTF-8");
+
+        //get inputs
+        //InputStream fileContent = filePart.getInputStream();
+        Part filePart = request.getPart("fileToUpload");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        InputStream fileContent = filePart.getInputStream();
+
+        String docType = filePart.getSubmittedFileName();
+        int i = docType.lastIndexOf('.');
+        if (i > 0) {
+            docType = docType.substring(i + 1);
+        }
 
         String examPK = request.getParameter("examPK");
 
-        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = " + examPK + ";");
-        try {
-            if (rs.next()) {
-                String fileName = "test" + "." + rs.getString("doctype");
-                Blob blob = rs.getBlob("examFile");
+        out.println(examPK);
+        out.println(docType);
 
-                InputStream is = blob.getBinaryStream();
-                int fileLength = is.available();
+        //Connect to database
+        Database db = new Database();
+        db.connect();
 
-                System.out.println("File Length: " + fileLength);
+        db.updateblob(fileContent, docType, examPK);
+        out.println("end");
 
-                ServletContext context = getServletContext();
-
-                // sets MIME type for the file download
-                String mimeType = context.getMimeType(fileName);
-                if (mimeType == null) {
-                    mimeType = "application/octet-stream";
-                }
-
-                // set content properties and header attributes for the response
-                response.setContentType(mimeType);
-                response.setContentLength(fileLength);
-                String headerKey = "Content-Disposition";
-                String headerValue = String.format("attachment; filename=\"%s\"", fileName);
-                response.setHeader(headerKey, headerValue);
-
-                // writes the file to the client
-                OutputStream outStream = response.getOutputStream();
-
-                byte[] buffer = new byte[4096];
-                int bytesRead = -1;
-
-                while ((bytesRead = is.read(buffer)) != -1) {
-                    outStream.write(buffer, 0, bytesRead);
-                }
-
-                is.close();
-                outStream.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FileDownload.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+        response.sendRedirect("/ExamCheck/listExams.jsp");    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

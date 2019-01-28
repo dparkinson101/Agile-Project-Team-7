@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package BackEnd;
-import java.lang.System.*;
 
+import java.lang.System.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,16 +28,16 @@ public class Database {
 
     private Connection conn;
 
-    public Database(){
+    public Database() {
         conn = null;
     }
-    
+
     @Override
-    protected void finalize() throws Throwable{
+    protected void finalize() throws Throwable {
         conn.close();
         super.finalize();
     }
-    
+
     /**
      *
      * @return Returns an instance of the sql.Connection class which is the
@@ -107,12 +107,99 @@ public class Database {
             return false;
         }
     }
-public void addcomment(String comments,String pk ,String date) {
+
+    public void movetoexamvettingcommite(String pk) {
+
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "update exams set internal_moderator_int_mod_pk=2 where exam_pk=" + pk + ";";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
+
+    }
+
+    public void movetoexamvetexternalmodderator(String pk) {
+
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
+
+    }
+
+    public void finish_exam(String pk) {
+
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "update exams set External_Examiner_ext_exam_pk=2 where exam_pk = " + pk + ";";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
+
+    }
+
+    public void addcomment(String comments, String pk, String date, int pointer) {
+
+        if (pointer == 1) {
+
+            this.movetoexamvettingcommite(pk);
+
+        }
+
+        if (pointer == 2) {
+
+            this.movetoexamvetexternalmodderator(pk);
+
+        }
+        if (pointer == 3) {
+
+            this.finish_exam(pk);
+        }
+
         try {
             Statement state = conn.createStatement();
-           // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
+            // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
 
-String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(\""+pk+"\",\""+comments+"\",\""+date+"\""+pk+";";
+            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk+pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -122,55 +209,6 @@ String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssss
             System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
-
-
-public void movetoexamvettingcommite(String pk) {
-              try {
-            Statement state = conn.createStatement();
-
-String sql = "update exams set internal_moderator_int_mod_pk=2 ="+pk+";";
-            state.executeUpdate(sql);
-
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-    }
-
-public void movetoexamvetexternalmodderator(String pk) {
-                   try {
-            Statement state = conn.createStatement();
-
-String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 ="+pk+";";
-            state.executeUpdate(sql);
-
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-    }
-
-public void finish_exam(String pk) {
-                   try {
-            Statement state = conn.createStatement();
-
-String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
-            state.executeUpdate(sql);
-
-        } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-    }
-
-
-
 
     /**
      *
@@ -452,7 +490,8 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
             return "0";
         }
     }
-/**
+
+    /**
      *
      * @param inputStream
      * @param Modulecode
@@ -462,62 +501,53 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
      * @param online
      * @param resit
      * @param exam_setter_lect_pk
-     * @param examPK
      * @return
      */
-     public String blobin(InputStream inputStream,String Modulecode,String level, String pk,String title, String online,String resit, String exam_setter_lect_pk, String examPK, String docType){
-        try{
-           
-           //     InputStream inputStream = new FileInputStream(new File(path));         
-            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\""+examPK+"\",\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\""+docType+"\",1,1,1,1);";
-             //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
-                
-        //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");
-                PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setBlob(1, inputStream);
-                statement.executeUpdate();
-            }
-       
-        catch(SQLException e){
-          System.out.println("error");
-          System.out.println(e);
+    public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk, String examPK, String docType) {
+        try {
+
+            //     InputStream inputStream = new FileInputStream(new File(path));
+            String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\"" + examPK + "\",\"" + Modulecode + "\",\"" + title + "\",\"" + online + "\",\"" + resit + "\",\"1\",\"" + level + "\",?,\"" + docType + "\",1,1,1,1);";
+            //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
+
+            //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setBlob(1, inputStream);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("error");
+            System.out.println(e);
             return e.toString();
         }
         return "end of blob in";
     }
-     
-     
-     
-          public String updateblob(InputStream inputStream, String docType,String pk){
-        try{
-           
-            
-            
-           //     InputStream inputStream = new FileInputStream(new File(path));         
-          //  String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\""+examPK+"\",\""+Modulecode+"\",\""+title+"\",\""+online+"\",\""+resit+"\",\"1\",\""+level+"\",?,\""+docType+"\",1,1,1,1);";
-           String sql = "update exams set doctype ="+docType+" , set examFile =? where exam_pk ="+pk+" ;";
-          //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
-                
-        //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");
-                PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setBlob(1, inputStream);
-                statement.executeUpdate();
-            }
-       
-        catch(SQLException e){
-          System.out.println("error");
-          System.out.println(e);
+
+    public String updateblob(InputStream inputStream, String docType, String pk) {
+
+        try {
+
+            String sql = "update exams set doctype ='" + docType + "' , examFile =? where exam_pk =" + pk + " ;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setBlob(1, inputStream);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            System.out.println("error");
+
+            System.out.println(e);
+
             return e.toString();
+
         }
+
         return "end of blob in";
+
     }
-     
-     
-     
-     
-     
-     
-     
+
     public ResultSet info_examslinkedtopkvetcommit(String pk) {
         try {
             String sql = "select * from exams where ExmVetComit_exmVet_pk=" + pk + ";";
@@ -565,7 +595,6 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
 //        }
 //
 //    }
-
 //    public ResultSet view_unsigned_exams() {
 //
 //        try {
@@ -582,7 +611,6 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
 //            return null;
 //        }
 //    }
-
     /**
      *
      * @param exampk
@@ -591,18 +619,18 @@ String sql = "update exams set External_Examiner_ext_exam_pk=2 ="+pk+";";
      * @return
      */
     public Blob blobout(String exampk) {
-         try {
+        try {
             Statement state = conn.createStatement();
             ResultSet rset = state.executeQuery("select examFile from exams where exam_pk=" + exampk + ";");
             byte b[];
             Blob blob;
             int i = 1;
-           // String doctype = rset.getString("doctype");
+            // String doctype = rset.getString("doctype");
             //File f = new File(path + "\\" + name + doctype);
             //FileOutputStream fs = new FileOutputStream(f);
             blob = rset.getBlob("examFile");
-        
-return blob;
+
+            return blob;
         } catch (Exception e) {
             System.out.println(e);
             File v = new File("Csbxfgfgn");

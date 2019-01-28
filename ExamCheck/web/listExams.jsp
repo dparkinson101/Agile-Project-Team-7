@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : listExams
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
@@ -6,32 +6,32 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>    
+<!DOCTYPE html>
 <%
- HttpSession spoons = request.getSession();
-        String username = (String) spoons.getAttribute("email");
-        
-          String perms = "";
-        Cookie[] cookies = request.getCookies();
+    HttpSession spoons = request.getSession();
+    String username = (String) spoons.getAttribute("email");
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("permissions")) {
-                    perms = cookie.getValue();
-                }
-            }
-        }   
+    String perms = "";
+    Cookie[] cookies = request.getCookies();
 
-        String creds = "";
-        Cookie[] cookies2 = request.getCookies();
-
-        if (cookies2 != null) {
-            for (Cookie cookie2 : cookies2) {
-                if (cookie2.getName().equals("user")) {
-                    creds = cookie2.getValue();
-                }
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("permissions")) {
+                perms = cookie.getValue();
             }
         }
+    }
+
+    String creds = "";
+    Cookie[] cookies2 = request.getCookies();
+
+    if (cookies2 != null) {
+        for (Cookie cookie2 : cookies2) {
+            if (cookie2.getName().equals("user")) {
+                creds = cookie2.getValue();
+            }
+        }
+    }
 %>
 <html>
     <head>
@@ -71,13 +71,23 @@
             }
             document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
         }
+
+        function downloadFile(pk) {
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.open("POST", "${pageContext.request.contextPath}/DownloadFile", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("examPK=" + pk);
+
+
+        }
     </script>
-        <%
-           Database db = new Database();
-           db.connect();
-           String noCompletedExams = db.number_of_completed_exams("1");
-         
-        %>
+    <%
+        Database db = new Database();
+        db.connect();
+        String noCompletedExams = db.number_of_completed_exams("1");
+
+    %>
 
     <body>
 
@@ -148,17 +158,17 @@
             /*
             Database db = new Database();
             db.connect();
-            
+
             String user_pk = db.getUserPK();
             String result = db.number_examslinkedtopk("1");
             int count = Integer.getInteger(result);
-            */
+             */
         %>
-                          
+
         <div class="container">
             <div class="panel-group" id="exams">
-                <% if (perms.contains("examSetter")) { 
-                int noOfExams = Integer.parseInt(db.number_examslinkedtopk(creds));%>
+                <% if (perms.contains("examSetter")) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopk(creds));%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -166,19 +176,23 @@
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
-                        
-                        
-                        <% for (int i=0; i< noOfExams; i++){ 
-                            int no = i;
-                        ResultSet rs = db.info_examslinkedtopk(creds);
-                        if(rs.next())
-                        {
-                        String mc = rs.getString("module_code");
-                        String title = rs.getString("title");
-                        String onlineorpaper = rs.getString("online_or_paper");
-                        String resit = rs.getString("resit");
-                        String exam = rs.getString("exam");
-                        String grade = rs.getString("grade");
+
+
+                        <%
+                            ResultSet rs = db.info_examslinkedtopk(creds);
+                            for (int i = 0; i < noOfExams; i++) {
+                                int no = i;
+
+                                if (rs.next()) {
+
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper = rs.getString("online_or_paper");
+                                    String resit = rs.getString("resit");
+                                    String exam = rs.getString("exam");
+                                    String grade = rs.getString("grade");
+                                    String pk = rs.getString("exam_pk");
+
                         %>
                         <div class="panel-body">
                             <% out.print("Exam Number: " + no); %>
@@ -187,23 +201,32 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade); }%></p>
-                            
-                            <a href=""><button class="fa fa-download" onclick=""> Download exam </button> </a>
-                            <button class="fa fa-pencil "> Update exam </button>
-                            <form action="${pageContext.request.contextPath}/TestPage" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                            <p class="mb-1">Grade: <% out.print(grade);%></p>
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk %>"/>
+                                <button class="fa fa-download" type="submit"> Download exam </button>
+                            </form>
+                            <br>
+                            <form action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk %>"/>
+                                <button class="fa fa-pencil" type="submit"> Update exam </button>
+                            </form>
+                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
                             </form>
                         </div>
-                        <%} %>                     
+                        <%} %>
                     </div>
                 </div>
-                <%} %>
-                <% if (perms.contains("internalModerator")) { 
-                int noOfExams = Integer.parseInt(db.number_examslinkedtopkintmod(creds));%>
+                <%}
+                    }%>
+                <% if (perms.contains("internalModerator")) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopkintmod(creds));%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -211,18 +234,18 @@
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
-                        
-                        <% for (int i=0; i< noOfExams; i++){ 
-                        int no = i;
-                        ResultSet rs = db.info_examslinkedtopkintmod(creds);
-                        if(rs.next())
-                        {
-                        String mc = rs.getString("module_code");
-                        String title = rs.getString("title");
-                        String onlineorpaper = rs.getString("online_or_paper");
-                        String resit = rs.getString("resit");
-                        String exam = rs.getString("exam");
-                        String grade = rs.getString("grade");
+
+                        <% for (int i = 0; i < noOfExams; i++) {
+                                int no = i;
+                                ResultSet rs = db.info_examslinkedtopkintmod(creds);
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper = rs.getString("online_or_paper");
+                                    String resit = rs.getString("resit");
+                                    String exam = rs.getString("exam");
+                                    String grade = rs.getString("grade");
+                                    String pk = String.valueOf(rs.getInt("exam_pk"));
                         %>
                         <div class="panel-body">
                             <% out.print("Exam Number: " + no); %>
@@ -231,23 +254,24 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade); }%></p>
-                            
+                            <p class="mb-1">Grade: <% out.print(grade);
+                                }%></p>
+
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
-                            <form action="/ExamCheck/BackEnd/AddComments.java" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
                             </form>
                         </div>
                         <%} %>
-                        
+
                     </div>
                 </div>
                 <%} %>
-                        <% if (perms.contains("examVetCommittee")) { 
+                <% if (perms.contains("examVetCommittee")) {
                         int noOfExams = Integer.parseInt(db.number_examslinkedtopkvetcommit(creds));%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -256,17 +280,17 @@
                         </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
-                        <% for (int i=0; i< noOfExams; i++){ 
-                        int no = i;
-                        ResultSet rs = db.info_examslinkedtopkvetcommit(creds);
-                        if(rs.next())
-                        {
-                        String mc = rs.getString("module_code");
-                        String title = rs.getString("title");
-                        String onlineorpaper = rs.getString("online_or_paper");
-                        String resit = rs.getString("resit");
-                        String exam = rs.getString("exam");
-                        String grade = rs.getString("grade");
+                        <% for (int i = 0; i < noOfExams; i++) {
+                                int no = i;
+                                ResultSet rs = db.info_examslinkedtopkvetcommit(creds);
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper = rs.getString("online_or_paper");
+                                    String resit = rs.getString("resit");
+                                    String exam = rs.getString("exam");
+                                    String grade = rs.getString("grade");
+                                    String pk = rs.getString("exam_pk");
                         %>
                         <div class="panel-body">
                             <% out.print("Exam Number: " + no); %>
@@ -275,25 +299,26 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade); }%></p>
-                            
+                            <p class="mb-1">Grade: <% out.print(grade);
+                                }%></p>
+
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
-                            <form action="/ExamCheck/BackEnd/AddComments.java" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
                             </form>
                         </div>
                         <%} %>
-                        
+
                     </div>
                 </div>
-                 <%} %>
-                 <% if (perms.contains("externalModerator")) { 
-                 int noOfExams = Integer.parseInt(db.number_examslinkedtopkextmod(creds));
-                 %>
+                <%} %>
+                <% if (perms.contains("externalModerator")) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopkextmod(creds));
+                %>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -301,17 +326,17 @@
                         </h4>
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
-                        <% for (int i=0; i< 5; i++){ 
-                        int no = i;
-                        ResultSet rs = db.info_examslinkedtopkextmod(creds);
-                        if(rs.next())
-                        {
-                        String mc = rs.getString("module_code");
-                        String title = rs.getString("title");
-                        String onlineorpaper = rs.getString("online_or_paper");
-                        String resit = rs.getString("resit");
-                        String exam = rs.getString("exam");
-                        String grade = rs.getString("grade");
+                        <% for (int i = 0; i < 5; i++) {
+                                int no = i;
+                                ResultSet rs = db.info_examslinkedtopkextmod(creds);
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper = rs.getString("online_or_paper");
+                                    String resit = rs.getString("resit");
+                                    String exam = rs.getString("exam");
+                                    String grade = rs.getString("grade");
+                                    String pk = rs.getString("exam_pk");
                         %>
                         <div class="panel-body">
                             <% out.print("Exam Number: " + no); %>
@@ -320,24 +345,25 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade); }%></p>
+                            <p class="mb-1">Grade: <% out.print(grade);
+                                }%></p>
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
-                            <form action="/ExamCheck/BackEnd/AddComments.java" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
                             </form>
-                            
+
                         </div>
                         <%} %>
-                        
+
                     </div>
                 </div>
                 <%} %>
-                <% if (perms.contains("office")) { 
-                int noOfExams = Integer.parseInt(db.number_of_completed_exams(creds));%>%>
+                <% if (perms.contains("office")) {
+                        int noOfExams = Integer.parseInt(db.number_of_completed_exams(creds));%>%>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -345,17 +371,19 @@
                         </h4>
                     </div>
                     <div id="collapse5" class="panel-collapse collapse">
-                        <% for (int i=0; i< noOfExams; i++){ 
-                        int no = i;
-                        ResultSet rs = db.info_examslinkedtopk(creds);
-                       if(rs.next())
-                        {
-                        String mc = rs.getString("module_code");
-                        String title = rs.getString("title");
-                        String onlineorpaper = rs.getString("online_or_paper");
-                        String resit = rs.getString("resit");
-                        String exam = rs.getString("exam");
-                        String grade = rs.getString("grade");
+                        <% for (int i = 0; i < noOfExams; i++) {
+                                int no = i;
+
+                                ResultSet rs = db.info_examslinkedtopk(creds);
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper = rs.getString("online_or_paper");
+                                    String resit = rs.getString("resit");
+                                    String exam = rs.getString("exam");
+                                    String grade = rs.getString("grade");
+                                    String pk = rs.getString("exam_pk");
+
                         %>
                         <div class="panel-body">
                             <% out.print("Exam Number: " + no); %>
@@ -364,11 +392,12 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade); }%></p>
+                            <p class="mb-1">Grade: <% out.print(grade);
+                                }%></p>
                             <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
                             <button class="fa fa-pencil "> Update exam </button>
-                            <form action="/ExamCheck/BackEnd/AddComments.java" method="post">
-                                <input type="hidden" name="examPK" value="${pk}"> 
+                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
+                                <input type="hidden" name="examPK" value="${pk}">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <input type="submit" value="Submit Comment">
@@ -377,11 +406,11 @@
                         <%} %>
                     </div>
                 </div>
-              <%} %>         
-                
+                <%}%>
 
-            </div> 
-        </div>                   
+
+            </div>
+        </div>
 
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>

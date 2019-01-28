@@ -77,10 +77,6 @@ public class loginManager extends HttpServlet {
             perms += " admin";
         }
 
-        if (loginResults.equals("1")) {
-            perms += " admin";
-        }
-
         Cookie login = new Cookie("login", String.valueOf(loggedIn));
         Cookie credentials = new Cookie("user", loginResults);
         Cookie permissions = new Cookie("permissions", perms);

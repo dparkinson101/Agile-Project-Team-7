@@ -60,8 +60,6 @@
                 }
             }
         }
-
-        String examSetter = perms.substring(0, 16);
     %>
 
     <body>

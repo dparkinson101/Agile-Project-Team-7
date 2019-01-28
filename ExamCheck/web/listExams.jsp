@@ -106,7 +106,7 @@
     <%
         Database db = new Database();
         db.connect();
-        String noCompletedExams = db.number_of_completed_exams("1");
+        //String noCompletedExams = db.number_of_completed_exams("1");
     %>
 
     <body>

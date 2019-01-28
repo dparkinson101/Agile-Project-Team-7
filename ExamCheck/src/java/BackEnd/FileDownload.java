@@ -81,6 +81,7 @@ public class FileDownload extends HttpServlet {
 
                 is.close();
                 outStream.close();
+                System.out.println("File Downloaded Successfully");
             }
         } catch (SQLException ex) {
             Logger.getLogger(FileDownload.class.getName()).log(Level.SEVERE, null, ex);

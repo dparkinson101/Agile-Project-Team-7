@@ -64,7 +64,7 @@ public class FileUploadUpdate extends HttpServlet {
         db.connect();
 
         db.updateblob(fileContent, docType, examPK);
-        out.println("end");
+        out.println("File Uploaded Successfully");
 
         response.sendRedirect("/ExamCheck/listExams.jsp");    }
 

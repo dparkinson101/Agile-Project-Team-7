@@ -72,21 +72,41 @@
             document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
         }
 
-        function downloadFile(pk) {
-            var xmlhttp = new XMLHttpRequest();
+        function submitForms(formUpload, formComment) {
+            var f1 = document.getElementById(formUpload);
+            var f2 = document.getElementById(formComment);
 
-            xmlhttp.open("POST", "${pageContext.request.contextPath}/DownloadFile", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("examPK=" + pk);
+            //sendXMLRequest(f1, "FileUploadUpdate");
+            sendXMLRequest(f2, "AddComments");
+            f1.submit();
+        }
 
+        function sendXMLRequest(f, page) {
+            var postData = [];
+            for (var i = 0; i < f.elements.length; i++) {
+                postData.push(f.elements[i].name + "=" + f.elements[i].value);
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", page, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(postData.join("&"));
+        }
 
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
         }
     </script>
     <%
         Database db = new Database();
         db.connect();
         String noCompletedExams = db.number_of_completed_exams("1");
-
     %>
 
     <body>
@@ -143,7 +163,7 @@
                             <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick="return confirm('Are you sure you want to log out?');"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="Log-in.jsp" onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -204,27 +224,29 @@
                             <p class="mb-1">Grade: <% out.print(grade);%></p>
 
                             <form action="FileDownload" method="POST">
-                                <input type="hidden" name="examPK" value="<%= pk %>"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
                                 <button class="fa fa-download" type="submit"> Download exam </button>
                             </form>
                             <br>
-                            <form action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
                                 <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                                <input type="hidden" name="examPK" value="<%= pk %>"/>
-                                <button class="fa fa-pencil" type="submit"> Update exam </button>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
                             </form>
-                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
-                                <input type="submit" value="Submit Comment">
                             </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
-                        <%} %>
+                        <%}
+                            } %>
                     </div>
                 </div>
-                <%}
-                    }%>
+                <%}%>
                 <% if (perms.contains("internalModerator")) {
                         int noOfExams = Integer.parseInt(db.number_examslinkedtopkintmod(creds));%>
                 <div class="panel panel-default">
@@ -254,19 +276,29 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade);
-                                }%></p>
+                            <p class="mb-1">Grade: <% out.print(grade);%></p>
 
-                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
-                            <button class="fa fa-pencil "> Update exam </button>
-                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}">
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="fa fa-download" type="submit"> Download exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
-                                <input type="submit" value="Submit Comment">
                             </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
-                        <%} %>
+                        <%}
+                            }%>
 
                     </div>
                 </div>
@@ -299,19 +331,29 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade);
-                                }%></p>
+                            <p class="mb-1">Grade: <% out.print(grade);%></p>
 
-                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
-                            <button class="fa fa-pencil "> Update exam </button>
-                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}">
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="fa fa-download" type="submit"> Download exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
-                                <input type="submit" value="Submit Comment">
                             </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
-                        <%} %>
+                        <%}
+                            } %>
 
                     </div>
                 </div>
@@ -345,19 +387,30 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade);
-                                }%></p>
-                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
-                            <button class="fa fa-pencil "> Update exam </button>
-                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}">
+                            <p class="mb-1">Grade: <% out.print(grade);%></p>
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="fa fa-download" type="submit"> Download exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
-                                <input type="submit" value="Submit Comment">
                             </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
 
                         </div>
-                        <%} %>
+                        <%}
+                            } %>
 
                     </div>
                 </div>
@@ -392,18 +445,29 @@
                             <p class="mb-1">Online or Paper: <% out.print(onlineorpaper); %></p>
                             <p class="mb-1">Resit: <% out.print(resit); %></p>
                             <p class="mb-1">Exam: <% out.print(exam); %></p>
-                            <p class="mb-1">Grade: <% out.print(grade);
-                                }%></p>
-                            <a href=""><button class="fa fa-download" onclick="LoopExams()"> Download exam </button> </a>
-                            <button class="fa fa-pencil "> Update exam </button>
-                            <form action="${pageContext.request.contextPath}/AddComments" method="post">
-                                <input type="hidden" name="examPK" value="${pk}">
+                            <p class="mb-1">Grade: <% out.print(grade);%></p>
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="fa fa-download" type="submit"> Download exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
-                                <input type="submit" value="Submit Comment">
                             </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
-                        <%} %>
+                        <%}
+                            } %>
                     </div>
                 </div>
                 <%}%>

@@ -32,7 +32,6 @@ public class AddComments extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     public void processComment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pk = request.getParameter("examPK");
@@ -48,7 +47,12 @@ public class AddComments extends HttpServlet {
             System.out.println(pk);
             System.out.println(currentDateTime);
             //Hardcoded to moving exam setter exam onto stage 2
-            db.addcomment(comment, pk, currentDateTime, 1);
+            try {
+                db.addcomment(comment, pk, currentDateTime, 1);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
             response.sendRedirect("index.jsp");
         } catch (Exception e) {
             e.getMessage();

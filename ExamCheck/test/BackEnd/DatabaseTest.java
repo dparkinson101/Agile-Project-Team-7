@@ -345,7 +345,7 @@ public class DatabaseTest {
         String pk = "";
         String date = "";
         Database instance = new Database();
-        instance.addcomment(comments, pk, date);
+        instance.addcomment(comments, pk, date, 1);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

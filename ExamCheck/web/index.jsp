@@ -206,7 +206,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="./createExam.jsp">
+                            <a href="CreateExam.jsp">
                                 <div class="panel-footer">
                                     <span class="pull-left">Add Exam</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -290,7 +290,7 @@
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+    
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>

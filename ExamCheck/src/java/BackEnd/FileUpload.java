@@ -45,7 +45,7 @@ public class FileUpload extends HttpServlet {
         //get inputs
         //InputStream fileContent = filePart.getInputStream();
         Part filePart = request.getPart("fileToUpload");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
 
         String docType = filePart.getSubmittedFileName();

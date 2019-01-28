@@ -385,7 +385,7 @@ public class Database {
      */
     public String number_of_in_progress_exams(String pk) {
         try {
-            String sql = "select count(*) from exams where exams_External_Examiner_FK!=2 and exams_ExmVetComit_FK!=2 and exams_internal_moderator_FK!=2 and exams_External_Examiner_FK!=1 and exams_ExmVetComit_FK!=1 and exams_internal_moderator_FK!=1;";
+            String sql = "select count(*) from exams where External_Examiner_ext_exam_pk!=2 and ExmVetComit_exmVet_pk!=2 and internal_moderator_int_mod_pk!=2 and External_Examiner_ext_exam_pk!=1 and ExmVetComit_exmVet_pk!=1 and internal_moderator_int_mod_pk!=1;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);

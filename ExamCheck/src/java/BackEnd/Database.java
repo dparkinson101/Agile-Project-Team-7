@@ -5,20 +5,18 @@
  */
 package BackEnd;
 
-import java.lang.System.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import static java.lang.System.console;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,11 +29,13 @@ public class Database {
     public Database() {
         conn = null;
     }
-
-    @Override
-    protected void finalize() throws Throwable {
-        conn.close();
-        super.finalize();
+    
+    public void close(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -44,9 +44,10 @@ public class Database {
      * current connection to the database.
      */
     public Connection connect() {
+        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             System.out.println("Failed to register MySQL Connector/J");
             System.out.println(ex);
             return null;
@@ -72,16 +73,18 @@ public class Database {
      */
     public ResultSet executeQuery(String query) {
         try {
+            this.connect();
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(query);
-
+            this.close();
             return rs;
         } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
+            this.close();
             return null;
         }
     }
@@ -94,16 +97,19 @@ public class Database {
      */
     public boolean updateQuery(String query) {
         try {
+            this.connect();
             Statement state = conn.createStatement();
 
             state.executeUpdate(query);
-
+            
+            this.close();
             return true;
         } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
+            this.close();
             return false;
         }
     }
@@ -182,7 +188,6 @@ public class Database {
         if (pointer == 1) {
 
             this.movetoexamvettingcommite(pk);
-
         }
 
         if (pointer == 2) {
@@ -199,7 +204,7 @@ public class Database {
             Statement state = conn.createStatement();
             // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
 
-            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk+pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
+            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk + pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -219,36 +224,66 @@ public class Database {
      */
     public String checkLogin(String username, String password) {
         try {
-            String sql = "select user_pk from users where username = '" + username + "' and password = '" + password + "';";
-            //  String sql = "select user_pk from users where username =\"admin\" and password =\"1234\";";
-
+            this.connect();
+            if(username == null || password == null){
+                this.close();
+                return null;
+            }
+            
+            String sql = "select user_pk, password, salt from users where username = '" + username + "';";
+            
+            if(conn == null){
+                System.out.println("The connection is null");
+                this.close();
+            }
+            
             Statement state = conn.createStatement();
-
+            
+            Base64.Decoder dec = Base64.getDecoder();
+            
             ResultSet rs = state.executeQuery(sql);
+            
+            if(rs == null){
+                System.out.println("No Results for such credentials exist in the database.");
+                this.close();
+                return null;
+            }
+            
+            rs.first();
+            
+            byte[] salt = dec.decode(rs.getString("salt"));
+            byte[] saltedHash = dec.decode(rs.getString("password"));
+            byte[] passwordHash = null;
 
-            rs.beforeFirst();
-            rs.next();
+            Security security = new Security();
+            try {
+                passwordHash = security.getSaltedHash(password, salt);
+            } catch (Exception e) {
+                System.out.println("ERROR: PASSWORD CHECK FAILED TO GET SALTED HASH");
+                System.out.println(e);
+            }
 
             String user_pk = rs.getString(1);
 
-            if (user_pk != null) {
-
+            if (Arrays.equals(passwordHash, saltedHash) && user_pk != null) {
+                System.out.println("User: " + username + " Logged in successfully!");
                 System.out.println("UserPK: " + user_pk);
 
                 return user_pk;
-                // roles[0] = this.getexamsetter(user_pk);
-                //    roles[1] = this.getinternalmod(user_pk);
-                //    roles[2] = this.getexamvetcommit(user_pk);
-                //    roles[3] = this.getexternal(user_pk);
-                //    roles[4] = this.getoffice(user_pk);
+            } else {
+                System.out.println("User: " + username + " Log in failed!");
+                this.close();
+                return null;
             }
 
         } catch (SQLException ex) {
-
-            return "-1";
+            System.out.println("Database Erorr");
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            this.close();
+            return null;
         }
-        return "-1";
-
     }
 
     /**
@@ -501,6 +536,8 @@ public class Database {
      * @param online
      * @param resit
      * @param exam_setter_lect_pk
+     * @param examPK
+     * @param docType
      * @return
      */
     public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk, String examPK, String docType) {
@@ -514,7 +551,7 @@ public class Database {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setBlob(1, inputStream);
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("error");
             System.out.println(e);
             return e.toString();
@@ -614,28 +651,26 @@ public class Database {
     /**
      *
      * @param exampk
-     * @param path
-     * @param name
      * @return
      */
-    public Blob blobout(String exampk) {
-        try {
-            Statement state = conn.createStatement();
-            ResultSet rset = state.executeQuery("select examFile from exams where exam_pk=" + exampk + ";");
-            byte b[];
-            Blob blob;
-            int i = 1;
-            // String doctype = rset.getString("doctype");
-            //File f = new File(path + "\\" + name + doctype);
-            //FileOutputStream fs = new FileOutputStream(f);
-            blob = rset.getBlob("examFile");
-
-            return blob;
-        } catch (Exception e) {
-            System.out.println(e);
-            File v = new File("Csbxfgfgn");
-            return null;
-        }
-
-    }
+//    public Blob blobout(String exampk) {
+//        try {
+//            Statement state = conn.createStatement();
+//            ResultSet rset = state.executeQuery("select examFile from exams where exam_pk=" + exampk + ";");
+//            byte b[];
+//            Blob blob;
+//            int i = 1;
+//            // String doctype = rset.getString("doctype");
+//            //File f = new File(path + "\\" + name + doctype);
+//            //FileOutputStream fs = new FileOutputStream(f);
+//            blob = rset.getBlob("examFile");
+//
+//            return blob;
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//            File v = new File("Csbxfgfgn");
+//            return null;
+//        }
+//
+//    }
 }

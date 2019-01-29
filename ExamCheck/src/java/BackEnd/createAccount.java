@@ -49,7 +49,6 @@ public class createAccount extends HttpServlet {
             
             //Sets up database connection
             Database db = new Database();
-            db.connect();
 
             //Creates a new user
             boolean created;

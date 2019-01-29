@@ -648,8 +648,16 @@ return a;
     }
 
     
-    
-    
+       public ResultSet getallexams(String pk) {
+        try {
+            String sql = "select * from exams ;";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
     
     
     

@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,10 +36,13 @@ public class loginManager extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        HttpSession spoons = request.getSession();
+        spoons.setAttribute("email", email);
+
         Database db = new Database();
-        
+
         String loginResults = db.checkLogin(email, password);
-        
+
         if (loginResults != null) {
             boolean loggedIn = false;
             String perms = "guest";

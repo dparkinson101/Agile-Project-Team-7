@@ -112,7 +112,7 @@
 
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-	<a class="navbar-brand" href="#">Dundee Computing Examination Board</a>
+            <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
 	<ul class="navbar-nav ml-auto">
 		<!-- Accessibility !-->
 		<li class="nav-item dropdown" style="padding-right: 10px">

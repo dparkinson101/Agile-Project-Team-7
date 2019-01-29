@@ -35,89 +35,71 @@
     </head>
 
     <body>
-    
+
         <script>
-            function resizeText(multiplier){
-                if (document.body.style.fontSize === ""){
-                document.body.style.fontSize = "1.0em";
+            function resizeText(multiplier) {
+                if (document.body.style.fontSize === "") {
+                    document.body.style.fontSize = "1.0em";
                 }
                 document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
             }
         </script>
+       
+        <%
+            HttpSession spoons = request.getSession();
+            String username = (String) spoons.getAttribute("email");
+        %>
 
-        <div id="wrapper">
-
-            <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
-                </div>
-                <!-- /.navbar-header -->
-
-                <ul class="nav navbar-top-links navbar-right">
-                <!-- Accessibility -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+            <ul class="navbar-nav ml-auto">
+                <!-- Accessibility !-->
+                <li class="nav-item dropdown" style="padding-right: 10px">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <i class="fas fa-universal-access fa-lg"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-access">
-                        <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-fw"></i>Increase Text Size</a></li>
-                        <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                        <li><a href="CreateExam.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
-                    </ul>
-                </li>
-                <!-- Alerts Dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> No New Comments
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-
-                </li>
-                <!-- User Dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- /.dropdown -->
-                </ul>
-                <!-- Top Links -->
-
-            <!-- /.navbar-static-side -->
-            </nav>
-        
-            <div id="page-wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Create a new Exam</h1>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#" onclick=resizeText(1)><i class="fas fa-text-height fa-2x"></i>
+                            Increase text size</a>
+                        <a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
+                            Decrease text size</a>
+                        <a class="dropdown-item" href="index.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
                     </div>
-                    <!-- /.col-lg-12 -->
+                </li>
+                <!-- Notifications !-->
+                <li class="nav-item dropdown" style="padding-right: 10px">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <i class="fas fa-bell fa-lg"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
+                    </div>
+                </li>
+                <!-- User !-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <i class="fas fa-user fa-lg"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username);%></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Log-in.jsp"onclick=" if (confirm('Are you sure you want to log out?')) {
+                                    deleteAllCookies();
+                                }"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Create a new Exam</h1>
                 </div>
-            
-                
+                <!-- /.col-lg-12 -->
+            </div>
+
+
             <form action="FileUpload" method="post" id="examDetails" enctype="multipart/form-data">
                 Module Code: <br>
                 <input type="text" name="moduleCode" id="modCode"><br><br>
@@ -139,7 +121,7 @@
                 <br>
                 <button type="submit" form="examDetails" value="submit">Submit Exam</button>
             </form>
-                
+
             <br>
             <br>      
             <br>
@@ -149,13 +131,13 @@
             <!-- jQuery -->
             <script src="vendor/jquery/jquery.min.js"></script>
 
-                <!-- Bootstrap Core JavaScript -->
+            <!-- Bootstrap Core JavaScript -->
             <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
- 
- 
-                <!-- Custom Theme JavaScript -->
+
+
+            <!-- Custom Theme JavaScript -->
             <script src="dist/js/DCEC.js"></script>
         </div>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

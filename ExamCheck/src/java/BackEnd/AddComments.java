@@ -33,6 +33,8 @@ public class AddComments extends HttpServlet {
             throws ServletException, IOException {
         String pk = request.getParameter("examPK");
         String comment = request.getParameter("comment");
+        int stage = Integer.parseInt(request.getParameter("stage"));
+        
         DateFormat dateFormat = new SimpleDateFormat("DD/mm/yyyy HH:mm:ss");
         Date date = new Date();
         String currentDateTime = dateFormat.format(date);
@@ -44,7 +46,7 @@ public class AddComments extends HttpServlet {
             System.out.println(currentDateTime);
             //Hardcoded to moving exam setter exam onto stage 2
             try {
-                db.addcomment(comment, pk, currentDateTime, 1);
+                db.addcomment(comment, pk, currentDateTime, stage);
             } catch (Exception e) {
                 System.out.println(e);
             }

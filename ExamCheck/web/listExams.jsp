@@ -229,6 +229,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=0>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -299,6 +300,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=1>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -369,6 +371,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=2>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -440,6 +443,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=3>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>

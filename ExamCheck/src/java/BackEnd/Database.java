@@ -131,6 +131,11 @@ public class Database {
 
     }
 
+    
+    
+    
+    
+    
     public void movetoexamvetexternalmodderator(String pk) {
 
         try {
@@ -574,6 +579,63 @@ public class Database {
 
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        public  int  gettotalnumberofexams() {
+
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "select count(*) from exams;";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+          
+        return -1;
+        }
+
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      *
      * @param pk

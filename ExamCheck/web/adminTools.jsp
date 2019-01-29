@@ -9,71 +9,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%
-    HttpSession spoons = request.getSession();
-    String username = (String) spoons.getAttribute("email");
 
-    String perms = "";
-    Cookie[] cookies = request.getCookies();
-
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("permissions")) {
-                perms = cookie.getValue();
-            }
-        }
-    }
-
-    String creds = "";
-    Cookie[] cookies2 = request.getCookies();
-
-    if (cookies2 != null) {
-        for (Cookie cookie2 : cookies2) {
-            if (cookie2.getName().equals("user")) {
-                creds = cookie2.getValue();
-            }
-        }
-    }
-    %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
         Database db = new Database();
         db.connect();
-        int noOfExams = 3;
+
         
-                        noOfExams = db.gettotalnumberofexams();
+
+        ResultSet rs = db.getallexams();
+        for (int i = 0; i < db.gettotalnumberofexams(); i++) {  
+           
+            
+rs.next();
+                String mc = rs.getString("module_code");
+                
+                String pk = rs.getString("exam_pk");
+
         
-                            ResultSet rs = db.info_examslinkedtopk(creds);
-                            for (int i = 0; i < noOfExams; i++) {
-                                int no = i;
-
-                                if (rs.next()) {
-
-                                    String mc = rs.getString("module_code");
-                                    String title = rs.getString("title");
-                                    String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
-                                    } else {
-                                      onlineorpaper = "Written Exam";
-                                    }
-                                    String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
-                                    } else {
-                                      resit = "Resit Exam";
-                                    }
-                                    String exam = rs.getString("exam");
-                                    String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
-                                    } else {
-                                      grade = "Postgraduate Exam";
-                                    }
-                                    String pk = rs.getString("exam_pk");
-
-                                
         %>
         <style>
             table, th, td {
@@ -101,7 +55,7 @@
                 <td>
             </tr>
             <%
-                }}
+                }
                 %>
         </table>
     </body>

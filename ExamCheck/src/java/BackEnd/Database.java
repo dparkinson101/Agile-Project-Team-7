@@ -637,8 +637,10 @@ public class Database {
 
             String sql = "select count(*) from exams;";
 
-           int a =  state.executeUpdate(sql);
-return a;
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getInt(1);
         } catch (SQLException ex) {
 
           

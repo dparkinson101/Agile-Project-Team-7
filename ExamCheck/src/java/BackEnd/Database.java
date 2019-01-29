@@ -620,7 +620,13 @@ public class Database {
     
     
     
+      public  String  testcolour() {
+
+            return "red";
     
+        
+
+    }
     
     
     
@@ -638,7 +644,7 @@ public class Database {
             String sql = "select count(*) from exams;";
 
            int a =  state.executeUpdate(sql);
-return a;
+            return a;
         } catch (SQLException ex) {
 
           

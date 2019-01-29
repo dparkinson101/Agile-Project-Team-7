@@ -600,8 +600,8 @@ public class Database {
 
             String sql = "select count(*) from exams;";
 
-            state.executeUpdate(sql);
-
+           int a =  state.executeUpdate(sql);
+return a;
         } catch (SQLException ex) {
 
           
@@ -611,8 +611,16 @@ public class Database {
     }
 
     
-    
-    
+       public ResultSet getallexams(String pk) {
+        try {
+            String sql = "select * from exams ;";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
     
     
     

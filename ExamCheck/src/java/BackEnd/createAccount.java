@@ -7,6 +7,7 @@ package BackEnd;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,37 +39,53 @@ public class createAccount extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        //Sets up database connection
-        Database db = new Database();
-        db.connect();
-
-        //Creates a new user
-        boolean created;
         try {
-            db.updateQuery("INSERT INTO testuser (username, password, firstName, lastName) VALUES ('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "');");
-            created = true;
+            //Creates / Stores Salted Hash of Password
+            Base64.Encoder enc = Base64.getEncoder();
+            Security security = new Security();
+            byte[] salt = security.getNewSalt();
+
+            byte[] saltedHash = security.getSaltedHash(password, salt);
+            
+            //Sets up database connection
+            Database db = new Database();
+            db.connect();
+
+            //Creates a new user
+            boolean created;
+            try {
+                db.updateQuery("INSERT INTO users (username, password, salt) VALUES ('" + email + "', '" + enc.encodeToString(saltedHash) + "', '" + enc.encodeToString(salt) + "');");
+                created = true;
+            } catch (Exception e) {
+                created = false;
+                System.out.println(e);
+            }
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet createAccount</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet createAccount at " + request.getContextPath() + "</h1>");
+                out.println("<p>" + firstName + " " + lastName + "</p>");
+                if (created) {
+                    out.println("<p>Account Created Successfully :)</p>");
+                } else {
+                    out.println("<p>Error Creating Account</p>");
+                }
+                out.println("</body>");
+                out.println("</html>");
+                response.sendRedirect("Log-in.jsp");
+            }
+            catch(Exception e){
+                System.out.println("ERROR PRINTING HTML");
+                System.out.println(e);
+            }
         } catch (Exception e) {
-            created = false;
+            System.out.println("Account Creation Failed To Hash&Salt Password");
             System.out.println(e);
         }
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet createAccount</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet createAccount at " + request.getContextPath() + "</h1>");
-            out.println("<p>" + firstName + " " + lastName + "</p>");
-            if (created) {
-                out.println("<p>Account Created Successfully :)</p>");
-            } else {
-                out.println("<p>Error Creating Account</p>");
-            }
-            out.println("</body>");
-            out.println("</html>");
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

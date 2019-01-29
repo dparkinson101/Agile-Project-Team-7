@@ -40,9 +40,10 @@
         <%
         Database db = new Database();
         db.connect();
+        int noOfExams = 1;
         
         if (perms.contains("examSetter")) {
-                        int noOfExams = 1;
+                        noOfExams = 1;
         }
         
                             ResultSet rs = db.info_examslinkedtopk(creds);
@@ -74,7 +75,7 @@
                                     }
                                     String pk = rs.getString("exam_pk");
 
-                       
+                                }}
         %>
         <style>
             table, th, td {
@@ -95,7 +96,7 @@
             <tr>
                 <td bgcolor="#FF0000"><% out.print(rs.getString("module_code")); %>
                     <br>
-                    <button></button>
+                    <button>Assign Us</button>
                     <button>Gorilla Warfare</button>
                 </td>
                 <td>Smith</td> 

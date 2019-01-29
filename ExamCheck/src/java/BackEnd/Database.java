@@ -600,8 +600,8 @@ public class Database {
 
             String sql = "select count(*) from exams;";
 
-            state.executeUpdate(sql);
-
+           int a =  state.executeUpdate(sql);
+return a;
         } catch (SQLException ex) {
 
           

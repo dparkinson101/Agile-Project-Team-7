@@ -1,12 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Keiren
-  Date: 27/01/2019
-  Time: 18:07
-  To change this template use File | Settings | File Templates.
+<%-- 
+    Document   : Log-in
+    Created on : 22-Jan-2019, 10:54:27
+    Author     : andrewbrodrick
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE HTML>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -42,7 +41,6 @@
         <script>
             function deleteAllCookies() {
                 var cookies = document.cookie.split(";");
-
                 for (var i = 0; i < cookies.length; i++) {
                     var cookie = cookies[i];
                     var eqPos = cookie.indexOf("=");

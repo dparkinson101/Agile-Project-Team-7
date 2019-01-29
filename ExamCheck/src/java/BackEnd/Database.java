@@ -77,14 +77,12 @@ public class Database {
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(query);
-            this.close();
             return rs;
         } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            this.close();
             return null;
         }
     }
@@ -102,14 +100,12 @@ public class Database {
 
             state.executeUpdate(query);
             
-            this.close();
             return true;
         } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            this.close();
             return false;
         }
     }
@@ -231,7 +227,6 @@ public class Database {
         try {
             this.connect();
             if(username == null || password == null){
-                this.close();
                 return null;
             }
             
@@ -239,7 +234,6 @@ public class Database {
             
             if(conn == null){
                 System.out.println("The connection is null");
-                this.close();
             }
             
             Statement state = conn.createStatement();
@@ -250,7 +244,6 @@ public class Database {
             
             if(rs == null){
                 System.out.println("No Results for such credentials exist in the database.");
-                this.close();
                 return null;
             }
             
@@ -277,7 +270,6 @@ public class Database {
                 return user_pk;
             } else {
                 System.out.println("User: " + username + " Log in failed!");
-                this.close();
                 return null;
             }
 
@@ -286,7 +278,6 @@ public class Database {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            this.close();
             return null;
         }
     }

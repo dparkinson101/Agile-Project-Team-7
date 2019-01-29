@@ -374,20 +374,6 @@ public class DatabaseTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of blobout method, of class Database.
-     */
-    @Test
-    public void testBlobout() {
-        System.out.println("blobout");
-        String exampk = "";
-        Database instance = new Database();
-        Blob expResult = null;
-        Blob result = instance.blobout(exampk);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
 
     

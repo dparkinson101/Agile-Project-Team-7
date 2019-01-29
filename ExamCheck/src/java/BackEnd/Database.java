@@ -5,6 +5,7 @@
  */
 package BackEnd;
 
+
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,8 +29,8 @@ public class Database {
     public Database() {
         conn = null;
     }
-
-    public void close() {
+    
+    public void close(){
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -43,7 +44,7 @@ public class Database {
      * current connection to the database.
      */
     public Connection connect() {
-
+        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
@@ -76,6 +77,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(query);
+            this.close();
             return rs;
         } catch (SQLException ex) {
             // handle any sql errors
@@ -99,7 +101,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             state.executeUpdate(query);
-
+            
             this.close();
             return true;
         } catch (SQLException ex) {
@@ -114,22 +116,75 @@ public class Database {
 
     public void movetoexamvettingcommite(String pk) {
 
-        String sql = "update exams set internal_moderator_int_mod_pk=2 where exam_pk=" + pk + ";"; // handle any sql errors
-        updateQuery(sql);
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "update exams set internal_moderator_int_mod_pk=2 where exam_pk=" + pk + ";";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
 
     }
 
+    
+    
+    
+    
+    
     public void movetoexamvetexternalmodderator(String pk) {
 
-        String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
-        updateQuery(sql);
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
 
     }
 
     public void finish_exam(String pk) {
 
-        String sql = "update exams set External_Examiner_ext_exam_pk=2 where exam_pk = " + pk + ";";
-        updateQuery(sql);
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "update exams set External_Examiner_ext_exam_pk=2 where exam_pk = " + pk + ";";
+
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
 
     }
 
@@ -150,9 +205,19 @@ public class Database {
             this.finish_exam(pk);
         }
 
-        // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
-        String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk + pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
-        updateQuery(sql);
+        try {
+            Statement state = conn.createStatement();
+            // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
+
+            String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk + pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
     }
 
     /**
@@ -165,30 +230,32 @@ public class Database {
     public String checkLogin(String username, String password) {
         try {
             this.connect();
-            if (username == null || password == null) {
+            if(username == null || password == null){
                 this.close();
                 return null;
             }
-
+            
             String sql = "select user_pk, password, salt from users where username = '" + username + "';";
-
-            if (conn == null) {
+            
+            if(conn == null){
                 System.out.println("The connection is null");
                 this.close();
             }
-
+            
+            Statement state = conn.createStatement();
+            
             Base64.Decoder dec = Base64.getDecoder();
-
-            ResultSet rs = executeQuery(sql);
-
-            if (rs == null) {
+            
+            ResultSet rs = state.executeQuery(sql);
+            
+            if(rs == null){
                 System.out.println("No Results for such credentials exist in the database.");
                 this.close();
                 return null;
             }
-
+            
             rs.first();
-
+            
             byte[] salt = dec.decode(rs.getString("salt"));
             byte[] saltedHash = dec.decode(rs.getString("password"));
             byte[] passwordHash = null;
@@ -232,7 +299,9 @@ public class Database {
     public String getexamsetter(String pk) {
         try {
             String sql = "select lect_pk from exam_setter where user_user_pk =" + pk + ";";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
 
@@ -251,8 +320,9 @@ public class Database {
     public String getinternalmod(String pk) {
         try {
             String sql = "select int_mod_pk from internal_moderator where user_user_pk =" + pk + ";";
+            Statement state = conn.createStatement();
 
-            ResultSet rs = executeQuery(sql);
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
 
@@ -274,7 +344,8 @@ public class Database {
     public String getexamvetcommit(String pk) {
         try {
             String sql = "select exmVet_pk from ExmVetComit where user_user_pk =" + pk + ";";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -291,8 +362,9 @@ public class Database {
     public String getexternal(String pk) {
         try {
             String sql = "select ext_exam_pk from External_Examiner where user_user_pk =" + pk + ";";
+            Statement state = conn.createStatement();
 
-            ResultSet rs = executeQuery(sql);
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
 
@@ -311,9 +383,12 @@ public class Database {
     public String getoffice(String pk) {
         try {
             String sql = "select school_office_pk from School_office where user_user_pk =" + pk + ";";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
+
             return rs.getString(1);
 
         } catch (SQLException ex) {
@@ -329,9 +404,12 @@ public class Database {
     public String number_of_completed_exams(String pk) {
         try {
             String sql = "select count(*) from exams where ExmVetComit_exmVet_pk=2;";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
+
             return rs.getString(1);
 
         } catch (SQLException ex) {
@@ -348,7 +426,9 @@ public class Database {
     public String number_of_in_progress_exams(String pk) {
         try {
             String sql = "select count(*) from exams where External_Examiner_ext_exam_pk!=2 and ExmVetComit_exmVet_pk!=2 and internal_moderator_int_mod_pk!=2 and External_Examiner_ext_exam_pk!=1 and ExmVetComit_exmVet_pk!=1 and internal_moderator_int_mod_pk!=1;";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -365,8 +445,9 @@ public class Database {
     public String number_examslinkedtopk(String pk) {
         try {
             String sql = "select count(*) from exams where exam_setter_lect_pk=" + pk + ";";
+            Statement state = conn.createStatement();
 
-            ResultSet rs = executeQuery(sql);
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -376,15 +457,22 @@ public class Database {
     }
 
     public ResultSet info_examslinkedtopk(String pk) {
-        String sql = "select * from exams where exam_setter_lect_pk=" + pk + ";";
-        ResultSet rs = executeQuery(sql);
-        return rs;
+        try {
+            String sql = "select * from exams where exam_setter_lect_pk=" + pk + ";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     public String number_examslinkedtopkintmod(String pk) {
         try {
             String sql = "select count(*) from exams where internal_moderator_int_mod_pk=" + pk + ";";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -394,15 +482,22 @@ public class Database {
     }
 
     public ResultSet info_examslinkedtopkintmod(String pk) {
-        String sql = "select * from exams where internal_moderator_int_mod_pk=" + pk + ";";
-        ResultSet rs = executeQuery(sql);
-        return rs;
+        try {
+            String sql = "select * from exams where internal_moderator_int_mod_pk=" + pk + ";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     public String number_examslinkedtopkextmod(String pk) {
         try {
             String sql = "select count(*) from exams where External_Examiner_ext_exam_pk=" + pk + ";";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -412,16 +507,22 @@ public class Database {
     }
 
     public ResultSet info_examslinkedtopkextmod(String pk) {
-        String sql = "select * from exams where External_Examiner_ext_exam_pk=" + pk + ";";
-        ResultSet rs = executeQuery(sql);
-        return rs;
+        try {
+            String sql = "select * from exams where External_Examiner_ext_exam_pk=" + pk + ";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     public String number_examslinkedtopkvetcommit(String pk) {
         try {
             String sql = "select count(*) from exams where ExmVetComit_exmVet_pk=" + pk + ";";
+            Statement state = conn.createStatement();
 
-            ResultSet rs = executeQuery(sql);
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -447,27 +548,26 @@ public class Database {
     public String blobin(InputStream inputStream, String Modulecode, String level, String pk, String title, String online, String resit, String exam_setter_lect_pk, String examPK, String docType) {
         try {
 
+            //     InputStream inputStream = new FileInputStream(new File(path));
             String sql = "INSERT INTO `18agileteam7db`.`exams`(`exam_pk`,`module_code`,`title`,`online_or_paper`,`resit`,`exam`,`grade`,`examFile`,`doctype`,`exam_setter_lect_pk`,`internal_moderator_int_mod_pk`,`External_Examiner_ext_exam_pk`,`ExmVetComit_exmVet_pk`)VALUES(\"" + examPK + "\",\"" + Modulecode + "\",\"" + title + "\",\"" + online + "\",\"" + resit + "\",\"1\",\"" + level + "\",?,\"" + docType + "\",1,1,1,1);";
+            //   String sql = "INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,?);";
 
-            connect();
-                PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setBlob(1, inputStream);
-                statement.executeUpdate();
-            close();
+            //        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssss");
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setBlob(1, inputStream);
+            statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error");
             System.out.println(e);
-            close();
             return e.toString();
         }
-        close();
         return "end of blob in";
     }
 
     public String updateblob(InputStream inputStream, String docType, String pk) {
 
         try {
-            connect();
+
             String sql = "update exams set doctype ='" + docType + "' , examFile =? where exam_pk =" + pk + " ;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -475,31 +575,38 @@ public class Database {
             statement.setBlob(1, inputStream);
 
             statement.executeUpdate();
-            close();
+
         } catch (SQLException e) {
 
             System.out.println("error");
 
             System.out.println(e);
 
-            close();
             return e.toString();
+
         }
-        close();
+
         return "end of blob in";
 
     }
 
     public ResultSet info_examslinkedtopkvetcommit(String pk) {
-        String sql = "select * from exams where ExmVetComit_exmVet_pk=" + pk + ";";
-        ResultSet rs = executeQuery(sql);
-        return rs;
+        try {
+            String sql = "select * from exams where ExmVetComit_exmVet_pk=" + pk + ";";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     public String number_of_new_examsextmod(String pk) {
         try {
             String sql = "select count(*) from exams where External_Examiner_ext_exam_pk=1 AND ExmVetComit_exmVet_pk=1 AND internal_moderator_int_mod_pk=1;";
-            ResultSet rs = executeQuery(sql);
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
             return rs.getString(1);
@@ -509,17 +616,73 @@ public class Database {
 
     }
 
-    public int gettotalnumberofexams() {
-        String sql = "select count(*) from exams;";
-        ResultSet rs = executeQuery(sql);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        public  int  gettotalnumberofexams() {
+
         try {
-            return rs.getInt(0);
+
+            Statement state = conn.createStatement();
+
+            String sql = "select count(*) from exams;";
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getInt(1);
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+
+          
+        return -1;
         }
-        return 0;
+
     }
 
+    
+       public ResultSet getallexams() {
+        try {
+            String sql = "select * from exams ;";
+            Statement state = conn.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      *
      * @param pk

@@ -648,7 +648,7 @@ return a;
     }
 
     
-       public ResultSet getallexams(String pk) {
+       public ResultSet getallexams() {
         try {
             String sql = "select * from exams ;";
             Statement state = conn.createStatement();

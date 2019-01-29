@@ -145,8 +145,8 @@
                             <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Log-in.jsp"onclick=" if (confirm('Are you sure you want to log out?')) {
-                                            deleteAllCookies();
-                                        }"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                                        deleteAllCookies();
+                                    }"><i class="fas fa-sign-out-alt"></i> Log out</a>
                         </div>
                     </li>
                 </ul>

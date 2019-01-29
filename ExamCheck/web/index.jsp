@@ -89,8 +89,8 @@
                         <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="Log-in.jsp"onclick=" if (confirm('Are you sure you want to log out?')) {
-        deleteAllCookies();
-        }"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                                    deleteAllCookies();
+                                }"><i class="fas fa-sign-out-alt"></i> Log out</a>
                     </div>
                 </li>
             </ul>
@@ -117,21 +117,21 @@
                                     <%
                                         Database db = new Database();
                                         db.connect();
-                                                    String noCompletedExams = db.number_of_completed_exams("1");
-                                                    out.print(noCompletedExams);
-                                                %>
-                                            </span>
-                                            <p class="text-right">Completed Exams</p>
-                                        </div>
-                                    </div>
-                                    <a href="listExams.jsp" class="text-success text-decoration-none">
-                                        <div class="card-footer">
-                                            <span>View Exams</span>
-                                            <i class="fa fa-arrow-circle-right fa-pull-right"></i>
-                                        </div>
-                                    </a>
-                                </div>
+                                        String noCompletedExams = db.number_of_completed_exams("1");
+                                        out.print(noCompletedExams);
+                                    %>
+                                </span>
+                                <p class="text-right">Completed Exams</p>
                             </div>
+                        </div>
+                        <a href="listExams.jsp" class="text-success text-decoration-none">
+                            <div class="card-footer">
+                                <span>View Exams</span>
+                                <i class="fa fa-arrow-circle-right fa-pull-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
                 <!-- In Progress Exams !-->
                 <div class="col-sm-4">
                     <div class="card border-warning">

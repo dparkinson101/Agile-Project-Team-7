@@ -13,21 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
-        Database db = new Database();
-        db.connect();
+            Database db = new Database();
+            db.connect();
 
-        
+            ResultSet rs = db.getallexams();
+            for (int i = 0; i < db.gettotalnumberofexams(); i++) {
 
-        ResultSet rs = db.getallexams();
-        for (int i = 0; i < db.gettotalnumberofexams(); i++) {  
-           
-            
-rs.next();
+                rs.next();
                 String mc = rs.getString("module_code");
-                
+
                 String pk = rs.getString("exam_pk");
 
-        
+
         %>
         <style>
             table, th, td {
@@ -56,7 +53,7 @@ rs.next();
             </tr>
             <%
                 }
-                %>
+            %>
         </table>
     </body>
 </html>

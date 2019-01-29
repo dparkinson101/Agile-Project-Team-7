@@ -40,11 +40,9 @@
         <%
         Database db = new Database();
         db.connect();
-        int noOfExams = 1;
+        int noOfExams = 3;
         
-        if (perms.contains("examSetter")) {
-                        noOfExams = 1;
-        }
+                        noOfExams = db.gettotalnumberofexams();
         
                             ResultSet rs = db.info_examslinkedtopk(creds);
                             for (int i = 0; i < noOfExams; i++) {
@@ -75,7 +73,7 @@
                                     }
                                     String pk = rs.getString("exam_pk");
 
-                                }}
+                                
         %>
         <style>
             table, th, td {
@@ -85,7 +83,6 @@
         </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
         <table style="width:60%">
             <tr>
                 <th>Exam Setter</th>
@@ -94,7 +91,7 @@
                 <th>External Moderator</th>
             </tr>
             <tr>
-                <td bgcolor="#FF0000"><% out.print(rs.getString("module_code")); %>
+                <td bgcolor="#FF0000"><% out.print(mc); %>
                     <br>
                     <button>Assign Us</button>
                     <button>Gorilla Warfare</button>
@@ -103,11 +100,9 @@
                 <td>50</td>
                 <td>
             </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td> 
-                <td>94</td>
-            </tr>
+            <%
+                }}
+                %>
         </table>
     </body>
 </html>

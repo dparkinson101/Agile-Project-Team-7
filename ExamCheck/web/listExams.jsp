@@ -106,7 +106,7 @@
     <%
         Database db = new Database();
         db.connect();
-        String noCompletedExams = db.number_of_completed_exams("1");
+        //String noCompletedExams = db.number_of_completed_exams("1");
     %>
 
     <body>
@@ -207,10 +207,25 @@
 
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
-                                    String onlineorpaper = rs.getString("online_or_paper");
-                                    String resit = rs.getString("resit");
+                                    String onlineorpaper;
+                                    if("0".equals(rs.getString("online_or_paper"))){
+                                      onlineorpaper = "Online Exam";
+                                    } else {
+                                      onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if("0".equals(rs.getString("resit"))){
+                                      resit = "Main Exam";
+                                    } else {
+                                      resit = "Resit Exam";
+                                    }
                                     String exam = rs.getString("exam");
-                                    String grade = rs.getString("grade");
+                                    String grade;
+                                    if("0".equals(rs.getString("grade"))){
+                                      grade = "Undergraduate Exam";
+                                    } else {
+                                      grade = "Postgraduate Exam";
+                                    }
                                     String pk = rs.getString("exam_pk");
 
                         %>
@@ -263,10 +278,25 @@
                                 if (rs.next()) {
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
-                                    String onlineorpaper = rs.getString("online_or_paper");
-                                    String resit = rs.getString("resit");
+                                    String onlineorpaper;
+                                    if("0".equals(rs.getString("online_or_paper"))){
+                                      onlineorpaper = "Online Exam";
+                                    } else {
+                                      onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if("0".equals(rs.getString("resit"))){
+                                      resit = "Main Exam";
+                                    } else {
+                                      resit = "Resit Exam";
+                                    }
                                     String exam = rs.getString("exam");
-                                    String grade = rs.getString("grade");
+                                    String grade;
+                                    if("0".equals(rs.getString("grade"))){
+                                      grade = "Undergraduate Exam";
+                                    } else {
+                                      grade = "Postgraduate Exam";
+                                    }
                                     String pk = String.valueOf(rs.getInt("exam_pk"));
                         %>
                         <div class="panel-body">
@@ -318,10 +348,25 @@
                                 if (rs.next()) {
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
-                                    String onlineorpaper = rs.getString("online_or_paper");
-                                    String resit = rs.getString("resit");
+                                    String onlineorpaper;
+                                    if("0".equals(rs.getString("online_or_paper"))){
+                                      onlineorpaper = "Online Exam";
+                                    } else {
+                                      onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if("0".equals(rs.getString("resit"))){
+                                      resit = "Main Exam";
+                                    } else {
+                                      resit = "Resit Exam";
+                                    }
                                     String exam = rs.getString("exam");
-                                    String grade = rs.getString("grade");
+                                    String grade;
+                                    if("0".equals(rs.getString("grade"))){
+                                      grade = "Undergraduate Exam";
+                                    } else {
+                                      grade = "Postgraduate Exam";
+                                    }
                                     String pk = rs.getString("exam_pk");
                         %>
                         <div class="panel-body">
@@ -374,10 +419,25 @@
                                 if (rs.next()) {
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
-                                    String onlineorpaper = rs.getString("online_or_paper");
-                                    String resit = rs.getString("resit");
+                                    String onlineorpaper;
+                                    if("0".equals(rs.getString("online_or_paper"))){
+                                      onlineorpaper = "Online Exam";
+                                    } else {
+                                      onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if("0".equals(rs.getString("resit"))){
+                                      resit = "Main Exam";
+                                    } else {
+                                      resit = "Resit Exam";
+                                    }
                                     String exam = rs.getString("exam");
-                                    String grade = rs.getString("grade");
+                                    String grade;
+                                    if("0".equals(rs.getString("grade"))){
+                                      grade = "Undergraduate Exam";
+                                    } else {
+                                      grade = "Postgraduate Exam";
+                                    }
                                     String pk = rs.getString("exam_pk");
                         %>
                         <div class="panel-body">
@@ -431,10 +491,25 @@
                                 if (rs.next()) {
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
-                                    String onlineorpaper = rs.getString("online_or_paper");
-                                    String resit = rs.getString("resit");
+                                    String onlineorpaper;
+                                    if("0".equals(rs.getString("online_or_paper"))){
+                                      onlineorpaper = "Online Exam";
+                                    } else {
+                                      onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if("0".equals(rs.getString("resit"))){
+                                      resit = "Main Exam";
+                                    } else {
+                                      resit = "Resit Exam";
+                                    }
                                     String exam = rs.getString("exam");
-                                    String grade = rs.getString("grade");
+                                    String grade;
+                                    if("0".equals(rs.getString("grade"))){
+                                      grade = "Undergraduate Exam";
+                                    } else {
+                                      grade = "Postgraduate Exam";
+                                    }
                                     String pk = rs.getString("exam_pk");
 
                         %>

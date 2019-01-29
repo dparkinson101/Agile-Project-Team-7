@@ -45,7 +45,7 @@ public class FileUpload extends HttpServlet {
         //get inputs
         //InputStream fileContent = filePart.getInputStream();
         Part filePart = request.getPart("fileToUpload");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
 
         String docType = filePart.getSubmittedFileName();
@@ -82,7 +82,7 @@ public class FileUpload extends HttpServlet {
         //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
         db.blobin(fileContent, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", examPK, docType);
         out.println("end");
-        response.sendRedirect("/ExamCheck/index.jsp");
+        response.sendRedirect("index.jsp");
 
         try (PrintWriter out = response.getWriter()) {
 

@@ -35,17 +35,6 @@
 
     </head>
 
-    <script>
-        function resizeText(multiplier)
-        {
-            if (document.body.style.fontSize == "")
-            {
-                document.body.style.fontSize = "1.0em";
-            }
-            document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
-        }
-    </script>
-
     <%
         HttpSession spoons = request.getSession();
         String username = (String) spoons.getAttribute("email");
@@ -63,6 +52,16 @@
     %>
 
     <body>
+        <script>
+        function resizeText(multiplier)
+        {
+            if (document.body.style.fontSize == "")
+            {
+                document.body.style.fontSize = "1.0em";
+            }
+            document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+        }
+        </script>
 
         <div id="wrapper">
 
@@ -207,7 +206,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="./createExam.jsp">
+                            <a href="CreateExam.jsp">
                                 <div class="panel-footer">
                                     <span class="pull-left">Add Exam</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -291,7 +290,7 @@
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+    
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>

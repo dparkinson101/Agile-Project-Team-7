@@ -43,15 +43,12 @@
         <meta name="The Mighty Morphin' Matthew Rangers" content="">
 
         <title>Exams</title>
-
+        <!-- Jquery !-->
+        <script src="vendor/jquery/jquery.min.js"></script>
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="dist/css/DCEC.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- FONT AWESOME !-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -114,64 +111,44 @@
         <div id="wrapper">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="Admin.jsp">Dundee Computing Examination Board</a>
-                </div>
-                <!-- /.navbar-header -->
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- Accessibility -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-access">
-                            <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
-                            <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                            <li><a href="Admin.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
-                        </ul>
-                    </li>
-                    <!-- Alerts Dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> No New Comments
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <!-- User Dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- Top Links -->
-
-                <!-- /.navbar-static-side -->
-            </nav>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+	<a class="navbar-brand" href="#">Dundee Computing Examination Board</a>
+	<ul class="navbar-nav ml-auto">
+		<!-- Accessibility !-->
+		<li class="nav-item dropdown" style="padding-right: 10px">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+				<i class="fas fa-universal-access fa-lg"></i>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a class="dropdown-item" href="#" onclick=resizeText(1)><i class="fas fa-text-height fa-2x"></i>
+					Increase text size</a>
+				<a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
+					Decrease text size</a>
+				<a class="dropdown-item" href="index.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
+			</div>
+		</li>
+		<!-- Notifications !-->
+		<li class="nav-item dropdown" style="padding-right: 10px">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+				<i class="fas fa-bell fa-lg"></i>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
+			</div>
+		</li>
+		<!-- User !-->
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+				<i class="fas fa-user fa-lg"></i>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> $Username</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Log out</a>
+			</div>
+		</li>
+	</ul>
+</nav>
         </div>
 
         <%

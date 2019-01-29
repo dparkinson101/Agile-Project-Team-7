@@ -1,328 +1,262 @@
 <%--
-    Document   : index
-    Created on : 21-Jan-2019, 10:20:17
-    Author     : Douglas
+  Created by IntelliJ IDEA.
+  User: Keiren
+  Date: 27/01/2019
+  Time: 14:51
+  To change this template use File | Settings | File Templates.
 --%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="BackEnd.Database" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="The Mighty Morphin' Matthew Rangers" content="">
+<head>
+	<title>INDEX</title>
+	<!-- JQUERY !-->
+	<script src="./vendor/jquery/jquery.min.js"></script>
+	<!-- BOOTSTRAP !-->
+	<link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!-- FONT AWESOME !-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+</head>
 
-        <title>Homepage</title>
+<script>
+	function resizeText(multiplier) {
+		if (document.body.style.fontSize === "") {
+			document.body.style.fontSize = "1.0em";
+		}
+		document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+	}
+</script>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<body>
+<!-- Navbar !-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+	<a class="navbar-brand" href="#">Dundee Computing Examination Board</a>
+	<ul class="navbar-nav ml-auto">
+		<!-- Accessibility !-->
+		<li class="nav-item dropdown" style="padding-right: 10px">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+				<i class="fas fa-universal-access fa-lg"></i>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a class="dropdown-item" href="#" onclick=resizeText(1)><i class="fas fa-text-height fa-2x"></i>
+					Increase text size</a>
+				<a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
+					Decrease text size</a>
+				<a class="dropdown-item" href="index.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
+			</div>
+		</li>
+		<!-- Notifications !-->
+		<li class="nav-item dropdown" style="padding-right: 10px">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+				<i class="fas fa-bell fa-lg"></i>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
+			</div>
+		</li>
+		<!-- User !-->
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+				<i class="fas fa-user fa-lg"></i>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> $Username</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Log out</a>
+			</div>
+		</li>
+	</ul>
+</nav>
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Exams</h1>
+			<hr>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<!-- Completed Exams !-->
+		<div class="col-sm-4">
+			<div class="card border-success">
+				<div class="card-header bg-success text-light">
+					<div class="col-xs-3">
+						<i class="fas fa-check fa-5x fa-pull-left"></i>
+					</div>
+					<div class="col-xs-9 text-right text-light">
+						<span style="font-size: 40px;">8</span>
+						<p class="text-right">Completed Exams</p>
+					</div>
+				</div>
+				<a href="listExams.jsp" class="text-success text-decoration-none">
+					<div class="card-footer">
+						<span>View Exams</span>
+						<i class="fa fa-arrow-circle-right fa-pull-right"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+		<!-- In Progress Exams !-->
+		<div class="col-sm-4">
+			<div class="card border-warning">
+				<div class="card-header bg-warning text-light">
+					<div class="col-xs-3">
+						<i class="fas fa-tasks fa-5x fa-pull-left"></i>
+					</div>
+					<div class="col-xs-9 text-right text-light">
+						<span style="font-size: 40px;">2</span>
+						<p class="text-right">In Progress Exams</p>
+					</div>
+				</div>
+				<a href="listExams.jsp" class="text-warning text-decoration-none">
+					<div class="card-footer">
+						<span>View Exams</span>
+						<i class="fa fa-arrow-circle-right fa-pull-right"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+		<!-- New Exams !-->
+		<div class="col-sm-4">
+			<div class="card border-danger">
+				<div class="card-header bg-danger text-light">
+					<div class="col-xs-3">
+						<i class="fas fa-file fa-5x fa-pull-left"></i>
+					</div>
+					<div class="col-xs-9 text-right text-light">
+						<span style="font-size: 40px;">4</span>
+						<p class="text-right">New Exams</p>
+					</div>
+				</div>
+				<a href="CreateExam.jsp" class="text-danger text-decoration-none">
+					<div class="card-footer">
+						<span>View Exams</span>
+						<i class="fa fa-arrow-circle-right fa-pull-right"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Administrator tools</h1>
+			<hr>
+		</div>
+	</div>
+	<br>
+	<div class="row">
 
-        <!-- Custom CSS -->
-        <link href="dist/css/DCEC.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-    </head>
-
-    <%
-        HttpSession spoons = request.getSession();
-        String username = (String) spoons.getAttribute("email");
-
-        String perms = "";
-        String userPK = "";
-        Cookie[] cookies = request.getCookies();
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("permissions")) {
-                    perms = cookie.getValue();
-                }
-                if (cookie.getName().equals("user")) {
-                    userPK = cookie.getValue();
-                    Database db = new Database();
-
-                    ResultSet rs = db.executeQuery("select username from users where user_pk = '" + userPK + "';");
-                    rs.first();
-                    username = rs.getString("username");
-                }
-            }
-        }
-    %>
-
-    <body>
-        <script>
-            function resizeText(multiplier)
-            {
-                if (document.body.style.fontSize == "")
-                {
-                    document.body.style.fontSize = "1.0em";
-                }
-                document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
-            }
-
-            function deleteAllCookies() {
-                var cookies = document.cookie.split(";");
-
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i];
-                    var eqPos = cookie.indexOf("=");
-                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                }
-            }
-        </script>
-
-        <div id="wrapper">
-
-            <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="Staff.jsp">Dundee Computing Examination Board</a>
-                </div>
-                <!-- /.navbar-header -->
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- Accessibility -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-access">
-                            <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
-                            <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                            <li><a href="index.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
-                        </ul>
-                    </li>
-                    <!-- Alerts Dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> No New Comments
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <!-- User Dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username); %></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick=" if (confirm('Are you sure you want to log out?')) {
-                                        deleteAllCookies();
-                                    }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- Top Links -->
-
-                <!-- /.navbar-static-side -->
-            </nav>
-
-            <div id="page-wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Exams</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">
-                                            <%
-                                                Database db = new Database();
-                                                db.connect();
-                                                String noCompletedExams = db.number_of_completed_exams("1");
-                                                out.print(noCompletedExams);
-                                            %>
-                                        </div>
-                                        <div>Completed Exams</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="listExams.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Exams</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">
-                                            <%
-                                                String noInProgressExams = db.number_of_in_progress_exams("1");
-                                                out.print(noInProgressExams);
-                                            %>
-                                        </div>
-                                        <div>Exams In Progress</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="listExams.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Exams</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-file fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">
-                                            <br>
-                                        </div>
-                                        <div>New Exams</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="CreateExam.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Add Exam</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                </div>
-
-                <div class="row">
-                    <%                            if (perms.contains("admin")) {
-                    %>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-white">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-13 text-center">
-                                        <div><font size="5">Add New User</font></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="AddUser.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Add User</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-white">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-12 text-middle-center">
-                                        <div><font size="5">View Unsigned Exams</font></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="listExams.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Exams</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <% } %>
-
-                    <% if (perms.contains("examSetter")) {%>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="panel panel-white">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-12 text-center">
-                                        <div><font size="5">Create New Exam</font></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="CreateExam.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Create</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <% }%>
-                </div>
-            </div>
-        </div>
-        <!-- /#page-wrapper -->
-
-
-
-        <!-- jQuery -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="dist/js/DCEC.js"></script>
-
-    </body>
+		<!--
+			ADMIN
+		!-->
+		<!-- Add new user !-->
+		<div class="col-sm-4">
+			<div class="card border-dark">
+				<div class="card-header text-center text-light bg-dark">
+					<h4 class="card-title">Add new user</h4>
+				</div>
+				<div class="card-body">
+					<form id="newUser">
+						<div class="form-group">
+							<label for="firstName">First name(s)</label>
+							<input type="text" class="form-control" id="firstName" required>
+						</div>
+						<div class="form-group">
+							<label for="surname">Surname</label>
+							<input type="text" class="form-control" id="surname" required>
+						</div>
+						<div class="form-group">
+							<label for="email">Dundee University E-mail</label>
+							<input type="email" class="form-control" id="email" required>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" id="password" required>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-block btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Assign user !-->
+		<div class="col-sm-4">
+			<div class="card border-dark">
+				<div class="card-header text-center text-light bg-dark">
+					<h4 class="card-title">Assign user</h4>
+				</div>
+				<div class="card-body">
+					<form id="assignUser">
+						<div class="form-group">
+							<label for="role">Role</label>
+							<select class="custom-select" id="role">
+								<option selected>Select role</option>
+								<option>Internal Moderator</option>
+								<option>External Moderator</option>
+								<option>Exam Vetting Committee Member</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="user">User</label>
+							<select class="custom-select" id="user">
+								<option selected>Select user</option>
+								<option>User 1</option>
+								<option>User 2</option>
+								<option>Cont...</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="examAssign">Exam</label>
+							<select class="custom-select" id="examAssign">
+								<option selected>Select exam</option>
+								<option>AC31007 - Exam</option>
+								<option>AC31007 - Resit</option>
+								<option>Cont...</option>
+							</select>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-block btn-success">Assign</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- View unsigned exams !-->
+		<div class="col-sm-4">
+			<div class="card border-dark">
+				<div class="card-header text-center text-light bg-dark">
+					<h4 class="card-title">View in progress exams</h4>
+				</div>
+				<div class="card-body">
+					<form id="viewExam">
+						<div class="form-group">
+							<label for="stage">Stage</label>
+							<select class="custom-select" id="stage">
+								<option selected>Select stage</option>
+								<option>Internal Moderating</option>
+								<option>External Moderating</option>
+								<option>Exam Vetting Committee</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="examView">Exam</label>
+							<select class="custom-select" id="examView">
+								<option selected>Select exam</option>
+								<option>AC31007 - Exam</option>
+								<option>AC31007 - Resit</option>
+								<option>Cont...</option>
+							</select>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-block btn-success">View</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+</body>
 </html>

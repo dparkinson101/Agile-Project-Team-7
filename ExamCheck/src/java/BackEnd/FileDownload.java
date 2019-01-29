@@ -5,9 +5,15 @@ package BackEnd;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,19 +38,55 @@ public class FileDownload extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FileDownload</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FileDownload at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        Database db = new Database();
+        db.connect();
+
+        String examPK = request.getParameter("examPK");
+
+        ResultSet rs = db.executeQuery("SELECT * FROM exams WHERE exam_pk = " + examPK + ";");
+        try {
+            if (rs.next()) {
+                String fileName = "test" + "." + rs.getString("doctype");
+                Blob blob = rs.getBlob("examFile");
+
+                InputStream is = blob.getBinaryStream();
+                int fileLength = is.available();
+
+                System.out.println("File Length: " + fileLength);
+
+                ServletContext context = getServletContext();
+
+                // sets MIME type for the file download
+                String mimeType = context.getMimeType(fileName);
+                if (mimeType == null) {
+                    mimeType = "application/octet-stream";
+                }
+
+                // set content properties and header attributes for the response
+                response.setContentType(mimeType);
+                response.setContentLength(fileLength);
+                String headerKey = "Content-Disposition";
+                String headerValue = String.format("attachment; filename=\"%s\"", fileName);
+                response.setHeader(headerKey, headerValue);
+
+                // writes the file to the client
+                OutputStream outStream = response.getOutputStream();
+
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+
+                while ((bytesRead = is.read(buffer)) != -1) {
+                    outStream.write(buffer, 0, bytesRead);
+                }
+
+                is.close();
+                outStream.close();
+                System.out.println("File Downloaded Successfully");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FileDownload.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

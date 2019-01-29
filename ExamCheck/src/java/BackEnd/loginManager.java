@@ -6,7 +6,6 @@
 package BackEnd;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -35,29 +34,68 @@ public class loginManager extends HttpServlet {
         String password = request.getParameter("password");
 
         Database db = new Database();
-        db.connect();
+        
         String loginResults = db.checkLogin(email, password);
-        boolean loggedIn = false;
+        
+        if (loginResults != null) {
+            boolean loggedIn = false;
+            String perms = "guest";
 
-        for (String loginResult : loginResults) {
-            if (loginResults[0].equals("-1")) {
-                loggedIn = false;
-                System.out.println("Error: Login Not Valid");
-                break;
+            String[] roles = new String[5];
+            roles[0] = db.getexamsetter(loginResults);
+            roles[1] = db.getinternalmod(loginResults);
+            roles[2] = db.getexamvetcommit(loginResults);
+            roles[3] = db.getexternal(loginResults);
+            roles[4] = db.getoffice(loginResults);
+
+            for (int i = 0; i < roles.length; i++) {
+                if (!"0".equals(roles[i])) {
+                    loggedIn = true;
+                    switch (i) {
+                        case 0:
+                            perms += " examSetter";
+                            break;
+                        case 1:
+                            perms += " internalModerator";
+                            break;
+                        case 2:
+                            perms += " examVetCommittee";
+                            break;
+                        case 3:
+                            perms += " externalModerator";
+                            break;
+                        case 4:
+                            perms += " office";
+                            break;
+                    }
+                }
             }
-            if (loginResult.equals("1")) {
-                loggedIn = true;
+
+            if (loginResults.equals("1")) {
+                perms += " admin";
             }
+
+            Cookie login = new Cookie("login", String.valueOf(loggedIn));
+            Cookie credentials = new Cookie("user", loginResults);
+            Cookie permissions = new Cookie("permissions", perms);
+
+            //Sets cookie max age for log-in to 24 hours
+            login.setMaxAge(60 * 60 * 24);
+            credentials.setMaxAge(60 * 60 * 24);
+            permissions.setMaxAge(60 * 60 * 24);
+
+            response.addCookie(login);
+            response.addCookie(credentials);
+            response.addCookie(permissions);
+
+            response.sendRedirect("index.jsp");
+
+        } else {
+            Cookie login = new Cookie("login", "false");
+            response.addCookie(login);
+            response.sendRedirect("Log-in.jsp");
         }
 
-        Cookie cookie = new Cookie("login", String.valueOf(loggedIn));
-
-        //Sets cookie max age for log-in to 10 mins
-        cookie.setMaxAge(60 * 10);
-
-        response.addCookie(cookie);
-
-        response.sendRedirect("/ExamCheck/index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

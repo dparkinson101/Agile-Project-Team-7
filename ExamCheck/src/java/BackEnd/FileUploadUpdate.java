@@ -1,31 +1,40 @@
+package BackEnd;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BackEnd;
-
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import BackEnd.Database;
+import java.nio.file.Paths;
+import java.util.Random;
+import javax.servlet.http.Cookie;
 
 /**
  *
- * @author Douglas
+ * @author matthewmcneil
  */
-public class createAccount extends HttpServlet {
+@MultipartConfig
+public class FileUploadUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods for creating a new account on the website.
+     * methods.
      *
-     * @param request servlet request for creating a new account
-     * @param response servlet webpage shown when account created or when an
-     * error occurs
+     * @param request servlet request
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -33,44 +42,31 @@ public class createAccount extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        //Sets up variables for POST varaible info
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        //get inputs
+        //InputStream fileContent = filePart.getInputStream();
+        Part filePart = request.getPart("fileToUpload");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        InputStream fileContent = filePart.getInputStream();
 
-        //Sets up database connection
+        String docType = filePart.getSubmittedFileName();
+        int i = docType.lastIndexOf('.');
+        if (i > 0) {
+            docType = docType.substring(i + 1);
+        }
+
+        String examPK = request.getParameter("examPK");
+
+        out.println(examPK);
+        out.println(docType);
+
+        //Connect to database
         Database db = new Database();
         db.connect();
 
-        //Creates a new user
-        boolean created;
-        try {
-            db.updateQuery("INSERT INTO testuser (username, password, firstName, lastName) VALUES ('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "');");
-            created = true;
-        } catch (Exception e) {
-            created = false;
-            System.out.println(e);
-        }
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet createAccount</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet createAccount at " + request.getContextPath() + "</h1>");
-            out.println("<p>" + firstName + " " + lastName + "</p>");
-            if (created) {
-                out.println("<p>Account Created Successfully :)</p>");
-            } else {
-                out.println("<p>Error Creating Account</p>");
-            }
-            out.println("</body>");
-            out.println("</html>");
-        }
+        db.updateblob(fileContent, docType, examPK);
+        out.println("File Uploaded Successfully");
 
-    }
+        response.sendRedirect("/ExamCheck/listExams.jsp");    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -108,7 +104,7 @@ public class createAccount extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Used to create a new user account.";
+        return "Short description";
     }// </editor-fold>
 
 }

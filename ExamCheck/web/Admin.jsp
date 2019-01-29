@@ -137,7 +137,7 @@ function resizeText(multiplier)
                                         <%
                                             Database db = new Database();
                                             db.connect();
-                                            String noCompletedExams = db.number_of_completed_exams();
+                                            String noCompletedExams = db.number_of_completed_exams("1");
                                             out.print(noCompletedExams);
                                         %>
                                     </div>
@@ -165,7 +165,7 @@ function resizeText(multiplier)
                                     <div class="huge">
                                         <%
                                             String noInProgressExams = db.number_of_in_progress_exams("1");
-//                                            out.print(noCompletedExams);
+//                                            out.print(noInProgressExams);
                                         %>
                                     </div>
                                     <div>Exams In Progress</div>
@@ -192,7 +192,7 @@ function resizeText(multiplier)
                                     <div class="huge">
                                         <%
                                             String noNewExams = db.number_of_new_exams("1");
-                                         //   out.print(noCompletedExams);
+                                         //   out.print(noNewExams);
                                         %>
                                     </div>
                                     <div>New Exams</div>

@@ -38,7 +38,6 @@ public class AddComments extends HttpServlet {
         String currentDateTime = dateFormat.format(date);
 
         Database db = new Database();
-        db.connect();
         try {
             System.out.println(comment);
             System.out.println(pk);
@@ -51,7 +50,7 @@ public class AddComments extends HttpServlet {
             }
 
             response.sendRedirect("index.jsp");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.getMessage();
         }
     }

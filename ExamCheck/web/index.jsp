@@ -49,11 +49,11 @@
                 if (cookie.getName().equals("permissions")) {
                     perms = cookie.getValue();
                 }
-                if (cookie.getName().equals("user")){
+                if (cookie.getName().equals("user")) {
                     userPK = cookie.getValue();
                     Database db = new Database();
-                    
-                    ResultSet rs = db.executeQuery("select username from users where user_pk = '"+userPK+"';");
+
+                    ResultSet rs = db.executeQuery("select username from users where user_pk = '" + userPK + "';");
                     rs.first();
                     username = rs.getString("username");
                 }
@@ -63,14 +63,25 @@
 
     <body>
         <script>
-        function resizeText(multiplier)
-        {
-            if (document.body.style.fontSize == "")
+            function resizeText(multiplier)
             {
-                document.body.style.fontSize = "1.0em";
+                if (document.body.style.fontSize == "")
+                {
+                    document.body.style.fontSize = "1.0em";
+                }
+                document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
             }
-            document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
-        }
+
+            function deleteAllCookies() {
+                var cookies = document.cookie.split(";");
+
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    var eqPos = cookie.indexOf("=");
+                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                }
+            }
         </script>
 
         <div id="wrapper">
@@ -125,7 +136,9 @@
                             <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username); %></a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="Log-in.jsp" onclick=" if (confirm('Are you sure you want to log out?')) {
+                                        deleteAllCookies();
+                                    }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -300,16 +313,16 @@
         </div>
         <!-- /#page-wrapper -->
 
-    
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- jQuery -->
+        <script src="vendor/jquery/jquery.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="dist/js/DCEC.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-</body>
+        <!-- Custom Theme JavaScript -->
+        <script src="dist/js/DCEC.js"></script>
+
+    </body>
 </html>

@@ -28,20 +28,6 @@
 	}
 </script>
 
-<%
-        HttpSession spoons = request.getSession();
-        String username = (String) spoons.getAttribute("email");
-        String perms = "";
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("permissions")) {
-                    perms = cookie.getValue();
-                }
-            }
-        }
-    %>
-
 <body>
 <!-- Navbar !-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -75,7 +61,7 @@
 				<i class="fas fa-user fa-lg"></i>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
+				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> $Username</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Log out</a>
 			</div>
@@ -162,7 +148,7 @@
 	</div>
 	<br>
 	<div class="row">
-		
+
 		<!--
 			ADMIN
 		!-->

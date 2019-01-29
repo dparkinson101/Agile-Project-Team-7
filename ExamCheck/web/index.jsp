@@ -3,6 +3,7 @@
     Created on : 21-Jan-2019, 10:20:17
     Author     : Douglas
 --%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -40,12 +41,21 @@
         String username = (String) spoons.getAttribute("email");
 
         String perms = "";
+        String userPK = "";
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("permissions")) {
                     perms = cookie.getValue();
+                }
+                if (cookie.getName().equals("user")){
+                    userPK = cookie.getValue();
+                    Database db = new Database();
+                    
+                    ResultSet rs = db.executeQuery("select username from users where user_pk = '"+userPK+"';");
+                    rs.first();
+                    username = rs.getString("username");
                 }
             }
         }

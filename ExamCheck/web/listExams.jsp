@@ -48,7 +48,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- FONT AWESOME !-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -112,43 +112,45 @@
 
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
-	<ul class="navbar-nav ml-auto">
-		<!-- Accessibility !-->
-		<li class="nav-item dropdown" style="padding-right: 10px">
-			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-				<i class="fas fa-universal-access fa-lg"></i>
-			</a>
-			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#" onclick=resizeText(1)><i class="fas fa-text-height fa-2x"></i>
-					Increase text size</a>
-				<a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
-					Decrease text size</a>
-				<a class="dropdown-item" href="index.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
-			</div>
-		</li>
-		<!-- Notifications !-->
-		<li class="nav-item dropdown" style="padding-right: 10px">
-			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-				<i class="fas fa-bell fa-lg"></i>
-			</a>
-			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
-			</div>
-		</li>
-		<!-- User !-->
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-				<i class="fas fa-user fa-lg"></i>
-			</a>
-			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="Log-in.jsp"onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fas fa-sign-out-alt"></i> Log out</a>
-			</div>
-		</li>
-	</ul>
-</nav>
+                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+                <ul class="navbar-nav ml-auto">
+                    <!-- Accessibility !-->
+                    <li class="nav-item dropdown" style="padding-right: 10px">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="fas fa-universal-access fa-lg"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#" onclick=resizeText(1)><i class="fas fa-text-height fa-2x"></i>
+                                Increase text size</a>
+                            <a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
+                                Decrease text size</a>
+                            <a class="dropdown-item" href="listExams.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
+                        </div>
+                    </li>
+                    <!-- Notifications !-->
+                    <li class="nav-item dropdown" style="padding-right: 10px">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="fas fa-bell fa-lg"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
+                        </div>
+                    </li>
+                    <!-- User !-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="fas fa-user fa-lg"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Log-in.jsp"onclick=" if (confirm('Are you sure you want to log out?')) {
+                                            deleteAllCookies();
+                                        }"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
         <%
@@ -185,23 +187,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
 
@@ -257,23 +259,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = String.valueOf(rs.getInt("exam_pk"));
                         %>
@@ -328,23 +330,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
                         %>
@@ -400,23 +402,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
                         %>
@@ -473,23 +475,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
 

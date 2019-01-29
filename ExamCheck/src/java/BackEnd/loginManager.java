@@ -38,7 +38,7 @@ public class loginManager extends HttpServlet {
 
         HttpSession spoons = request.getSession();
         spoons.setAttribute("email", email);
-
+        
         Database db = new Database();
 
         String loginResults = db.checkLogin(email, password);

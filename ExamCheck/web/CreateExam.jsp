@@ -44,7 +44,7 @@
                 document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
             }
         </script>
-       
+
         <%
             HttpSession spoons = request.getSession();
             String username = (String) spoons.getAttribute("email");
@@ -63,7 +63,7 @@
                             Increase text size</a>
                         <a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
                             Decrease text size</a>
-                        <a class="dropdown-item" href="index.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
+                        <a class="dropdown-item" href="CreateExam.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
                     </div>
                 </li>
                 <!-- Notifications !-->

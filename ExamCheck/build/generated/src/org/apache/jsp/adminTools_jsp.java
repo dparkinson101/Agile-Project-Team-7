@@ -43,32 +43,32 @@ public final class adminTools_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<!DOCTYPE html>\r\n");
-      out.write("<html>\r\n");
-      out.write("    <head>\r\n");
-      out.write("\r\n");
-      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
-      out.write("        <title>JSP Page</title>\r\n");
-      out.write("\r\n");
-      out.write("        <style>\r\n");
-      out.write("            table, th, td {\r\n");
-      out.write("                border: 1px solid black;\r\n");
-      out.write("                border-collapse: collapse;\r\n");
-      out.write("            }\r\n");
-      out.write("        </style>\r\n");
-      out.write("    </head>\r\n");
-      out.write("    <body>\r\n");
-      out.write("        <table style=\"width:60%\">\r\n");
-      out.write("            <tr>\r\n");
-      out.write("                <th>Exam Setter</th>\r\n");
-      out.write("                <th>Internal Moderator</th> \r\n");
-      out.write("                <th>Exam Vetting Comittee</th>\r\n");
-      out.write("                <th>External Moderator</th>\r\n");
-      out.write("            </tr>\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
+      out.write("        <title>JSP Page</title>\n");
+      out.write("\n");
+      out.write("        <style>\n");
+      out.write("            table, th, td {\n");
+      out.write("                border: 1px solid black;\n");
+      out.write("                border-collapse: collapse;\n");
+      out.write("            }\n");
+      out.write("        </style>\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("        <table style=\"width:60%\">\n");
+      out.write("            <tr>\n");
+      out.write("                <th>Exam Setter</th>\n");
+      out.write("                <th>Internal Moderator</th> \n");
+      out.write("                <th>Exam Vetting Comittee</th>\n");
+      out.write("                <th>External Moderator</th>\n");
+      out.write("            </tr>\n");
       out.write("                                ");
 
         Database db = new Database();
@@ -94,33 +94,33 @@ public final class adminTools_jsp extends org.apache.jasper.runtime.HttpJspBase
 
         
         
-      out.write("\r\n");
-      out.write("            <tr>\r\n");
+      out.write("\n");
+      out.write("            <tr>\n");
       out.write("                <td align=\"center\" height=\"60\" bgcolor=");
 out.print(colourSet);
       out.write('>');
  out.print(mc); 
-      out.write("\r\n");
-      out.write("                        \r\n");
-      out.write("                            <br>\r\n");
+      out.write("\n");
+      out.write("                        \n");
+      out.write("                            <br>\n");
       out.write("                            ");
 
                                 out.print(examSetter);
                             
-      out.write(" \r\n");
-      out.write("\r\n");
-      out.write("                </td>\r\n");
+      out.write(" \n");
+      out.write("\n");
+      out.write("                </td>\n");
       out.write("                <td align=\"center\" bgcolor=");
 out.print(colourInt);
-      out.write(">Smith\r\n");
+      out.write(">Smith\n");
       out.write("                    ");
 
                         if(!colourInt.equals("green")){
                     
-      out.write("\r\n");
-      out.write("                    <br>\r\n");
-      out.write("                    <form action=\"adminTools.jsp\">\r\n");
-      out.write("                            <select name=\"Examiner\">\r\n");
+      out.write("\n");
+      out.write("                    <br>\n");
+      out.write("                    <form action=\"adminTools.jsp\">\n");
+      out.write("                            <select name=\"Examiner\">\n");
       out.write("                            ");
 
                                 ResultSet ur = db.list_all_internal_modderators_username();                                
@@ -128,37 +128,37 @@ out.print(colourInt);
                                     ur.next();
                                     String user = ur.getString("username");
                             
-      out.write("\r\n");
+      out.write("\n");
       out.write("                            <option value=");
 out.print(user);
       out.write('>');
 out.print(user);
-      out.write("</option>\r\n");
+      out.write("</option>\n");
       out.write("                            ");
 
                                 }
                             
-      out.write("\r\n");
-      out.write("                            </select>\r\n");
-      out.write("                            <input type=\"submit\">\r\n");
-      out.write("                        </form>                     \r\n");
+      out.write("\n");
+      out.write("                            </select>\n");
+      out.write("                            <input type=\"submit\">\n");
+      out.write("                        </form>                     \n");
       out.write("                    ");
 
                         }
                     
-      out.write("\r\n");
-      out.write("                </td> \r\n");
+      out.write("\n");
+      out.write("                </td> \n");
       out.write("                <td align=\"center\" bgcolor=");
 out.print(colourVet);
-      out.write(">50\r\n");
+      out.write(">50\n");
       out.write("                    ");
 
                         if(!colourVet.equals("green")){
                     
-      out.write("\r\n");
-      out.write("                    <br>\r\n");
-      out.write("                    <form action=\"adminTools.jsp\">\r\n");
-      out.write("                            <select name=\"Examiner\">\r\n");
+      out.write("\n");
+      out.write("                    <br>\n");
+      out.write("                    <form action=\"adminTools.jsp\">\n");
+      out.write("                            <select name=\"Examiner\">\n");
       out.write("                            ");
 
                                 ResultSet ur = db.list_all_exam_vetting_commitey_username();                                
@@ -166,37 +166,37 @@ out.print(colourVet);
                                     ur.next();
                                     String user = ur.getString("username");
                             
-      out.write("\r\n");
+      out.write("\n");
       out.write("                            <option value=");
 out.print(user);
       out.write('>');
 out.print(user);
-      out.write("</option>\r\n");
+      out.write("</option>\n");
       out.write("                            ");
 
                                 }
                             
-      out.write("\r\n");
-      out.write("                            </select>\r\n");
-      out.write("                            <input type=\"submit\">\r\n");
-      out.write("                        </form>                        \r\n");
+      out.write("\n");
+      out.write("                            </select>\n");
+      out.write("                            <input type=\"submit\">\n");
+      out.write("                        </form>                        \n");
       out.write("                    ");
 
                         }
                     
-      out.write("\r\n");
-      out.write("                </td>\r\n");
+      out.write("\n");
+      out.write("                </td>\n");
       out.write("                <td align=\"center\" bgcolor=");
 out.print(colourExt);
-      out.write(">Cart\r\n");
+      out.write(">Cart\n");
       out.write("                    ");
 
                         if(!colourExt.equals("green")){
                     
-      out.write("\r\n");
-      out.write("                    <br>\r\n");
-      out.write("                    <form action=\"adminTools.jsp\">\r\n");
-      out.write("                            <select name=\"Examiner\">\r\n");
+      out.write("\n");
+      out.write("                    <br>\n");
+      out.write("                    <form action=\"adminTools.jsp\">\n");
+      out.write("                            <select name=\"Examiner\">\n");
       out.write("                            ");
 
                                 ResultSet ur = db.list_all_external_examiners_username();                                
@@ -204,35 +204,35 @@ out.print(colourExt);
                                     ur.next();
                                     String user = ur.getString("username");
                             
-      out.write("\r\n");
+      out.write("\n");
       out.write("                            <option value=");
 out.print(user);
       out.write('>');
 out.print(user);
-      out.write("</option>\r\n");
+      out.write("</option>\n");
       out.write("                            ");
 
                                 }
                             
-      out.write("\r\n");
-      out.write("                            </select>\r\n");
-      out.write("                            <input type=\"submit\">\r\n");
-      out.write("                        </form>                        \r\n");
+      out.write("\n");
+      out.write("                            </select>\n");
+      out.write("                            <input type=\"submit\">\n");
+      out.write("                        </form>                        \n");
       out.write("                    ");
 
                         }
                     
-      out.write("\r\n");
-      out.write("                </td>\r\n");
-      out.write("            </tr>\r\n");
+      out.write("\n");
+      out.write("                </td>\n");
+      out.write("            </tr>\n");
       out.write("            ");
 
                 }
             
-      out.write("\r\n");
-      out.write("        </table>\r\n");
-      out.write("    </body>\r\n");
-      out.write("</html>\r\n");
+      out.write("\n");
+      out.write("        </table>\n");
+      out.write("    </body>\n");
+      out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

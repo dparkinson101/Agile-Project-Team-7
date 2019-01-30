@@ -119,7 +119,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             String sql = "update exams set internal_moderator_int_mod_pk=2 where exam_pk=" + pk + ";";
-            this.updatelog("exam :"+pk+" was internal modderated and approved");
+            //this.updatelog("exam :"+pk+" was internal modderated and approved");
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -142,7 +142,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
-            this.updatelog("exam :"+pk+" was moved externally modderated and approved");
+            //this.updatelog("exam :"+pk+" was moved externally modderated and approved");
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -165,7 +165,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             String sql = "update exams set External_Examiner_ext_exam_pk=2 where exam_pk = " + pk + ";";
-            this.updatelog("exam :"+pk+" has been approved the school office can now download the exam");
+            //this.updatelog("exam :"+pk+" has been approved the school office can now download the exam");
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -201,7 +201,7 @@ public class Database {
         try {
             Statement state = conn.createStatement();
             // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
-            this.updatelog("exam :"+pk+" has been commented on :"+comments +"by :" +getusername(pk));
+            //this.updatelog("exam :"+pk+" has been commented on :"+comments +"by :" +getusername(pk));
             String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk + pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
             state.executeUpdate(sql);
 
@@ -256,13 +256,13 @@ public class Database {
 
             if (Arrays.equals(passwordHash, saltedHash) && user_pk != null) {
                 System.out.println("User: " + username + " Logged in successfully!");
-                this.updatelog(username+"logged in");
+                //this.updatelog(username+"logged in");
                 System.out.println("UserPK: " + user_pk);
 
                 return user_pk;
             } else {
                 System.out.println("User: " + username + " Log in failed!");
-                this.updatelog("a login was attempted for the user :"+username);
+                //this.updatelog("a login was attempted for the user :"+username);
                 return null;
             }
 

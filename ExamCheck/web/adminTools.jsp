@@ -26,6 +26,9 @@
     Security secure = new Security();
     try {
         Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permissionsObject == null){
+            throw new NullPointerException("Error: Null Permissions Object Returned");
+        }
     } catch (Exception e) {
         System.out.println("Error Getting Permissions Object: Session Variable may have changed.");
         System.out.println("Loggin Possible Tampering Detected With Following Credentials:");

@@ -5,6 +5,8 @@
   Time: 14:51
   To change this template use File | Settings | File Templates.
 --%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.lang.Exception"%>
 <%@page import="BackEnd.Permissions"%>
 <%@page import="BackEnd.Security"%>
 <%@page import="java.sql.ResultSet"%>
@@ -43,13 +45,22 @@
     Security secure = new Security();
     try{
         Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permissionsObject == null){
+            throw new NullPointerException("Error: Null Permissions Object Returned");
+        }
     }
-    catch(Exception e){
+    catch(NullPointerException e){
         System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        System.out.println("Error Getting Permissions Object: Session Variable may have changed.");
+        System.out.println("Loggin Possible Tampering Detected With Following Credentials:");
+        System.out.println(request.getRemoteAddr());
+        System.out.println(request.getRemoteHost());
+        System.out.println(request.getRemotePort());
+        System.out.println(request.getRequestedSessionId());
         request.changeSessionId();
         
         //Deletes Cookies
-        for(Cookie c : request.getCookies()){
+        for(Cookie c : cookies){
             Cookie cookie = new Cookie(c.getName(), "");
             cookie.setMaxAge(0);
             response.addCookie(cookie);

@@ -57,18 +57,18 @@
                 <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
                 <div class="form-group">
                     <label for="email" class="sr-only">Email address or Username</label>
-                    <input type="text" name="email" class="form-control" placeholder="Email" required="required">
+                    <input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
                 <%
                     Cookie[] cookies = request.getCookies();
                     for (Cookie c : cookies) {
                         if (c.getName().equals("login")) {
                             if (c.getValue().equals("false")) {
-                                out.println("<p class='text-danger text-center'> Incorrect Login Credentials <br> Please try again</p>");
+                                out.println("<p class='text-danger text-center'> Incorrect Login Credentials, <br> Please try again</p>");
                             }
                         }
                     }

@@ -15,27 +15,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-        <style type="text/css">
+        <style>
+            html,
+            body {
+                height: 100%;
+            }
+
+            body {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-color: #f5f5f5;
+            }
+
             .login-form {
-                width: 340px;
-                margin: 50px auto;
-            }
-            .login-form form {
-                margin-bottom: 15px;
-                background: #f7f7f7;
-                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-                padding: 30px;
-            }
-            .login-form h2 {
-                margin: 0 0 15px;
-            }
-            .form-control, .btn {
-                min-height: 38px;
-                border-radius: 2px;
-            }
-            .btn {        
-                font-size: 15px;
-                font-weight: bold;
+                width: 100%;
+                max-width: 400px;
+                padding: 15px;
+                margin: auto;
             }
         </style>
         <script>
@@ -50,14 +50,17 @@
             }
         </script>
     </head>
-    <body>
-        <div class="login-form">
-            <form action="loginManager" method="post">
-                <h2 class="text-center">Log in</h2>       
+    <body class="text-center">
+        <div class="container">
+            <form class="login-form" action="loginManager" method="post">
+                <h1 class="mb-4">🐦</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
                 <div class="form-group">
+                    <label for="email" class="sr-only">Email address or Username</label>
                     <input type="text" name="email" class="form-control" placeholder="Email" required="required">
                 </div>
                 <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password" required="required">
                 </div>
                 <%
@@ -71,13 +74,16 @@
                     }
                 %>
                 <div class="form-group">
-                    <button type="submit" onclick="deleteAllCookies()" class="btn btn-primary btn-block">Log in</button>
+                    <button type="submit" onclick="deleteAllCookies()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </div>
-                <div class="clearfix">
-                    <a href="#" class="pull-right">Forgot Password?</a>
-                </div>        
+                <div class="form-group">
+                    <a href="createAccount.jsp" class="text-dark text-left" style="float: left;">Create an account</a>
+                    <a href="#" class="text-dark text-right float-right" style="float: right;">Forgot password?</a>
+                    <div class="clearfix"></div>
+                </div>
+                <hr>
+                <span class="mt-5 mb-3 text-muted">Dundee Computing Examination Board</span>
             </form>
-            <p class="text-center"><a href="/ExamCheck/createAccount.jsp">Create an Account</a></p>
         </div>
     </body>
 </html>

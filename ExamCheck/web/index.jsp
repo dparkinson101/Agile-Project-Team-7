@@ -58,6 +58,7 @@
         
         response.sendRedirect("Log-in.jsp");
     }
+    
 %>
 
 <html>

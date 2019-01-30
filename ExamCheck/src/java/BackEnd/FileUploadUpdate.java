@@ -27,7 +27,7 @@ import javax.servlet.http.Cookie;
  * @author matthewmcneil
  */
 @MultipartConfig
-public class FileUpload extends HttpServlet {
+public class FileUploadUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +45,7 @@ public class FileUpload extends HttpServlet {
         //get inputs
         //InputStream fileContent = filePart.getInputStream();
         Part filePart = request.getPart("fileToUpload");
-        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
 
         String docType = filePart.getSubmittedFileName();
@@ -54,54 +54,19 @@ public class FileUpload extends HttpServlet {
             docType = docType.substring(i + 1);
         }
 
-        //String filePath = request.getParameter("fileToUpload");
-        String moduleCode = request.getParameter("moduleCode");
-        String moduleTitle = request.getParameter("moduleTitle");
-        String examType = request.getParameter("examType");
-        String examChoice = request.getParameter("examChoice");
-        String examLevel = request.getParameter("examLevel");
+        String examPK = request.getParameter("examPK");
 
-        //out.println(filePath);
-        out.println(moduleCode);
-        out.println(moduleTitle);
-        out.println(examType);
-        out.println(examChoice);
-        out.println(examLevel);
+        out.println(examPK);
         out.println(docType);
 
         //Connect to database
         Database db = new Database();
         db.connect();
-        int examPK = db.exam_rows();
-        out.println(examPK);
 
-        //
-        //InputStream inputStream = new FileInputStream(new File(filePath));
-        //out.println(inputStream);
-        //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
-        db.blobin(fileContent, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", Integer.toString(examPK), docType);
-        out.println("end");
-        response.sendRedirect("index.jsp");
+        db.updateblob(fileContent, docType, examPK);
+        out.println("File Uploaded Successfully");
 
-        try (PrintWriter out = response.getWriter()) {
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset=\"utf-8\">");
-            out.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
-            out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-            out.println("<meta name=\"description\" content=\"\">");
-            out.println("<meta name=\"author\" content=\"\">");
-            out.println("<title>Servlet createAccount</title>");
-            out.println("<link href=\"vendor/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">");
-            out.println("<link href=\"dist/css/DCEC.css\" rel=\"stylesheet\">");
-            out.println("<link href=\"vendor/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">");
-            out.println("File passed");
-            out.println("</head>");
-            out.println("</html>");
-        }
-    }
+        response.sendRedirect("/ExamCheck/listExams.jsp");    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

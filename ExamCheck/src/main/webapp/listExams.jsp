@@ -43,15 +43,12 @@
         <meta name="The Mighty Morphin' Matthew Rangers" content="">
 
         <title>Exams</title>
-
+        <!-- Jquery !-->
+        <script src="vendor/jquery/jquery.min.js"></script>
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="dist/css/DCEC.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- FONT AWESOME !-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -114,63 +111,45 @@
         <div id="wrapper">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="Admin.jsp">Dundee Computing Examination Board</a>
-                </div>
-                <!-- /.navbar-header -->
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- Accessibility -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-universal-access fa-fw"></i> <i class="fa fa-caret-down"></i>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+                <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+                <ul class="navbar-nav ml-auto">
+                    <!-- Accessibility !-->
+                    <li class="nav-item dropdown" style="padding-right: 10px">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="fas fa-universal-access fa-lg"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-access">
-                            <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
-                            <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
-                            <li><a href="Admin.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#" onclick=resizeText(1)><i class="fas fa-text-height fa-2x"></i>
+                                Increase text size</a>
+                            <a class="dropdown-item" href="#" onclick=resizeText(-1)><i class="fas fa-text-height fa-fw"></i>
+                                Decrease text size</a>
+                            <a class="dropdown-item" href="listExams.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
+                        </div>
                     </li>
-                    <!-- Alerts Dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <!-- Notifications !-->
+                    <li class="nav-item dropdown" style="padding-right: 10px">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="fas fa-bell fa-lg"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> No New Comments
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
+                        </div>
                     </li>
-                    <!-- User Dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <!-- User !-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="fas fa-user fa-lg"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Log-in.jsp"onclick=" if (confirm('Are you sure you want to log out?')) {
+                                        deleteAllCookies();
+                                    }"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        </div>
                     </li>
                 </ul>
-                <!-- Top Links -->
-
-                <!-- /.navbar-static-side -->
             </nav>
         </div>
 
@@ -208,23 +187,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
 
@@ -252,6 +231,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=0>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -279,23 +259,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = String.valueOf(rs.getInt("exam_pk"));
                         %>
@@ -322,6 +302,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=1>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -349,23 +330,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
                         %>
@@ -392,6 +373,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=2>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -420,23 +402,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
                         %>
@@ -463,6 +445,7 @@
                             </form>
                             <form id="comment<%= pk%>" action="AddComments" method="post">
                                 <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=3>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                             </form>
@@ -492,23 +475,23 @@
                                     String mc = rs.getString("module_code");
                                     String title = rs.getString("title");
                                     String onlineorpaper;
-                                    if("0".equals(rs.getString("online_or_paper"))){
-                                      onlineorpaper = "Online Exam";
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
                                     } else {
-                                      onlineorpaper = "Written Exam";
+                                        onlineorpaper = "Written Exam";
                                     }
                                     String resit;
-                                    if("0".equals(rs.getString("resit"))){
-                                      resit = "Main Exam";
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
                                     } else {
-                                      resit = "Resit Exam";
+                                        resit = "Resit Exam";
                                     }
                                     String exam = rs.getString("exam");
                                     String grade;
-                                    if("0".equals(rs.getString("grade"))){
-                                      grade = "Undergraduate Exam";
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
                                     } else {
-                                      grade = "Postgraduate Exam";
+                                        grade = "Postgraduate Exam";
                                     }
                                     String pk = rs.getString("exam_pk");
 

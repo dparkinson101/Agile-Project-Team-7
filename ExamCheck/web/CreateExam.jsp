@@ -1,7 +1,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page import="BackEnd.Database" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,15 +15,13 @@
 
         <title>Create An Exam</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-        <!-- Custom CSS -->
-        <link href="dist/css/DCEC.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- JQUERY !-->
+        <script src="./vendor/jquery/jquery.min.js"></script>
+        <!-- BOOTSTRAP !-->
+        <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+        <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- FONT AWESOME !-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +29,6 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
     </head>
 
     <body>
@@ -90,54 +87,87 @@
                 </li>
             </ul>
         </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Create a new Exam</h1>
+        <br><br><br><br><br>
+        <div class="container">
+            <form action="FileUpload" method="POST" id="examDetails" enctype="multipart/form-data" class="form-upload align-content-center text-center">
+                <h1 class="text-center">🐱‍👓</h1>
+                <h1 class="h1 font-weight-normal">Create a new Exam</h1>
+                <div class="form-group w-50 mx-auto">
+                    <label for="moduleCode">Module code</label>
+                    <input type="text" name="moduleCode" id="modCode" class="form-control" required>
+                    <label for="moduleTitle">Module title</label>
+                    <input type="text" name="moduleTitle" id="modTitle" class="form-control" required>
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
-
-
-            <form action="FileUpload" method="post" id="examDetails" enctype="multipart/form-data">
-                Module Code: <br>
-                <input type="text" name="moduleCode" id="modCode"><br><br>
-                Module Title: <br>
-                <input type="text" name="moduleTitle" id="modTitle"><br><br>
-                <br>
-                <input type="radio" name="examType" value="0" id="onlineRad"> Online<br> <!-- 0=Online 1=Written -->
-                <input type="radio" name="examType" value="1" id="writtenRad"> Written<br>
-                <br>
-                <input type="radio" name="examChoice" value="0" id="mainRad"> Main Exam<br> <!-- 0=Main Exam 1=Resit Exam -->
-                <input type="radio" name="examChoice" value="1" id="resitRad"> Resit Exam<br>
-                <br>
-                <input type="radio" name="examLevel" value="0" id="UndergradRad"> Undergrad Exam<br> <!-- 0=Undergrad 1=Postgrad -->
-                <input type="radio" name="examLevel" value="1" id="PostgradRad"> Postgrad Exam<br>
-                <br>
-                <br>
-                Select a file to upload: <br><br>
-                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                <br>
-                <button type="submit" form="examDetails" value="submit">Submit Exam</button>
+                <div class="form-group w-50 mx-auto">
+                    <label for="examChoice">Exam Options</label>
+                    <select class="custom-select" name="examChoice">
+                        <option selected>Main exam</option>
+                        <option>Resit</option>
+                    </select>
+                </div>
+                <div class="form-group w-50 mx-auto">
+                    <label for="examType" class="sr-only">Exam type</label>
+                    <select class="custom-select" name="examType">
+                        <option selected>Online</option>
+                        <option>Written</option>
+                    </select>
+                </div>
+                <div class="form-group w-50 mx-auto">
+                    <label for="examLevel" class="sr-only">Exam type</label>
+                    <select class="custom-select" name="ExamLevel">
+                        <option selected>Undergraduate</option>
+                        <option>Postgraduate</option>
+                    </select>
+                </div>
+                <div class="form-group w-50 mx-auto">
+                    <label for="fileToUpload">Select a file to upload:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="fileToUpload" name="fileToUpload" accept=".docx, .pdf">
+                            <label class="custom-file-label text-left" for="fileToUpload"></label>
+                        </div>
+                    </div>
+                    <script>
+                        $('input[type="file"]').change(function (e) {
+                            var fileName = e.target.files[0].name;
+                            $('.custom-file-label').html(fileName);
+                        });
+                    </script>
+                </div>
+                <button type="submit" form="examDetails" value="submit" class="btn btn-block btn-success w-25 mx-auto">Assign</button>
             </form>
-
-            <br>
-            <br>      
-            <br>
-            <br>
-            <a href="index.jsp">Return to Homepage</a>
-
-            <!-- jQuery -->
-            <script src="vendor/jquery/jquery.min.js"></script>
-
-            <!-- Bootstrap Core JavaScript -->
-            <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-
-            <!-- Custom Theme JavaScript -->
-            <script src="dist/js/DCEC.js"></script>
         </div>
+
+        <!--            <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Create a new Exam</h1>
+                        </div>
+                         /.col-lg-12 
+                    </div>
+                    <form action="FileUpload" method="post" id="examDetails" enctype="multipart/form-data">
+                        Module Code: <br>
+                        <input type="text" name="moduleCode" id="modCode"><br><br>
+                        Module Title: <br>
+                        <input type="text" name="moduleTitle" id="modTitle"><br><br>
+                        <br>
+                        <input type="radio" name="examType" value="0" id="onlineRad"> Online<br>  0=Online 1=Written 
+                        <input type="radio" name="examType" value="1" id="writtenRad"> Written<br>
+                        <br>
+                        <input type="radio" name="examChoice" value="0" id="mainRad"> Main Exam<br>  0=Main Exam 1=Resit Exam 
+                        <input type="radio" name="examChoice" value="1" id="resitRad"> Resit Exam<br>
+                        <br>
+                        <input type="radio" name="examLevel" value="0" id="UndergradRad"> Undergrad Exam<br>  0=Undergrad 1=Postgrad 
+                        <input type="radio" name="examLevel" value="1" id="PostgradRad"> Postgrad Exam<br>
+                        <br>
+                        <br>
+                        Select a file to upload: <br><br>
+                        <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                        <br>
+                        <button type="submit" form="examDetails" value="submit">Submit Exam</button>
+                    </form>-->
     </div>
 </body>
 </html>

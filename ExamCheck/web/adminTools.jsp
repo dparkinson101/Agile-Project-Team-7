@@ -60,9 +60,12 @@
                         <form action="adminTools.jsp">
                             <select name="Examiner">
                             <%
+                                ResultSet ur = db.list_all_usernames();
                                 for (int j = 0; j < db.gettotalnumberofusers(); j++){
+                                    ur.next();
+                                    String user = ur.getString("username");
                             %>
-                                <option value="lecturer">Lecturer</option>
+                            <option value=<%out.print(user);%>><%out.print(user);%></option>
                             <%
                                 }
                             %>

@@ -326,7 +326,7 @@ public class Database {
         }
         return null;
     }
-  public ResultSet list_all_usernames(String pk) {
+  public ResultSet list_all_usernames() {
         try {
             String sql = "select username from users ;";
             Statement state = conn.createStatement();

@@ -159,7 +159,7 @@
 					<h4 class="card-title">Add new user</h4>
 				</div>
 				<div class="card-body">
-					<form id="newUser">
+					<form id="newUser" action="">
 						<div class="form-group">
 							<label for="firstName">First name(s)</label>
 							<input type="text" class="form-control" id="firstName" required>
@@ -176,7 +176,14 @@
 							<label for="password">Password</label>
 							<input type="password" class="form-control" id="password" required>
 						</div>
-						<br>
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="Exam Setter" value="1" id="Setter"> Exam Setter<br>
+                                                    <input type="checkbox" name="Internal Moderator" value="1" id="IntMod"> Internal Moderator<br>
+                                                    <input type="checkbox" name="Exam Vet" value="1" id="Vetting"> Exam Vetting Comittee<br>
+                                                    <input type="checkbox" name="External Moderator" value="1" id="ExtMod"> External Moderator<br>
+                                                    <input type="checkbox" name="SchoolOffice" value="1" id="Office"> School Office<br>
+                                                </div>
+						
 						<button type="submit" class="btn btn-block btn-success">Submit</button>
 					</form>
 				</div>
@@ -192,6 +199,7 @@
 					<form id="assignUser">
 						<div class="form-group">
 							<label for="role">Role</label>
+							
 							<select class="custom-select" id="role">
 								<option selected>Select role</option>
 								<option>Internal Moderator</option>

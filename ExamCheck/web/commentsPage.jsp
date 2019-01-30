@@ -3,6 +3,8 @@
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
 --%>
+<%@page import="BackEnd.Permissions"%>
+<%@page import="BackEnd.Security"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

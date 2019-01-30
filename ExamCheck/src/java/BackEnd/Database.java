@@ -629,13 +629,131 @@ public class Database {
     
     
     
+     public  String colour1(String pk) {    
+         
+            try {
+            Statement state = conn.createStatement();
+            String sql = "select * from exams where exam_pk = "+pk+";";
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            String res =  rs.getString("exam_setter_lect_pk");
+            if (res.equals("1") ){            
+            return "red";
+            }  else  if (res.equals("2") ){            
+            return "green";
+            }               
+            else {return "yellow";} 
+          
+        } catch (SQLException ex) {
+        }         
+         return"grey";
+             }
+     
+         public  String colour2(String pk) {    
+         
+            try {
+            Statement state = conn.createStatement();
+            String sql = "select * from exams where exam_pk = "+pk+";";
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            String res =  rs.getString("internal_moderator_int_mod_pk");
+            if (res.equals("1") ){            
+            return "red";
+            }  else  if (res.equals("2") ){            
+            return "green";
+            }               
+            else {return "yellow";} 
+          
+        } catch (SQLException ex) {
+        }         
+         return"grey";
+             }
     
     
     
+         public  String colour3(String pk) {    
+         
+            try {
+            Statement state = conn.createStatement();
+            String sql = "select * from exams where exam_pk = "+pk+";";
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            String res =  rs.getString("External_Examiner_ext_exam_pk");
+            if (res.equals("1") ){            
+            return "red";
+            }  else  if (res.equals("2") ){            
+            return "green";
+            }               
+            else {return "yellow";} 
+          
+        } catch (SQLException ex) {
+        }         
+         return"grey";
+             }
     
-    
-    
-    
+         
+         
+         
+         
+         
+         
+         
+         public  String colour4(String pk) {    
+         
+            try {
+            Statement state = conn.createStatement();
+            String sql = "select * from exams where exam_pk = "+pk+";";
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            String res =  rs.getString("ExmVetComit_exmVet_pk");
+            if (res.equals("1") ){            
+            return "red";
+            }  else  if (res.equals("2") ){            
+            return "green";
+            }               
+            else {return "yellow";} 
+          
+        } catch (SQLException ex) {
+        }         
+         return"grey";
+             }
+         
+         
+         
+         
+         
+         public  int  gettotalnumberofusers() {
+
+        try {
+
+            Statement state = conn.createStatement();
+
+            String sql = "select count(*) from users;";
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException ex) {
+
+          
+        return -1;
+        }
+    }
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
         public  int  gettotalnumberofexams() {
 
         try {

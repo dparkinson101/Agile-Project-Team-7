@@ -42,6 +42,7 @@
         String mc = rs.getString("module_code");
                 
         String pk = rs.getString("exam_pk");
+        String examSetter = rs.getString("exam_setter_lect_pk");
         String colourSet= db.colour1(pk);
         String colourInt= db.colour2(pk);
         String colourVet=db.colour3(pk);             
@@ -53,15 +54,23 @@
         %>
             <tr>
                 <td align="center" height="60" bgcolor=<%out.print(colourSet);%>><% out.print(mc); %>
-                        <%
-                            if(!colourSet.equals("green")){
-                        %>
-                        <br>
-                        <form action="adminTools.jsp">
+                        
+                            <br>
+                            <%
+                                out.print(examSetter);
+                            %> 
+
+                </td>
+                <td align="center" bgcolor=<%out.print(colourInt);%>>Smith
+                    <%
+                        if(!colourInt.equals("green")){
+                    %>
+                    <br>
+                    <form action="adminTools.jsp">
                             <select name="Examiner">
                             <%
-                                ResultSet ur = db.list_all_usernames();
-                                for (int j = 0; j < db.gettotalnumberofusers(); j++){
+                                ResultSet ur = db.list_all_internal_modderators_username();                                
+                                for (int j = 0; j < 1; j++){
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
@@ -71,17 +80,7 @@
                             %>
                             </select>
                             <input type="submit">
-                        </form>                    
-                    <%
-                        }
-                    %>
-                </td>
-                <td align="center" bgcolor=<%out.print(colourInt);%>>Smith
-                    <%
-                        if(!colourInt.equals("green")){
-                    %>
-                    <br>
-                    <button>Submit</button>                    
+                        </form>                     
                     <%
                         }
                     %>
@@ -91,7 +90,21 @@
                         if(!colourVet.equals("green")){
                     %>
                     <br>
-                    <button>Submit</button>                    
+                    <form action="adminTools.jsp">
+                            <select name="Examiner">
+                            <%
+                                ResultSet ur = db.list_all_exam_vetting_commitey_username();                                
+                                for (int j = 0; j < 1; j++){
+                                    ur.next();
+                                    String user = ur.getString("username");
+                            %>
+                            <option value=<%out.print(user);%>><%out.print(user);%></option>
+                            <%
+                                }
+                            %>
+                            </select>
+                            <input type="submit">
+                        </form>                        
                     <%
                         }
                     %>
@@ -101,7 +114,21 @@
                         if(!colourExt.equals("green")){
                     %>
                     <br>
-                    <button>Submit</button>                    
+                    <form action="adminTools.jsp">
+                            <select name="Examiner">
+                            <%
+                                ResultSet ur = db.list_all_external_examiners_username();                                
+                                for (int j = 0; j < 1; j++){
+                                    ur.next();
+                                    String user = ur.getString("username");
+                            %>
+                            <option value=<%out.print(user);%>><%out.print(user);%></option>
+                            <%
+                                }
+                            %>
+                            </select>
+                            <input type="submit">
+                        </form>                        
                     <%
                         }
                     %>

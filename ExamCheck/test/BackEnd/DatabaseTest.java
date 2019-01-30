@@ -374,6 +374,102 @@ public class DatabaseTest {
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of close method, of class Database.
+     */
+    @Test
+    public void testClose() {
+        System.out.println("close");
+        Database instance = new Database();
+        instance.close();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of movetoexamvettingcommite method, of class Database.
+     */
+    @Test
+    public void testMovetoexamvettingcommite() {
+        System.out.println("movetoexamvettingcommite");
+        String pk = "";
+        Database instance = new Database();
+        instance.movetoexamvettingcommite(pk);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of movetoexamvetexternalmodderator method, of class Database.
+     */
+    @Test
+    public void testMovetoexamvetexternalmodderator() {
+        System.out.println("movetoexamvetexternalmodderator");
+        String pk = "";
+        Database instance = new Database();
+        instance.movetoexamvetexternalmodderator(pk);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of finish_exam method, of class Database.
+     */
+    @Test
+    public void testFinish_exam() {
+        System.out.println("finish_exam");
+        String pk = "";
+        Database instance = new Database();
+        instance.finish_exam(pk);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of updateblob method, of class Database.
+     */
+    @Test
+    public void testUpdateblob() {
+        System.out.println("updateblob");
+        InputStream inputStream = null;
+        String docType = "";
+        String pk = "";
+        Database instance = new Database();
+        String expResult = "";
+        String result = instance.updateblob(inputStream, docType, pk);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of gettotalnumberofexams method, of class Database.
+     */
+    @Test
+    public void testGettotalnumberofexams() {
+        System.out.println("gettotalnumberofexams");
+        Database instance = new Database();
+        int expResult = 0;
+        int result = instance.gettotalnumberofexams();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getallexams method, of class Database.
+     */
+    @Test
+    public void testGetallexams() {
+        System.out.println("getallexams");
+        Database instance = new Database();
+        ResultSet expResult = null;
+        ResultSet result = instance.getallexams();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 
 
     

@@ -435,7 +435,7 @@ public class Database {
     
     
     
-          public String download_comments1(String pk) {
+          public String download_comments2(String pk) {
         try {
             String sql = "select commentssssss from comments where comments_pk ="+pk+" ;";
             Statement state = conn.createStatement();
@@ -451,7 +451,7 @@ public class Database {
         }
     }
           
-      public int exam_rows(String pk) {
+      public int exam_rows() {
         try {
             String sql = "select count(*) from exams;";
             Statement state = conn.createStatement();

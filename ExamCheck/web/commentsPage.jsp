@@ -173,7 +173,27 @@
                 <!-- /.navbar-static-side -->
             </nav>
         </div>
-
+                            <style>
+                                .borderComment
+                                {
+                                    border-style:solid;
+                                    border-color:#287EC7;
+                                    border-width:8px;
+                                }
+                            </style>
+         <form>
+                <div class="borderComment">
+                    <p>From Internal Moderator: </p>
+                    <p> (int mod message here)</p>
+                    </div>
+                <div class="borderComment">
+                    <!--<p> Comment here: </p><br> -->
+                    <textarea type="text" name="submitComment" value="Comment here" rows="4" cols="50">
+                    </textarea>
+                    <input type="submit" value="Reply" id="submitButton">          
+                </div>
+        </form>
+                            
 
 
     </body>

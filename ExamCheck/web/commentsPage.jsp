@@ -163,7 +163,9 @@
                             <li><a href="#"><i class="fa fa-user fa-fw"></i><% out.print(username);%></a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="Log-in.jsp" onclick=" if(confirm('Are you sure you want to log out?')){deleteAllCookies();}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="Log-in.jsp" onclick=" if (confirm('Are you sure you want to log out?')) {
+                                        deleteAllCookies();
+                                    }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>

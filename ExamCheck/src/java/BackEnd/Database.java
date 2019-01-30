@@ -5,7 +5,6 @@
  */
 package BackEnd;
 
-
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,8 +28,8 @@ public class Database {
     public Database() {
         conn = null;
     }
-    
-    public void close(){
+
+    public void close() {
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -44,7 +43,7 @@ public class Database {
      * current connection to the database.
      */
     public Connection connect() {
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
@@ -99,7 +98,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             state.executeUpdate(query);
-            
+
             return true;
         } catch (SQLException ex) {
             // handle any sql errors
@@ -133,11 +132,6 @@ public class Database {
 
     }
 
-    
-    
-    
-    
-    
     public void movetoexamvetexternalmodderator(String pk) {
 
         try {
@@ -226,29 +220,29 @@ public class Database {
     public String checkLogin(String username, String password) {
         try {
             this.connect();
-            if(username == null || password == null){
+            if (username == null || password == null) {
                 return null;
             }
-            
+
             String sql = "select user_pk, password, salt from users where username = '" + username + "';";
-            
-            if(conn == null){
+
+            if (conn == null) {
                 System.out.println("The connection is null");
             }
-            
+
             Statement state = conn.createStatement();
-            
+
             Base64.Decoder dec = Base64.getDecoder();
-            
+
             ResultSet rs = state.executeQuery(sql);
-            
-            if(rs == null){
+
+            if (rs == null) {
                 System.out.println("No Results for such credentials exist in the database.");
                 return null;
             }
-            
+
             rs.first();
-            
+
             byte[] salt = dec.decode(rs.getString("salt"));
             byte[] saltedHash = dec.decode(rs.getString("password"));
             byte[] passwordHash = null;
@@ -326,17 +320,13 @@ public class Database {
         }
         return null;
     }
-    
-    
-    
-    
-  public ResultSet list_all_examsetters_username() {
+
+    public ResultSet list_all_examsetters_username() {
         try {
             String sql = "SELECT users.username from users INNER JOIN exam_setter ON users.user_pk = exam_setter.lect_pk and users.user_pk !=1 and users.user_pk !=2;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
-            
 
             return rs;
 
@@ -347,14 +337,13 @@ public class Database {
         }
         return null;
     }
-  
+
     public ResultSet list_all_internal_modderators_username() {
         try {
             String sql = "SELECT users.username from users INNER JOIN internal_moderator ON users.user_pk = internal_moderator.int_mod_pk and users.user_pk !=1 and users.user_pk !=2;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
-            
 
             return rs;
 
@@ -365,17 +354,13 @@ public class Database {
         }
         return null;
     }
-  
-  
-  
-  
-  public ResultSet list_all_exam_vetting_commitey_username() {
+
+    public ResultSet list_all_exam_vetting_commitey_username() {
         try {
             String sql = "SELECT users.username from users INNER JOIN exmvetcomit ON users.user_pk = exmvetcomit.exmVet_pk and users.user_pk !=1 and users.user_pk !=2;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
-            
 
             return rs;
 
@@ -386,18 +371,13 @@ public class Database {
         }
         return null;
     }
-  
-  
-  
-  
-  
+
     public ResultSet list_all_external_examiners_username() {
         try {
             String sql = "SELECT users.username from users INNER JOIN external_examiner ON users.user_pk = external_examiner.ext_exam_pk and users.user_pk !=1 and users.user_pk !=2;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
-            
 
             return rs;
 
@@ -408,16 +388,7 @@ public class Database {
         }
         return null;
     }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
     /**
      *
      * @param pk
@@ -698,110 +669,95 @@ public class Database {
 
     }
 
-    
-    
-    
-    
-    
-    
-     public  String colour1(String pk) {    
-         
-            try {
+    public String colour1(String pk) {
+
+        try {
             Statement state = conn.createStatement();
-            String sql = "select * from exams where exam_pk = "+pk+";";
+            String sql = "select * from exams where exam_pk = " + pk + ";";
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-            String res =  rs.getString("exam_setter_lect_pk");
-            if (res.equals("1") ){            
-            return "red";
-            }  else  if (res.equals("2") ){            
-            return "green";
-            }               
-            else {return "yellow";} 
-          
+            String res = rs.getString("exam_setter_lect_pk");
+            if (res.equals("1")) {
+                return "red";
+            } else if (res.equals("2")) {
+                return "green";
+            } else {
+                return "yellow";
+            }
+
         } catch (SQLException ex) {
-        }         
-         return"grey";
-             }
-     
-         public  String colour2(String pk) {    
-         
-            try {
+        }
+        return "grey";
+    }
+
+    public String colour2(String pk) {
+
+        try {
             Statement state = conn.createStatement();
-            String sql = "select * from exams where exam_pk = "+pk+";";
+            String sql = "select * from exams where exam_pk = " + pk + ";";
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-            String res =  rs.getString("internal_moderator_int_mod_pk");
-            if (res.equals("1") ){            
-            return "red";
-            }  else  if (res.equals("2") ){            
-            return "green";
-            }               
-            else {return "yellow";} 
-          
+            String res = rs.getString("internal_moderator_int_mod_pk");
+            if (res.equals("1")) {
+                return "red";
+            } else if (res.equals("2")) {
+                return "green";
+            } else {
+                return "yellow";
+            }
+
         } catch (SQLException ex) {
-        }         
-         return"grey";
-             }
-    
-    
-    
-         public  String colour3(String pk) {    
-         
-            try {
+        }
+        return "grey";
+    }
+
+    public String colour3(String pk) {
+
+        try {
             Statement state = conn.createStatement();
-            String sql = "select * from exams where exam_pk = "+pk+";";
+            String sql = "select * from exams where exam_pk = " + pk + ";";
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-            String res =  rs.getString("External_Examiner_ext_exam_pk");
-            if (res.equals("1") ){            
-            return "red";
-            }  else  if (res.equals("2") ){            
-            return "green";
-            }               
-            else {return "yellow";} 
-          
+            String res = rs.getString("External_Examiner_ext_exam_pk");
+            if (res.equals("1")) {
+                return "red";
+            } else if (res.equals("2")) {
+                return "green";
+            } else {
+                return "yellow";
+            }
+
         } catch (SQLException ex) {
-        }         
-         return"grey";
-             }
-    
-         
-         
-         
-         
-         
-         
-         
-         public  String colour4(String pk) {    
-         
-            try {
+        }
+        return "grey";
+    }
+
+    public String colour4(String pk) {
+
+        try {
             Statement state = conn.createStatement();
-            String sql = "select * from exams where exam_pk = "+pk+";";
+            String sql = "select * from exams where exam_pk = " + pk + ";";
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-            String res =  rs.getString("ExmVetComit_exmVet_pk");
-            if (res.equals("1") ){            
-            return "red";
-            }  else  if (res.equals("2") ){            
-            return "green";
-            }               
-            else {return "yellow";} 
-          
+            String res = rs.getString("ExmVetComit_exmVet_pk");
+            if (res.equals("1")) {
+                return "red";
+            } else if (res.equals("2")) {
+                return "green";
+            } else {
+                return "yellow";
+            }
+
         } catch (SQLException ex) {
-        }         
-         return"grey";
-             }
-         
-         
-         
-         
-         
-         public  int  gettotalnumberofusers() {
+        }
+        return "grey";
+    }
+
+    public int gettotalnumberofusers() {
 
         try {
 
@@ -815,21 +771,11 @@ public class Database {
             return rs.getInt(1);
         } catch (SQLException ex) {
 
-          
-        return -1;
+            return -1;
         }
     }
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-        public  int  gettotalnumberofexams() {
+
+    public int gettotalnumberofexams() {
 
         try {
 
@@ -843,14 +789,12 @@ public class Database {
             return rs.getInt(1);
         } catch (SQLException ex) {
 
-          
-        return -1;
+            return -1;
         }
 
     }
 
-    
-       public ResultSet getallexams() {
+    public ResultSet getallexams() {
         try {
             String sql = "select * from exams ;";
             Statement state = conn.createStatement();
@@ -860,29 +804,7 @@ public class Database {
             return null;
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      *
      * @param pk

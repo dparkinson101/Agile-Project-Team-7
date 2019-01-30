@@ -38,9 +38,9 @@
             }
         }
     }
-
+    
     sessionVar = request.getSession().getId();
-
+    
     Security secure = new Security();
     try{
         Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
@@ -48,12 +48,14 @@
     catch(Exception e){
         System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
         request.changeSessionId();
-
-        //Deletes Login Cookie
-        Cookie secretClass = new Cookie("secretClass", "");
-        secretClass.setMaxAge(0);
-        response.addCookie(secretClass);
-
+        
+        //Deletes Cookies
+        for(Cookie c : request.getCookies()){
+            Cookie cookie = new Cookie(c.getName(), "");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        
         response.sendRedirect("Log-in.jsp");
     }
 %>
@@ -77,35 +79,22 @@
             }
             document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
         }
-    </script>
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
 
-    <%
-        HttpSession spoons = request.getSession();
-        //String username = (String) spoons.getAttribute("email");
-        //String perms = "";
-        //String userPK = "";
-        //Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("permissions")) {
-                    perms = cookie.getValue();
-                }
-                if (cookie.getName().equals("user")) {
-                    userPK = cookie.getValue();
-                    Database db = new Database();
-
-                    ResultSet rs = db.executeQuery("select username from users where user_pk = '" + userPK + "';");
-                    rs.first();
-                    username = rs.getString("username");
-                }
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
             }
         }
-    %>
+    </script>
 
     <body>
         <!-- Navbar !-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <a class="navbar-brand" href="index.jsp">Dundee Computing Examination Board</a>
+            <a class="navbar-brand" href="#">Dundee Computing Examination Board</a>
             <ul class="navbar-nav ml-auto">
                 <!-- Accessibility !-->
                 <li class="nav-item dropdown" style="padding-right: 10px">
@@ -135,11 +124,9 @@
                         <i class="fas fa-user fa-lg"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <% out.print(username); %></a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> <%=username %></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Log-in.jsp"onclick=" if (confirm('Are you sure you want to log out?')) {
-                                    deleteAllCookies();
-                                }"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        <a class="dropdown-item" href="Log-in.jsp" onclick="deleteAllCookies()"><i class="fas fa-sign-out-alt"></i> Log out</a>
                     </div>
                 </li>
             </ul>
@@ -162,14 +149,7 @@
                                 <i class="fas fa-check fa-5x fa-pull-left"></i>
                             </div>
                             <div class="col-xs-9 text-right text-light">
-                                <span style="font-size: 40px;">
-                                    <%
-                                        Database db = new Database();
-                                        db.connect();
-                                        String noCompletedExams = db.number_of_completed_exams("1");
-                                        out.print(noCompletedExams);
-                                    %>
-                                </span>
+                                <span style="font-size: 40px;">8</span>
                                 <p class="text-right">Completed Exams</p>
                             </div>
                         </div>
@@ -189,12 +169,7 @@
                                 <i class="fas fa-tasks fa-5x fa-pull-left"></i>
                             </div>
                             <div class="col-xs-9 text-right text-light">
-                                <span style="font-size: 40px;">
-                                    <%
-                                        String numberOfInProgressExams = db.number_of_in_progress_exams("1");
-                                        out.print(numberOfInProgressExams);
-                                    %>
-                                </span>
+                                <span style="font-size: 40px;">2</span>
                                 <p class="text-right">In Progress Exams</p>
                             </div>
                         </div>
@@ -214,13 +189,13 @@
                                 <i class="fas fa-file fa-5x fa-pull-left"></i>
                             </div>
                             <div class="col-xs-9 text-right text-light">
-                                <span style="font-size: 40px;"></span>
+                                <span style="font-size: 40px;">4</span>
                                 <p class="text-right">New Exams</p>
                             </div>
                         </div>
                         <a href="CreateExam.jsp" class="text-danger text-decoration-none">
                             <div class="card-footer">
-                                <span>Add New Exam</span>
+                                <span>View Exams</span>
                                 <i class="fa fa-arrow-circle-right fa-pull-right"></i>
                             </div>
                         </a>

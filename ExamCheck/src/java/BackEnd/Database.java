@@ -436,11 +436,86 @@ public class Database {
         }
     }
 
-    /**
-     *
-     * @param pk
-     * @return
-     */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      public String download_comments1(String pk) {
+        try {
+            String sql = "select commentssssss from comments where comments_pk ="+pk+" ;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+    
+    
+    
+          public String download_comments1(String pk) {
+        try {
+            String sql = "select commentssssss from comments where comments_pk ="+pk+" ;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+          
+      public int exam_rows(String pk) {
+        try {
+            String sql = "select count(*) from exams;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+int a = rs.getInt(1);
+            return a*3;
+
+        } catch (SQLException ex) {
+            return -1;
+        }
+    }
+    
+    
+      public String download_comments3(String pk) {
+        try {
+            String sql = "select commentssssss from comments where comments_pk ="+pk+2+" ;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+    
+    
+    
+    
     public String getexternal(String pk) {
         try {
             String sql = "select ext_exam_pk from External_Examiner where user_user_pk =" + pk + ";";

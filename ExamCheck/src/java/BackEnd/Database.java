@@ -326,7 +326,23 @@ public class Database {
         }
         return null;
     }
+  public ResultSet list_all_usernames(String pk) {
+        try {
+            String sql = "select username from users ;";
+            Statement state = conn.createStatement();
 
+            ResultSet rs = state.executeQuery(sql);
+            
+
+            return rs;
+
+        } catch (SQLException ex) {
+            return null;
+        } catch (Exception e) {
+            System.out.println("Something broke.");
+        }
+        return null;
+    }
     /**
      *
      * @param pk

@@ -5,13 +5,62 @@
   Time: 14:51
   To change this template use File | Settings | File Templates.
 --%>
+<%@page import="BackEnd.Permissions"%>
+<%@page import="BackEnd.Security"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="BackEnd.Database" %>
+<%@page import="BackEnd.Database"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE HTML>
+
+<%
+    String perms = "";
+    String userPK = "";
+    String username = "";
+    String base64 = "";
+    String sessionVar = "";
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("permissions")) {
+                perms = cookie.getValue();
+            }
+            if (cookie.getName().equals("user")) {
+                userPK = cookie.getValue();
+                Database db = new Database();
+
+                ResultSet rs = db.executeQuery("select username from users where user_pk = '" + userPK + "';");
+                rs.first();
+                username = rs.getString("username");
+            }
+            if(cookie.getName().equals("secretClass")){
+                base64 = cookie.getValue();
+            }
+        }
+    }
+
+    sessionVar = request.getSession().getId();
+
+    Security secure = new Security();
+    try{
+        Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+    }
+    catch(Exception e){
+        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        request.changeSessionId();
+
+        //Deletes Login Cookie
+        Cookie secretClass = new Cookie("secretClass", "");
+        secretClass.setMaxAge(0);
+        response.addCookie(secretClass);
+
+        response.sendRedirect("Log-in.jsp");
+    }
+%>
+
 <html>
     <head>
-        <title>INDEX</title>
+        <title>ExamCheck Home</title>
         <!-- JQUERY !-->
         <script src="./vendor/jquery/jquery.min.js"></script>
         <!-- BOOTSTRAP !-->

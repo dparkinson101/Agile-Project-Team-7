@@ -49,10 +49,12 @@
         System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
         request.changeSessionId();
         
-        //Deletes Login Cookie
-        Cookie secretClass = new Cookie("secretClass", "");
-        secretClass.setMaxAge(0);
-        response.addCookie(secretClass);
+        //Deletes Cookies
+        for(Cookie c : request.getCookies()){
+            Cookie cookie = new Cookie(c.getName(), "");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
         
         response.sendRedirect("Log-in.jsp");
     }

@@ -326,9 +326,13 @@ public class Database {
         }
         return null;
     }
-  public ResultSet list_all_usernames() {
+    
+    
+    
+    
+  public ResultSet list_all_examsetters_username() {
         try {
-            String sql = "select username from users ;";
+            String sql = "SELECT users.username from users INNER JOIN exam_setter ON users.user_pk = exam_setter.lect_pk and users.user_pk !=1 and users.user_pk !=2;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -343,6 +347,77 @@ public class Database {
         }
         return null;
     }
+  
+    public ResultSet list_all_internal_modderators_username() {
+        try {
+            String sql = "SELECT users.username from users INNER JOIN internal_moderator ON users.user_pk = internal_moderator.int_mod_pk and users.user_pk !=1 and users.user_pk !=2;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            
+
+            return rs;
+
+        } catch (SQLException ex) {
+            return null;
+        } catch (Exception e) {
+            System.out.println("Something broke.");
+        }
+        return null;
+    }
+  
+  
+  
+  
+  public ResultSet list_all_exam_vetting_commitey_username() {
+        try {
+            String sql = "SELECT users.username from users INNER JOIN exmvetcomit ON users.user_pk = exmvetcomit.exmVet_pk and users.user_pk !=1 and users.user_pk !=2;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            
+
+            return rs;
+
+        } catch (SQLException ex) {
+            return null;
+        } catch (Exception e) {
+            System.out.println("Something broke.");
+        }
+        return null;
+    }
+  
+  
+  
+  
+  
+    public ResultSet list_all_external_examiners_username() {
+        try {
+            String sql = "SELECT users.username from users INNER JOIN external_examiner ON users.user_pk = external_examiner.ext_exam_pk and users.user_pk !=1 and users.user_pk !=2;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            
+
+            return rs;
+
+        } catch (SQLException ex) {
+            return null;
+        } catch (Exception e) {
+            System.out.println("Something broke.");
+        }
+        return null;
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
     /**
      *
      * @param pk

@@ -7,6 +7,7 @@ package BackEnd;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,11 +35,26 @@ public class createAccount extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         //Sets up variables for POST varaible info
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("fName");
+        String lastName = request.getParameter("sName");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = request.getParameter("pass");
+        String exSet = request.getParameter("exSet");
+        String intMod = request.getParameter("intMod");
+        String exVet = request.getParameter("exVet");
+        String exMod = request.getParameter("exMod");
+        String schOff = request.getParameter("schOff");
 
+        
+        out.println(firstName);
+        out.println(lastName);
+        out.println(email);
+        out.println(password);
+        out.println(exSet);
+        out.println(intMod);
+        out.println(exVet);
+        out.println(exMod);
+        out.println(schOff);
         try {
             //Creates / Stores Salted Hash of Password
             Base64.Encoder enc = Base64.getEncoder();
@@ -54,7 +70,30 @@ public class createAccount extends HttpServlet {
             boolean created;
             try {
                 db.updateQuery("INSERT INTO users (username, password, salt) VALUES ('" + email + "', '" + enc.encodeToString(saltedHash) + "', '" + enc.encodeToString(salt) + "');");
+               if(exSet.equals("TRUE"))
+               {
+                   out.println(db.user_rows());
+                  db.updateQuery("INSERT INTO exam_setter (lect_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }
+               if(intMod.equals("TRUE"))
+               {
+                  db.updateQuery("INSERT INTO internal_moderator (int_mod_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }
+               if(exVet.equals("TRUE"))
+               {
+                  db.updateQuery("INSERT INTO exmvetcomit (exmVet_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }      
+               if(exMod.equals("TRUE"))
+               {
+                  db.updateQuery("INSERT INTO external_examiner (ext_exam_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }
+               if(schOff.equals("TRUE"))
+               {
+                  db.updateQuery("INSERT INTO school_office (school_office_pk, user_user_pk)valoues("+db.user_rows()+db.user_rows()+");");
+               }  
+               
                 created = true;
+                response.sendRedirect("index.jsp");
             } catch (Exception e) {
                 created = false;
                 System.out.println(e);

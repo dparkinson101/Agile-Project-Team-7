@@ -372,6 +372,9 @@ public class Database {
         return null;
     }
 
+    
+    
+    
     public ResultSet list_all_external_examiners_username() {
         try {
             String sql = "SELECT users.username from users INNER JOIN external_examiner ON users.user_pk = external_examiner.ext_exam_pk and users.user_pk !=1 and users.user_pk !=2;";
@@ -468,6 +471,24 @@ int a = rs.getInt(1);
     }
     
     
+      
+        public int user_rows() {
+        try {
+            String sql = "select count(*) from users;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+int a = rs.getInt(1);
+            return a;
+
+        } catch (SQLException ex) {
+            return -1;
+        }
+    }
+      
+      
       public String download_comments3(String pk) {
         try {
             String sql = "select commentssssss from comments where comments_pk ="+pk+2+" ;";

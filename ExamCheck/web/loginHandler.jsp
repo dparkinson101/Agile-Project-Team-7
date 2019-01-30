@@ -11,17 +11,15 @@
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 
-    
-Database db = new Database();
-db.connect();
-String user_pk  =db.checkLogin(username, password);
-String[] roles = new String[5];
-roles[0] = db.getexamsetter(user_pk);
-              roles[1] = db.getinternalmod(user_pk);
-                roles[2] = db.getexamvetcommit(user_pk);
-             roles[3] = db.getexternal(user_pk);
-              roles[4] = db.getoffice(user_pk);
-
+    Database db = new Database();
+    db.connect();
+    String user_pk = db.checkLogin(username, password);
+    String[] roles = new String[5];
+    roles[0] = db.getexamsetter(user_pk);
+    roles[1] = db.getinternalmod(user_pk);
+    roles[2] = db.getexamvetcommit(user_pk);
+    roles[3] = db.getexternal(user_pk);
+    roles[4] = db.getoffice(user_pk);
 %>
 
 <!DOCTYPE html>

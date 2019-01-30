@@ -7,6 +7,43 @@
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    //Code for Cookie Validation
+    
+    String sessionVar = request.getSession().getId();
+    String base64 = null;
+    
+    if (request.getCookies() != null) {
+        for (Cookie cookie : request.getCookies()) {
+            if(cookie.getName().equals("secretClass")){
+                base64 = cookie.getValue();
+            }
+        }
+    }
+    Security secure = new Security();
+    try {
+        Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+    } catch (Exception e) {
+        System.out.println("Error Getting Permissions Object: Session Variable may have changed.");
+        System.out.println("Loggin Possible Tampering Detected With Following Credentials:");
+        System.out.println(request.getRemoteAddr());
+        System.out.println(request.getRemoteHost());
+        System.out.println(request.getRemotePort());
+        System.out.println(request.getRequestedSessionId());
+        request.changeSessionId();
+
+        //Deletes Cookies
+        for (Cookie c : request.getCookies()) {
+            Cookie cookie = new Cookie(c.getName(), "");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+
+        response.sendRedirect("Log-in.jsp");
+    }
+%>
+
 <%
     HttpSession spoons = request.getSession();
     String username = (String) spoons.getAttribute("email");

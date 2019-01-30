@@ -40,7 +40,6 @@
     }
     
     sessionVar = request.getSession().getId();
-    
     Security secure = new Security();
     try{
         Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);

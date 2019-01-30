@@ -6,6 +6,7 @@
 package BackEnd;
 
 import java.io.IOException;
+import java.util.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Douglas
  */
-@WebServlet("/loginManager")
 public class loginManager extends HttpServlet {
 
     /**
@@ -49,6 +49,11 @@ public class loginManager extends HttpServlet {
             roles[2] = db.getexamvetcommit(loginResults);
             roles[3] = db.getexternal(loginResults);
             roles[4] = db.getoffice(loginResults);
+            
+            Permissions permsInstance = new Permissions();
+            
+            permsInstance.login = true;
+            permsInstance.userPK = loginResults;
 
             for (int i = 0; i < roles.length; i++) {
                 if (!"0".equals(roles[i])) {
@@ -56,18 +61,23 @@ public class loginManager extends HttpServlet {
                     switch (i) {
                         case 0:
                             perms += " examSetter";
+                            permsInstance.examSetter = true;
                             break;
                         case 1:
                             perms += " internalModerator";
+                            permsInstance.internalModerator = true;
                             break;
                         case 2:
                             perms += " examVetCommittee";
+                            permsInstance.examVetCommittee = true;
                             break;
                         case 3:
                             perms += " externalModerator";
+                            permsInstance.externalModerator = true;
                             break;
                         case 4:
                             perms += " office";
+                            permsInstance.office = true;
                             break;
                     }
                 }
@@ -75,20 +85,29 @@ public class loginManager extends HttpServlet {
 
             if (loginResults.equals("1")) {
                 perms += " admin";
+                permsInstance.admin = true;
             }
+            
+            Security secure = new Security();
+            String sessionVar = request.getSession().getId();
+            
+            String encodedInstance = secure.convertObjectToEncodedBase64(permsInstance, sessionVar);
 
             Cookie login = new Cookie("login", String.valueOf(loggedIn));
             Cookie credentials = new Cookie("user", loginResults);
             Cookie permissions = new Cookie("permissions", perms);
+            Cookie secretClass = new Cookie("secretClass", encodedInstance);
 
             //Sets cookie max age for log-in to 24 hours
             login.setMaxAge(60 * 60 * 24);
             credentials.setMaxAge(60 * 60 * 24);
             permissions.setMaxAge(60 * 60 * 24);
+            secretClass.setMaxAge(60*60*24);
 
             response.addCookie(login);
             response.addCookie(credentials);
             response.addCookie(permissions);
+            response.addCookie(secretClass);
 
             response.sendRedirect("index.jsp");
 

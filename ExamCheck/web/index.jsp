@@ -212,114 +212,127 @@
             <br>
             <div class="row">
 
+        
+        
+        
+        
+        
                 <!--
-                        ADMIN
-                !-->
-                <!-- Add new user !-->
-                <div class="col-sm-4">
-                    <div class="card border-dark">
-                        <div class="card-header text-center text-light bg-dark">
-                            <h4 class="card-title">Add new user</h4>
-                        </div>
-                        <div class="card-body">
-                            <form id="newUser">
-                                <div class="form-group">
-                                    <label for="firstName">First name(s)</label>
-                                    <input type="text" class="form-control" id="firstName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="surname">Surname</label>
-                                    <input type="text" class="form-control" id="surname" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Dundee University E-mail</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" required>
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-block btn-success">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Assign user !-->
-                <div class="col-sm-4">
-                    <div class="card border-dark">
-                        <div class="card-header text-center text-light bg-dark">
-                            <h4 class="card-title">Assign user</h4>
-                        </div>
-                        <div class="card-body">
-                            <form id="assignUser">
-                                <div class="form-group">
-                                    <label for="role">Role</label>
-                                    <select class="custom-select" id="role">
-                                        <option selected>Select role</option>
-                                        <option>Internal Moderator</option>
-                                        <option>External Moderator</option>
-                                        <option>Exam Vetting Committee Member</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="user">User</label>
-                                    <select class="custom-select" id="user">
-                                        <option selected>Select user</option>
-                                        <option>User 1</option>
-                                        <option>User 2</option>
-                                        <option>Cont...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="examAssign">Exam</label>
-                                    <select class="custom-select" id="examAssign">
-                                        <option selected>Select exam</option>
-                                        <option>AC31007 - Exam</option>
-                                        <option>AC31007 - Resit</option>
-                                        <option>Cont...</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-block btn-success">Assign</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- View unsigned exams !-->
-                <div class="col-sm-4">
-                    <div class="card border-dark">
-                        <div class="card-header text-center text-light bg-dark">
-                            <h4 class="card-title">View in progress exams</h4>
-                        </div>
-                        <div class="card-body">
-                            <form id="viewExam">
-                                <div class="form-group">
-                                    <label for="stage">Stage</label>
-                                    <select class="custom-select" id="stage">
-                                        <option selected>Select stage</option>
-                                        <option>Internal Moderating</option>
-                                        <option>External Moderating</option>
-                                        <option>Exam Vetting Committee</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="examView">Exam</label>
-                                    <select class="custom-select" id="examView">
-                                        <option selected>Select exam</option>
-                                        <option>AC31007 - Exam</option>
-                                        <option>AC31007 - Resit</option>
-                                        <option>Cont...</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-block btn-success">View</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-    </body>
+			ADMIN
+		!-->
+		<!-- Add new user !-->
+		<div class="col-sm-4">
+			<div class="card border-dark">
+				<div class="card-header text-center text-light bg-dark">
+					<h4 class="card-title">Add new user</h4>
+				</div>
+				<div class="card-body">
+					<form id="newUser" action="">
+						<div class="form-group">
+							<label for="firstName">First name(s)</label>
+							<input type="text" class="form-control" id="firstName" required>
+						</div>
+						<div class="form-group">
+							<label for="surname">Surname</label>
+							<input type="text" class="form-control" id="surname" required>
+						</div>
+						<div class="form-group">
+							<label for="email">Dundee University E-mail</label>
+							<input type="email" class="form-control" id="email" required>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" id="password" required>
+						</div>
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="Exam Setter" value="1" id="Setter"> Exam Setter<br>
+                                                    <input type="checkbox" name="Internal Moderator" value="1" id="IntMod"> Internal Moderator<br>
+                                                    <input type="checkbox" name="Exam Vet" value="1" id="Vetting"> Exam Vetting Comittee<br>
+                                                    <input type="checkbox" name="External Moderator" value="1" id="ExtMod"> External Moderator<br>
+                                                    <input type="checkbox" name="SchoolOffice" value="1" id="Office"> School Office<br>
+                                                </div>
+						
+						<button type="submit" class="btn btn-block btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Assign user !-->
+		<div class="col-sm-4">
+			<div class="card border-dark">
+				<div class="card-header text-center text-light bg-dark">
+					<h4 class="card-title">Assign user</h4>
+				</div>
+				<div class="card-body">
+					<form id="assignUser">
+						<div class="form-group">
+							<label for="role">Role</label>
+							
+							<select class="custom-select" id="role">
+								<option selected>Select role</option>
+								<option>Internal Moderator</option>
+								<option>External Moderator</option>
+								<option>Exam Vetting Committee Member</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="user">User</label>
+							<select class="custom-select" id="user">
+								<option selected>Select user</option>
+								<option>User 1</option>
+								<option>User 2</option>
+								<option>Cont...</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="examAssign">Exam</label>
+							<select class="custom-select" id="examAssign">
+								<option selected>Select exam</option>
+								<option>AC31007 - Exam</option>
+								<option>AC31007 - Resit</option>
+								<option>Cont...</option>
+							</select>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-block btn-success">Assign</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- View unsigned exams !-->
+		<div class="col-sm-4">
+			<div class="card border-dark">
+				<div class="card-header text-center text-light bg-dark">
+					<h4 class="card-title">View in progress exams</h4>
+				</div>
+				<div class="card-body">
+					<form id="viewExam">
+						<div class="form-group">
+							<label for="stage">Stage</label>
+							<select class="custom-select" id="stage">
+								<option selected>Select stage</option>
+								<option>Internal Moderating</option>
+								<option>External Moderating</option>
+								<option>Exam Vetting Committee</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="examView">Exam</label>
+							<select class="custom-select" id="examView">
+								<option selected>Select exam</option>
+								<option>AC31007 - Exam</option>
+								<option>AC31007 - Resit</option>
+								<option>Cont...</option>
+							</select>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-block btn-success">View</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+</body>
 </html>

@@ -101,22 +101,22 @@
                 <div class="form-group w-50 mx-auto">
                     <label for="examChoice">Exam Options</label>
                     <select class="custom-select" name="examChoice">
-                        <option selected>Main exam</option>
-                        <option>Resit</option>
+                        <option value="0" selected>Main exam</option>
+                        <option value="1">Resit</option>
                     </select>
                 </div>
                 <div class="form-group w-50 mx-auto">
                     <label for="examType" class="sr-only">Exam type</label>
                     <select class="custom-select" name="examType">
-                        <option selected>Online</option>
-                        <option>Written</option>
+                        <option value="0" selected>Online</option>
+                        <option value="1">Written</option>
                     </select>
                 </div>
                 <div class="form-group w-50 mx-auto">
                     <label for="examLevel" class="sr-only">Exam type</label>
                     <select class="custom-select" name="ExamLevel">
-                        <option selected>Undergraduate</option>
-                        <option>Postgraduate</option>
+                        <option value="0" selected>Undergraduate</option>
+                        <option value="1">Postgraduate</option>
                     </select>
                 </div>
                 <div class="form-group w-50 mx-auto">

@@ -81,10 +81,10 @@
 
     <%
         HttpSession spoons = request.getSession();
-        String username = (String) spoons.getAttribute("email");
-        String perms = "";
-        String userPK = "";
-        Cookie[] cookies = request.getCookies();
+        //String username = (String) spoons.getAttribute("email");
+        //String perms = "";
+        //String userPK = "";
+        //Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("permissions")) {

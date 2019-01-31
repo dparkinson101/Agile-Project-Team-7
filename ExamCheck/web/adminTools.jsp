@@ -82,7 +82,7 @@
                             <input type="submit">
                         </form>                     
                     <%
-                        }
+                        }else{db.get_username_from_exam_pk(pk, 1);}
                     %>
                 </td> 
                 <td align="center" bgcolor=<%out.print(colourVet);%>>50
@@ -106,7 +106,7 @@
                             <input type="submit">
                         </form>                        
                     <%
-                        }
+                        }else{db.get_username_from_exam_pk(pk, 1);}
                     %>
                 </td>
                 <td align="center" bgcolor=<%out.print(colourExt);%>>Cart
@@ -130,7 +130,7 @@
                             <input type="submit">
                         </form>                        
                     <%
-                        }
+                        }else{db.get_username_from_exam_pk(pk, 1);}
                     %>
                 </td>
             </tr>

@@ -3,16 +3,56 @@
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
 --%>
+<%@page import="BackEnd.Permissions"%>
+<%@page import="BackEnd.Security"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    String base64 = "";
+    String sessionVar = "";
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("secretClass")){
+                base64 = cookie.getValue();
+            }
+        }
+    }
+    
+    sessionVar = request.getSession().getId();
+    
+    Security secure = new Security();
+    try{
+        Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permissionsObject == null){
+            throw new NullPointerException("Permissions Object Null");
+        }
+    }
+    catch(Exception e){
+        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        request.changeSessionId();
+        
+        //Deletes Cookies
+        for(Cookie c : request.getCookies()){
+            Cookie cookie = new Cookie(c.getName(), "");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        response.sendRedirect("Log-in.jsp");
+    }
+    
+%>
+
 <%
     HttpSession spoons = request.getSession();
     String username = (String) spoons.getAttribute("email");
 
     String perms = "";
-    Cookie[] cookies = request.getCookies();
+    cookies = request.getCookies();
 
     if (cookies != null) {
         for (Cookie cookie : cookies) {

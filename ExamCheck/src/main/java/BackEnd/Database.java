@@ -144,16 +144,11 @@ public class Database {
             String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
             //this.updatelog("exam :"+pk+" was moved externally modderated and approved");
             state.executeUpdate(sql);
-
         } catch (SQLException ex) {
-
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
-
             System.out.println("SQLState: " + ex.getSQLState());
-
             System.out.println("VendorError: " + ex.getErrorCode());
-
         }
 
     }
@@ -312,6 +307,33 @@ if(number ==2){sql =   "update exams set internal_moderator_int_mod_pk="+getapkf
     }
 
  
+    
+    public void add_to_storage(String date1, String date2 ,String date3,String date4,String date5) {
+
+        
+
+        try {
+            Statement state = conn.createStatement();
+           
+            String sql = "UPDATE `18agileteam7db`.`storeage_dates`SET`date_of_exam_submission` =\""+ date1+ "\",`deadline_for_internal_modderation` = \""+ date2+ "\",`deadline_for_exam_vetting` = \""+ date3+ "\",`deadline_for_external_modderation` =\""+ date4+ "\",`date_of_database_clearing` =\""+ date5+ "\" WHERE `store_pk` = 1;";
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+ 
+    
+    
+    
+    
+    
+    
+    
     public String checkLogin(String username, String password) {
         try {
             this.connect();
@@ -640,8 +662,8 @@ int a = rs.getInt(1);
       public int getRows(int no) {
         try {
             String sql = "a";
-            if(no ==1){sql = "select count(*) from ExmVetComit;";}
-            if(no ==2){sql = "select count(*) from internal_moderator;";}
+            if(no ==2){sql = "select count(*) from ExmVetComit;";}
+            if(no ==1){sql = "select count(*) from internal_moderator;";}
             if(no ==3){sql = "select count(*) from External_Examiner;";}
             
             
@@ -650,8 +672,8 @@ int a = rs.getInt(1);
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-int a = rs.getInt(1);
-            return a;
+            int a = rs.getInt(1);
+            return a-2;
 
         } catch (SQLException ex) {
             return -1;

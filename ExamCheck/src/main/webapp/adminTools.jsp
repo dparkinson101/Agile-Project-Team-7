@@ -53,7 +53,7 @@
         
         %>
             <tr>
-                <td align="center" height="60" bgcolor=<%out.print(colourSet);%>><% out.print(mc); %>
+                <td align="center" height="60" bgcolor="<%=colourSet%>"><% out.print(mc); %>
                         
                             <br>
                             <%
@@ -61,7 +61,7 @@
                             %> 
 
                 </td>
-                <td align="center" bgcolor=<%out.print(colourInt);%>>
+                <td align="center" bgcolor="<%=colourInt%>">
                     <%
                         if(colourInt.equals("red")){
                     %>
@@ -69,25 +69,27 @@
                     <form action="UpdateChecker.java">
                             <select name="Examiner">
                             <%
-                                ResultSet ur = db.list_all_internal_modderators_username();                                
-                                for (int j = 0; j < db.getRows(1); j++){
-                                    ur.next();
+                                
+                                ResultSet ur = db.list_all_internal_modderators_username();                                    
+                                for (int j = 0; j < db.getRows(1); j++){                             
+                                    ur.next();                                
                                     String user = ur.getString("username");
+//
                             %>
-                            <option name="Character" value=<%out.print(user);%>>  <%out.print(user);%></option>
+                            <option name="Character" value="<%=user%>">  <%=user%></option>
                             <%
                                 }
                             %>
                             </select>
                             <input type="hidden" name="field" value="1" />
-                            <input type="hidden" name="pk" value=<%out.println(pk);%> />
+                            <input type="hidden" name="pk" value=<%=pk%> />
                             <input type="submit">
                         </form>                     
                     <%
                         }else{out.print(db.get_username_from_exam_pk(pk, 1));}
                     %>
                 </td> 
-                <td align="center" bgcolor=<%out.print(colourVet);%>>
+                <td align="center" bgcolor="<%=colourVet%>">
                     <%
                         if(colourVet.equals("red")){
                     %>
@@ -100,20 +102,20 @@
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
-                            <option value=<%out.print(user);%>><%out.print(user);%></option>
+                            <option value="<%=user%>"><%=user%></option>
                             <%
                                 }
                             %>
                             </select>
                             <input type="hidden" name="field" value="2" />
-                            <input type="hidden" name="pk" value=<%out.println(pk);%> />
+                            <input type="hidden" name="pk" value="<%=pk%>" />
                             <input type="submit">
                         </form>                        
                     <%
                         }else{out.print(db.get_username_from_exam_pk(pk, 2));}
                     %>
                 </td>
-                <td align="center" bgcolor=<%out.print(colourExt);%>>
+                <td align="center" bgcolor="<%=colourExt%>">
                     <%
                         if(colourExt.equals("red")){
                     %>
@@ -126,14 +128,14 @@
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
-                            <option value=<%out.print(user);%>><%out.print(user);%></option>
+                            <option value="<%=user%>"><%=user%></option>
                             <%
                                 }
                             %>
                             </select>
                             <input type="submit">
                             <input type="hidden" name="field" value="3" />
-                            <input type="hidden" name="pk" value=<%out.println(pk);%> />
+                            <input type="hidden" name="pk" value="<%=pk%>" />
                         </form>                        
                     <%
                         }else{out.print(db.get_username_from_exam_pk(pk, 3));}

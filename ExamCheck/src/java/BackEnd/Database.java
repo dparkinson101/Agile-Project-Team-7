@@ -478,7 +478,7 @@ public class Database {
             if (camel == 3){sql = "select users.username from users inner join exams ON users.user_pk = exams.ExmVetComit_exmVet_pk where exams.exam_pk="+pk+";";}
               if (camel == 1){sql = "select users.username from users inner join exams ON users.user_pk = exams.internal_moderator_int_mod_pk where exams.exam_pk="+pk+";";}
                 if (camel == 2){sql = "select users.username from users inner join exams ON users.user_pk = exams.External_Examiner_ext_exam_pk where exams.exam_pk="+pk+";";}
-            if(camel!=1 ||camel!=2 ||camel!=3){return "error with input to function";}
+            if(camel!=1 && camel!=2 &&camel!=3){return "error with input to function";}
             
             
             Statement state = conn.createStatement();

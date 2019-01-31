@@ -63,7 +63,7 @@
                 </td>
                 <td align="center" bgcolor=<%out.print(colourInt);%>>Smith
                     <%
-                        if(!colourInt.equals("green")){
+                        if(colourInt.equals("red")){
                     %>
                     <br>
                     <form action="adminTools.jsp">
@@ -87,7 +87,7 @@
                 </td> 
                 <td align="center" bgcolor=<%out.print(colourVet);%>>50
                     <%
-                        if(!colourVet.equals("green")){
+                        if(colourVet.equals("red")){
                     %>
                     <br>
                     <form action="adminTools.jsp">
@@ -111,7 +111,7 @@
                 </td>
                 <td align="center" bgcolor=<%out.print(colourExt);%>>Cart
                     <%
-                        if(!colourExt.equals("green")){
+                        if(colourExt.equals("red")){
                     %>
                     <br>
                     <form action="adminTools.jsp">

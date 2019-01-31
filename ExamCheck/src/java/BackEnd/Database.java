@@ -472,7 +472,7 @@ public class Database {
           
        public String get_username_from_exam_pk(String pk,int camel) {
         try {
-             String sql;
+             String sql = null;
             
             
             if (camel == 3){sql = "select users.username from users inner join exams ON users.user_pk = exams.ExmVetComit_exmVet_pk where exams.exam_pk="+pk+";";}

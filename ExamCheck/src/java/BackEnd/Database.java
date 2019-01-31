@@ -629,7 +629,21 @@ int a = rs.getInt(1);
         }
     }
     
-    
+         public String getusername(String pk) {
+        try {
+            String sql = "select username from users where user_pk =" + pk + ";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
     
     
     public String getexternal(String pk) {

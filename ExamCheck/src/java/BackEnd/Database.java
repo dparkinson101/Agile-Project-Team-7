@@ -104,11 +104,15 @@ public class Database {
             this.connect();
             Statement state = conn.createStatement();
             Date date = new Date();
-            state.executeUpdate("insert into audit_log(log_entry, date_time)values("+query+","+date+");");
+            state.executeUpdate("insert into audit_log(log_entry, date_time)values(\""+query+"\",\""+date+"\");");
         } 
         catch (SQLException ex) 
         {
-              
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
     
@@ -219,7 +223,7 @@ public class Database {
            
             String sql = "UPDATE `18agileteam7db`.`storeage_dates`SET`date_of_exam_submission` =\""+ date1+ "\",`deadline_for_internal_modderation` = \""+ date2+ "\",`deadline_for_exam_vetting` = \""+ date3+ "\",`deadline_for_external_modderation` =\""+ date4+ "\",`date_of_database_clearing` =\""+ date5+ "\" WHERE `store_pk` = 1;";
             state.executeUpdate(sql);
-
+       this.updatelog("admin has added new dates for this semester exams");
         } catch (SQLException ex) {
             // handle any sql errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -530,7 +534,63 @@ int a = rs.getInt(1);
         }
     }
     
+        public int audit_rows() {
+        try {
+            String sql = "select count(*) from audit_log;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+int a = rs.getInt(1);
+            return a;
+
+        } catch (SQLException ex) {
+            return -1;
+        }
+    }
     
+        
+        
+        
+        
+                
+      public String download_log_string(String pk) {
+        try {
+            String sql = "select log_entry from audit_log where log_pk ="+pk+" ;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }        
+        
+                
+      public String download_log_date(String pk) {
+        try {
+            String sql = "select date_time from audit_log where log_pk ="+pk+" ;";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+        
+        
+        
+        
       public String download_comments3(String pk) {
         try {
             String sql = "select commentssssss from comments where comments_pk ="+pk+2+" ;";

@@ -70,7 +70,7 @@
                             <select name="Examiner">
                             <%
                                 ResultSet ur = db.list_all_internal_modderators_username();                                
-                                for (int j = 0; j < 1; j++){
+                                for (int j = 0; j < db.getRows(1); j++){
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
@@ -96,7 +96,7 @@
                             <select name="Examiner">
                             <%
                                 ResultSet ur = db.list_all_exam_vetting_commitey_username();                                
-                                for (int j = 0; j < 1; j++){
+                                for (int j = 0; j < db.getRows(2); j++){
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
@@ -122,7 +122,7 @@
                             <select name="Examiner">
                             <%
                                 ResultSet ur = db.list_all_external_examiners_username();                                
-                                for (int j = 0; j < 1; j++){
+                                for (int j = 0; j < db.getRows(3); j++){
                                     ur.next();
                                     String user = ur.getString("username");
                             %>

@@ -73,7 +73,10 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     </head>
 
-    <script>
+
+
+    <body>
+            <script>
         function resizeText(multiplier) {
             if (document.body.style.fontSize === "") {
                 document.body.style.fontSize = "1.0em";
@@ -91,8 +94,6 @@
             }
         }
     </script>
-
-    <body>
         <!-- Navbar !-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <a class="navbar-brand" href="#">Dundee Computing Examination Board</a>

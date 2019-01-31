@@ -57,7 +57,7 @@
                         
                             <br>
                             <%
-                                out.print(examSetter);
+                                out.print(db.getusername(examSetter));
                             %> 
 
                 </td>

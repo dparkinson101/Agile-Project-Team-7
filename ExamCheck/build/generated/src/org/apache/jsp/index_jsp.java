@@ -99,6 +99,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
         
         response.sendRedirect("Log-in.jsp");
     }
+    
 
       out.write("\r\n");
       out.write("\r\n");
@@ -114,7 +115,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.6.3/css/all.css\">\r\n");
       out.write("    </head>\r\n");
       out.write("\r\n");
-      out.write("    <script>\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("    <body>\r\n");
+      out.write("            <script>\r\n");
       out.write("        function resizeText(multiplier) {\r\n");
       out.write("            if (document.body.style.fontSize === \"\") {\r\n");
       out.write("                document.body.style.fontSize = \"1.0em\";\r\n");
@@ -132,8 +136,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            }\r\n");
       out.write("        }\r\n");
       out.write("    </script>\r\n");
-      out.write("\r\n");
-      out.write("    <body>\r\n");
       out.write("        <!-- Navbar !-->\r\n");
       out.write("        <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark sticky-top\">\r\n");
       out.write("            <a class=\"navbar-brand\" href=\"#\">Dundee Computing Examination Board</a>\r\n");
@@ -271,29 +273,29 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t<h4 class=\"card-title\">Add new user</h4>\r\n");
       out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t<div class=\"card-body\">\r\n");
-      out.write("\t\t\t\t\t<form id=\"newUser\" action=\"\">\r\n");
+      out.write("\t\t\t\t\t<form id=\"newUser\" action=\"createAccount\">\r\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\r\n");
-      out.write("\t\t\t\t\t\t\t<label for=\"firstName\">First name(s)</label>\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"firstName\" required>\r\n");
+      out.write("\t\t\t\t\t\t\t<label for=\"firstName\" >First name(s)</label>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"text\" name=\"fName\" class=\"form-control\" id=\"firstName\" required>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\r\n");
       out.write("\t\t\t\t\t\t\t<label for=\"surname\">Surname</label>\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"surname\" required>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"text\" name=\"sName\" class=\"form-control\" id=\"surname\" required>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\r\n");
       out.write("\t\t\t\t\t\t\t<label for=\"email\">Dundee University E-mail</label>\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"email\" class=\"form-control\" id=\"email\" required>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"email\" name=\"email\" class=\"form-control\" id=\"email\" required>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\r\n");
       out.write("\t\t\t\t\t\t\t<label for=\"password\">Password</label>\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"password\" class=\"form-control\" id=\"password\" required>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"password\" name=\"pass\" class=\"form-control\" id=\"password\" required>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("                                                <div class=\"form-group\">\r\n");
-      out.write("                                                    <input type=\"checkbox\" name=\"Exam Setter\" value=\"1\" id=\"Setter\"> Exam Setter<br>\r\n");
-      out.write("                                                    <input type=\"checkbox\" name=\"Internal Moderator\" value=\"1\" id=\"IntMod\"> Internal Moderator<br>\r\n");
-      out.write("                                                    <input type=\"checkbox\" name=\"Exam Vet\" value=\"1\" id=\"Vetting\"> Exam Vetting Comittee<br>\r\n");
-      out.write("                                                    <input type=\"checkbox\" name=\"External Moderator\" value=\"1\" id=\"ExtMod\"> External Moderator<br>\r\n");
-      out.write("                                                    <input type=\"checkbox\" name=\"SchoolOffice\" value=\"1\" id=\"Office\"> School Office<br>\r\n");
+      out.write("                                                    <input type=\"checkbox\" name=\"exSet\" id=\"Setter\" value=\"TRUE\"> Exam Setter<br>\r\n");
+      out.write("                                                    <input type=\"checkbox\" name=\"intMod\" id=\"IntMod\" value=\"TRUE\"> Internal Moderator<br>\r\n");
+      out.write("                                                    <input type=\"checkbox\" name=\"exVet\" id=\"Vetting\" value=\"TRUE\"> Exam Vetting Comittee<br>\r\n");
+      out.write("                                                    <input type=\"checkbox\" name=\"exMod\" id=\"ExtMod\" value=\"TRUE\"> External Moderator<br>\r\n");
+      out.write("                                                    <input type=\"checkbox\" name=\"schOff\" id=\"Office\" value=\"TRUE\"> School Office<br>\r\n");
       out.write("                                                </div>\r\n");
       out.write("\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-block btn-success\">Submit</button>\r\n");

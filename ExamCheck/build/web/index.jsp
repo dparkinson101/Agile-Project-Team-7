@@ -73,7 +73,10 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     </head>
 
-    <script>
+
+
+    <body>
+            <script>
         function resizeText(multiplier) {
             if (document.body.style.fontSize === "") {
                 document.body.style.fontSize = "1.0em";
@@ -91,8 +94,6 @@
             }
         }
     </script>
-
-    <body>
         <!-- Navbar !-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <a class="navbar-brand" href="#">Dundee Computing Examination Board</a>
@@ -228,29 +229,29 @@
 					<h4 class="card-title">Add new user</h4>
 				</div>
 				<div class="card-body">
-					<form id="newUser" action="">
+					<form id="newUser" action="createAccount">
 						<div class="form-group">
-							<label for="firstName">First name(s)</label>
-							<input type="text" class="form-control" id="firstName" required>
+							<label for="firstName" >First name(s)</label>
+							<input type="text" name="fName" class="form-control" id="firstName" required>
 						</div>
 						<div class="form-group">
 							<label for="surname">Surname</label>
-							<input type="text" class="form-control" id="surname" required>
+							<input type="text" name="sName" class="form-control" id="surname" required>
 						</div>
 						<div class="form-group">
 							<label for="email">Dundee University E-mail</label>
-							<input type="email" class="form-control" id="email" required>
+							<input type="email" name="email" class="form-control" id="email" required>
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label>
-							<input type="password" class="form-control" id="password" required>
+							<input type="password" name="pass" class="form-control" id="password" required>
 						</div>
                                                 <div class="form-group">
-                                                    <input type="checkbox" name="Exam Setter" value="1" id="Setter"> Exam Setter<br>
-                                                    <input type="checkbox" name="Internal Moderator" value="1" id="IntMod"> Internal Moderator<br>
-                                                    <input type="checkbox" name="Exam Vet" value="1" id="Vetting"> Exam Vetting Comittee<br>
-                                                    <input type="checkbox" name="External Moderator" value="1" id="ExtMod"> External Moderator<br>
-                                                    <input type="checkbox" name="SchoolOffice" value="1" id="Office"> School Office<br>
+                                                    <input type="checkbox" name="exSet" id="Setter" value="TRUE"> Exam Setter<br>
+                                                    <input type="checkbox" name="intMod" id="IntMod" value="TRUE"> Internal Moderator<br>
+                                                    <input type="checkbox" name="exVet" id="Vetting" value="TRUE"> Exam Vetting Comittee<br>
+                                                    <input type="checkbox" name="exMod" id="ExtMod" value="TRUE"> External Moderator<br>
+                                                    <input type="checkbox" name="schOff" id="Office" value="TRUE"> School Office<br>
                                                 </div>
 						
 						<button type="submit" class="btn btn-block btn-success">Submit</button>

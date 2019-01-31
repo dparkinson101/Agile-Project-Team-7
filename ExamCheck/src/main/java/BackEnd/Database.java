@@ -640,8 +640,8 @@ int a = rs.getInt(1);
       public int getRows(int no) {
         try {
             String sql = "a";
-            if(no ==1){sql = "select count(*) from ExmVetComit;";}
-            if(no ==2){sql = "select count(*) from internal_moderator;";}
+            if(no ==2){sql = "select count(*) from ExmVetComit;";}
+            if(no ==1){sql = "select count(*) from internal_moderator;";}
             if(no ==3){sql = "select count(*) from External_Examiner;";}
             
             
@@ -650,8 +650,8 @@ int a = rs.getInt(1);
             ResultSet rs = state.executeQuery(sql);
             rs.beforeFirst();
             rs.next();
-int a = rs.getInt(1);
-            return a;
+            int a = rs.getInt(1);
+            return a-2;
 
         } catch (SQLException ex) {
             return -1;

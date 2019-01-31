@@ -36,19 +36,20 @@ public class showDate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-    	String pk = request.getParameter("date5");
-        String a ="a";
-        
-            
-            
-            out.println(pk);
-            out.println(a);
+        String date1 = request.getParameter("date1");
+        String date2  = request.getParameter("date2");
+        String date3  = request.getParameter("date3");
+        String date4 = request.getParameter("date4");
+    	String date5 = request.getParameter("date5");
+       
+        Database db = new Database();
+            db.connect();
+            db.add_to_storage(date1,date2,date3,date4,date5);
+     
             
             
         //Connect to database
-        Database db = new Database();
-        db.connect();
-            
+   
             
         response.sendRedirect("log.jsp");
         try (PrintWriter out = response.getWriter()) {

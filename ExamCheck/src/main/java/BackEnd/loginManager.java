@@ -159,7 +159,7 @@ public class loginManager extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Used to verify login and distribute cookies.";
     }// </editor-fold>
 
 }

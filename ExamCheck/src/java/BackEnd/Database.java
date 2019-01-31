@@ -612,6 +612,36 @@ int a = rs.getInt(1);
         }
     }
       
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+      public int getRows(int no) {
+        try {
+            String sql = "a";
+            if(no ==1){sql = "select count(*) from ExmVetComit;";}
+            if(no ==2){sql = "select count(*) from internal_moderator;";}
+            if(no ==3){sql = "select count(*) from External_Examiner;";}
+            
+            
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+int a = rs.getInt(1);
+            return a;
+
+        } catch (SQLException ex) {
+            return -1;
+        }
+    }
       
       public String download_comments3(String pk) {
         try {

@@ -3,16 +3,56 @@
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
 --%>
+<%@page import="BackEnd.Permissions"%>
+<%@page import="BackEnd.Security"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    String base64 = "";
+    String sessionVar = "";
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("secretClass")){
+                base64 = cookie.getValue();
+            }
+        }
+    }
+    
+    sessionVar = request.getSession().getId();
+    
+    Security secure = new Security();
+    try{
+        Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permissionsObject == null){
+            throw new NullPointerException("Permissions Object Null");
+        }
+    }
+    catch(Exception e){
+        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        request.changeSessionId();
+        
+        //Deletes Cookies
+        for(Cookie c : request.getCookies()){
+            Cookie cookie = new Cookie(c.getName(), "");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        response.sendRedirect("Log-in.jsp");
+    }
+    
+%>
+
 <%
     HttpSession spoons = request.getSession();
     String username = (String) spoons.getAttribute("email");
 
     String perms = "";
-    Cookie[] cookies = request.getCookies();
+    cookies = request.getCookies();
 
     if (cookies != null) {
         for (Cookie cookie : cookies) {
@@ -75,7 +115,6 @@
         function submitForms(formUpload, formComment) {
             var f1 = document.getElementById(formUpload);
             var f2 = document.getElementById(formComment);
-
             //sendXMLRequest(f1, "FileUploadUpdate");
             sendXMLRequest(f2, "AddComments");
             f1.submit();
@@ -94,20 +133,14 @@
 
         function deleteAllCookies() {
             var cookies = document.cookie.split(";");
-
             for (var i = 0; i < cookies.length; i++) {
                 var cookie = cookies[i];
                 var eqPos = cookie.indexOf("=");
-                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                var name = eqPos > - 1 ? cookie.substr(0, eqPos) : cookie;
                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
             }
         }
     </script>
-    <%
-        Database db = new Database();
-        db.connect();
-        //String noCompletedExams = db.number_of_completed_exams("1");
-    %>
 
     <body>
 
@@ -134,7 +167,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-access">
                             <li><a href="#" onclick=resizeText(1)><i class="fa fa-text-height fa-2x"></i>Increase Text Size</a></li>
-                            <li><a href="#" onclick=resizeText(-1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
+                            <li><a href="#" onclick=resizeText( - 1)><i class="fa fa-text-height fa-fw"></i>Decrease Text Size</a></li>
                             <li><a href="Admin.jsp"><i class="fa fa-text-height fa-fw"></i>Normal Text Size</a></li>
                         </ul>
                     </li>
@@ -164,8 +197,8 @@
                             </li>
                             <li class="divider"></li>
                             <li><a href="Log-in.jsp" onclick=" if (confirm('Are you sure you want to log out?')) {
-                                        deleteAllCookies();
-                                    }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                deleteAllCookies();
+                                }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -175,28 +208,49 @@
                 <!-- /.navbar-static-side -->
             </nav>
         </div>
-                            <style>
-                                .borderComment
-                                {
-                                    border-style:solid;
-                                    border-color:#287EC7;
-                                    border-width:8px;
-                                }
-                            </style>
-         <form>
-                <div class="borderComment">
-                    <p>From Internal Moderator: </p>
-                    <p> (int mod message here)</p>
-                    </div>
-                <div class="borderComment">
-                    <!--<p> Comment here: </p><br> -->
-                    <textarea type="text" name="submitComment" value="Comment here" rows="4" cols="50">
-                    </textarea>
-                    <input type="submit" value="Reply" id="submitButton">          
-                </div>
-        </form>
-                            
+        <style>
+            .borderComment
+            {
+                border-style:solid;
+                border-color:#287EC7;
+                border-width:8px;
+            }
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+        </style>
+        <script>
+            function showIntMod(){
+                this.form['inputComment'].style.display = 'none;';
+            }
+        </script>
 
+
+        <form>
+            <table border="3">
+                <tr>
+                    <th>Comments from Internal Moderator</th>
+                    <th>Comments from Exam Vetting Committee</th>
+                    <th>Comments from External Moderator</th>
+                </tr>
+                <tr>
+                    <td><p>display int comment here</p>
+                    <td><p>display Exam vet comment here</p>
+                    <td><p>display External comment here</p>
+                </tr>
+                <tr>
+                    <td><button onclick="showIntMod()" id="btn1">Reply to Internal Moderator</button></td>
+                    <td><button onclick="" id="btn2">Reply to Exam Vetting Committee</button></td>
+                    <td><button onclick=""id="btn3">Reply to External Moderator</button></td>
+                </tr>
+            </table>
+
+
+            <textarea id="inputComment"rows="4" cols="50" name="hiddenText" style="display:none;">
+            </textarea>
+        </form>
 
     </body>
 </html>

@@ -1,5 +1,7 @@
 /ExamCheck/build/
 /ExamCheck/target/
+/ExamCheck/nbproject/
+/ExamCheck/nbproject/private
 *.class
 *.lst
 build.xml

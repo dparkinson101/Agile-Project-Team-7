@@ -3,10 +3,50 @@
     Created on : 28-Jan-2019, 13:16:36
     Author     : matthewmcneil
 --%>
+<%@page import="BackEnd.Permissions"%>
+<%@page import="BackEnd.Security"%>
 <%@page import="BackEnd.Database"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    String base64 = "";
+    String sessionVar = "";
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("secretClass")){
+                base64 = cookie.getValue();
+            }
+        }
+    }
+    
+    sessionVar = request.getSession().getId();
+    
+    Security secure = new Security();
+    try{
+        Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permissionsObject == null){
+            throw new NullPointerException("Permissions Object Null");
+        }
+    }
+    catch(Exception e){
+        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        request.changeSessionId();
+        
+        //Deletes Cookies
+        for(Cookie c : request.getCookies()){
+            Cookie cookie = new Cookie(c.getName(), "");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        response.sendRedirect("Log-in.jsp");
+    }
+    
+%>
+
 <html>
     <head>
 

@@ -44,6 +44,9 @@
     Security secure = new Security();
     try{
         Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permissionsObject == null){
+            throw new NullPointerException("Permissions Object Null");
+        }
     }
     catch(Exception e){
         System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");

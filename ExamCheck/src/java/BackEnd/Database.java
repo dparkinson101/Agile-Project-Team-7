@@ -466,6 +466,32 @@ public class Database {
         }
     }
           
+          
+       public String get_username_from_exam_pk(String pk,int camel) {
+        try {
+             String sql;
+            
+            
+            if (camel == 3){sql = "select users.username from users inner join exams ON users.user_pk = exams.ExmVetComit_exmVet_pk where exams.exam_pk="+pk+";";}
+              if (camel == 1){sql = "select users.username from users inner join exams ON users.user_pk = exams.internal_moderator_int_mod_pk where exams.exam_pk="+pk+";";}
+                if (camel == 2){sql = "select users.username from users inner join exams ON users.user_pk = exams.External_Examiner_ext_exam_pk where exams.exam_pk="+pk+";";}
+            if(camel!=1 && camel!=2 &&camel!=3){return "error with input to function";}
+            
+            
+            Statement state = conn.createStatement();
+            
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
+          
       public int exam_rows() {
         try {
             String sql = "select count(*) from exams;";

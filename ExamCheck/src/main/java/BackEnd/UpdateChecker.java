@@ -31,28 +31,29 @@ public class UpdateChecker extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String user = request.getParameter("user");
-        int field = Integer.parseInt(request.getParameter("field"));
-        String pk = request.getParameter("pk");
-        
-        out.println(user);
-        out.println(field);
-        out.println(pk);
-        
-        //Connect to database
+
+        String date1 = request.getParameter("date1");
+        String date2  = request.getParameter("date2");
+        String date3  = request.getParameter("date3");
+        String date4 = request.getParameter("date4");
+    	String date5 = request.getParameter("date5");
+
         Database db = new Database();
-        db.connect();
-        
-        db.setmods(pk, field, user);
-        
-        response.sendRedirect("adminTools.jsp");
+            db.connect();
+            db.add_to_storage(date1,date2,date3,date4,date5);
+
+
+
+        //Connect to database
+
+
+        response.sendRedirect("log.jsp");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateChecker</title>");            
+            out.println("<title>Servlet UpdateChecker</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UpdateChecker at " + request.getContextPath() + "</h1>");

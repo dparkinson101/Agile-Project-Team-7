@@ -195,7 +195,7 @@
                         </div>
                         <a href="CreateExam.jsp" class="text-danger text-decoration-none">
                             <div class="card-footer">
-                                <span>View Exams</span>
+                                <span>Create a new exam</span>
                                 <i class="fa fa-arrow-circle-right fa-pull-right"></i>
                             </div>
                         </a>

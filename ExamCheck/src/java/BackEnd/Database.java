@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package BackEnd;
-
+import java.util.Date;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,10 +17,7 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Douglas
- */
+ 
 public class Database {
 
     private Connection conn;
@@ -37,11 +34,7 @@ public class Database {
         }
     }
 
-    /**
-     *
-     * @return Returns an instance of the sql.Connection class which is the
-     * current connection to the database.
-     */
+ 
     public Connection connect() {
 
         try {
@@ -64,12 +57,7 @@ public class Database {
         }
     }
 
-    /**
-     *
-     * @param query SQL query for the database to process.
-     * @return Returns results of query for the database in a sql.ResultSet
-     * object.
-     */
+ 
     public ResultSet executeQuery(String query) {
         try {
             this.connect();
@@ -86,12 +74,7 @@ public class Database {
         }
     }
 
-    /**
-     *
-     * @param query SQL query for the database to process.
-     * @return Returns results of query for the database in a sql.ResultSet
-     * object.
-     */
+ 
     public boolean updateQuery(String query) {
         try {
             this.connect();
@@ -109,6 +92,26 @@ public class Database {
         }
     }
 
+    
+    
+
+ 
+    
+    
+    
+        public void updatelog(String query) {
+        try {
+            this.connect();
+            Statement state = conn.createStatement();
+            Date date = new Date();
+            state.executeUpdate("insert into audit_log(log_entry, date_time)values("+query+","+date+");");
+        } 
+        catch (SQLException ex) 
+        {
+              
+        }
+    }
+    
     public void movetoexamvettingcommite(String pk) {
 
         try {
@@ -116,7 +119,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             String sql = "update exams set internal_moderator_int_mod_pk=2 where exam_pk=" + pk + ";";
-
+            //this.updatelog("exam :"+pk+" was internal modderated and approved");
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -139,7 +142,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             String sql = "update exams set Exam_Vetting_Committee_exmVet_pk=2 where exam_pk=" + pk + ";";
-
+            //this.updatelog("exam :"+pk+" was moved externally modderated and approved");
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -162,7 +165,7 @@ public class Database {
             Statement state = conn.createStatement();
 
             String sql = "update exams set External_Examiner_ext_exam_pk=2 where exam_pk = " + pk + ";";
-
+            //this.updatelog("exam :"+pk+" has been approved the school office can now download the exam");
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
@@ -198,7 +201,7 @@ public class Database {
         try {
             Statement state = conn.createStatement();
             // INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(1,"a","a",15758);
-
+            //this.updatelog("exam :"+pk+" has been commented on :"+comments +"by :" +getusername(pk));
             String sql = "INSERT INTO `18agileteam7db`.`comments`(`comments_pk`,`commentssssss`,`Attribute_3`,`exams_exam_pk`)VALUES(" + pk + pointer + ",\"" + comments + "\",\"" + date + "\"," + pk + ");";
             state.executeUpdate(sql);
 
@@ -210,13 +213,7 @@ public class Database {
         }
     }
 
-    /**
-     *
-     * @param username the username / email of the user
-     * @param password the password of the user
-     * @return Returns the user_pk of the if they are a valid user in the
-     * database
-     */
+ 
     public String checkLogin(String username, String password) {
         try {
             this.connect();
@@ -259,11 +256,13 @@ public class Database {
 
             if (Arrays.equals(passwordHash, saltedHash) && user_pk != null) {
                 System.out.println("User: " + username + " Logged in successfully!");
+                //this.updatelog(username+"logged in");
                 System.out.println("UserPK: " + user_pk);
 
                 return user_pk;
             } else {
                 System.out.println("User: " + username + " Log in failed!");
+                //this.updatelog("a login was attempted for the user :"+username);
                 return null;
             }
 
@@ -297,6 +296,22 @@ public class Database {
         }
     }
 
+    
+    public String getusername(String pk) {
+        try {
+            String sql = "select username from users where user_pk =" + pk + ";";
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return "0";
+        }
+    }
     /**
      *
      * @param pk
@@ -440,7 +455,7 @@ public class Database {
     
           public String download_comments2(String pk) {
         try {
-            String sql = "select commentssssss from comments where comments_pk ="+pk+" ;";
+            String sql = "select commentssssss from comments where comments_pk ="+pk+1+" ;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);

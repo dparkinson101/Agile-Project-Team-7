@@ -157,8 +157,8 @@
                             </li>
                             <li class="divider"></li>
                             <li><a href="Log-in.jsp" onclick=" if (confirm('Are you sure you want to log out?')) {
-                                deleteAllCookies();
-                                }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                        deleteAllCookies();
+                                    }"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -168,49 +168,28 @@
                 <!-- /.navbar-static-side -->
             </nav>
         </div>
-        <style>
-            .borderComment
-            {
-                border-style:solid;
-                border-color:#287EC7;
-                border-width:8px;
-            }
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
-        </style>
-        <script>
-            function showIntMod{
-            this.form['inputComment'].style.display = 'none;';
-            }
-        </script>
-
-
-        <form>
-            <table border="3">
-                <tr>
-                    <th>Comments from Internal Moderator</th>
-                    <th>Comments from Exam Vetting Committee</th>
-                    <th>Comments from External Moderator</th>
-                </tr>
-                <tr>
-                    <td><p>display int comment here</p>
-                    <td><p>display Exam vet comment here</p>
-                    <td><p>display External comment here</p>
-                </tr>
-                <tr>
-                    <td><button onclick="showIntMod()" id="btn1">Reply to Internal Moderator</button></td>
-                    <td><button onclick="" id="btn2">Reply to Exam Vetting Committee</button></td>
-                    <td><button onclick=""id="btn3">Reply to External Moderator</button></td>
-                </tr>
-            </table>
-
-
-            <textarea id="inputComment"rows="4" cols="50" name="hiddenText" style="display:none;">
-            </textarea>
+                            <style>
+                                .borderComment
+                                {
+                                    border-style:solid;
+                                    border-color:#287EC7;
+                                    border-width:8px;
+                                }
+                            </style>
+         <form>
+                <div class="borderComment">
+                    <p>From Internal Moderator: </p>
+                    <p> (int mod message here)</p>
+                    </div>
+                <div class="borderComment">
+                    <!--<p> Comment here: </p><br> -->
+                    <textarea type="text" name="submitComment" value="Comment here" rows="4" cols="50">
+                    </textarea>
+                    <input type="submit" value="Reply" id="submitButton">
+                </div>
         </form>
+
+
 
     </body>
 </html>

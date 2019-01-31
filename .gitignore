@@ -1,11 +1,6 @@
-ExamCheck/build/
-ExamCheck/target/
-ExamCheck/dist/
-ExamCheck/nbproject/
-ExamCheck/nbproject/private/
+/ExamCheck/build/
+/ExamCheck/target/
+/ExamCheck/dist/
+/ExamCheck/nbproject/
 /ExamCheck/nbproject/private/
-ExamCheck/build/web/WEB-INF/classes/BackEnd/Database.class
-ExamCheck/nbproject/private/private.properties
-
-ExamCheck/nbproject/project.properties
-ExamCheck/nbproject/private/private.properties
+/ExamCheck/nbproject/private/

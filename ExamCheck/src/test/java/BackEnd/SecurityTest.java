@@ -5,6 +5,8 @@
  */
 package BackEnd;
 
+import java.util.Arrays;
+import java.util.Base64;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -14,6 +16,9 @@ import junit.framework.TestSuite;
  * @author Douglas
  */
 public class SecurityTest extends TestCase {
+    
+    Base64.Decoder dec = Base64.getDecoder();
+    Base64.Encoder enc = Base64.getEncoder();
     
     public SecurityTest(String testName) {
         super(testName);
@@ -40,26 +45,22 @@ public class SecurityTest extends TestCase {
     public void testGetNewSalt() {
         System.out.println("getNewSalt");
         Security instance = new Security();
-        byte[] expResult = null;
         byte[] result = instance.getNewSalt();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
      * Test of getSaltedHash method, of class Security.
+     * @throws java.lang.Exception
      */
     public void testGetSaltedHash() throws Exception {
         System.out.println("getSaltedHash");
-        String password = "";
-        byte[] salt = null;
+        String password = "1234";
+        byte[] salt = dec.decode("4TUX4Gesfs2CVAp8aWGwEg==");
         Security instance = new Security();
-        byte[] expResult = null;
+        byte[] expResult = dec.decode("yxufPl0mlXaEB3oBuX1wTw==");
         byte[] result = instance.getSaltedHash(password, salt);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(Arrays.equals(expResult, result));
     }
 
     /**
@@ -67,14 +68,16 @@ public class SecurityTest extends TestCase {
      */
     public void testConvertObjectToEncodedBase64() {
         System.out.println("convertObjectToEncodedBase64");
-        Object instance_2 = null;
-        String sessionVar = "";
+        Permissions instance_2 = new Permissions();
+        
+        instance_2.admin = true;
+        instance_2.login = true;
+        
+        String sessionVar = "sadjhasdkhasdkjas";
         Security instance = new Security();
-        String expResult = "";
+        String expResult = "34xkbxsTc3cpCQIYIQUOTyMWEwkDGxIaCwUbG+rdvKbCxSVjZGIyYXYFDwUIHT5rYAQLEgw3DxwVFhYxaHEWHAoHNxYHIgsHBQgHEA4NO3N1DhIVFgEPBQYlDhcBGQkVHBYxanAaHRUBGAYAHykEDAQBBR8FEylzZAgFDwgdPmtuDhUCAgkEP3NnERkNEyMvH2hzPw4KHABcHwAKDUcyBxYCBgZIHBtrYXNzYWVqHGFz";
         String result = instance.convertObjectToEncodedBase64(instance_2, sessionVar);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -82,14 +85,11 @@ public class SecurityTest extends TestCase {
      */
     public void testConvertEncodedBase64ToObject() {
         System.out.println("convertEncodedBase64ToObject");
-        String base64 = "";
-        String sessionVar = "";
+        String base64 = "34xkbxsTc3cpCQIYIQUOTyMWEwkDGxIaCwUbG+rdvKbCxSVjZGIyYXYFDwUIHT5rYAQLEgw3DxwVFhYxaHEWHAoHNxYHIgsHBQgHEA4NO3N1DhIVFgEPBQYlDhcBGQkVHBYxanAaHRUBGAYAHykEDAQBBR8FEylzZAgFDwgdPmtuDhUCAgkEP3NnERkNEyMvH2hzPw4KHABcHwAKDUcyBxYCBgZIHBtrYXNzYWVqHGFz";
+        String sessionVar = "sadjhasdkhasdkjas";
         Security instance = new Security();
-        Object expResult = null;
-        Object result = instance.convertEncodedBase64ToObject(base64, sessionVar);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Permissions result = (Permissions) instance.convertEncodedBase64ToObject(base64, sessionVar);
+        assertTrue(result.admin);
     }
 
     /**
@@ -97,13 +97,15 @@ public class SecurityTest extends TestCase {
      */
     public void testConvertObjectToByteArray() {
         System.out.println("convertObjectToByteArray");
-        Object instance_2 = null;
+        Permissions instance_2 = new Permissions();
+        
+        instance_2.admin = true;
+        instance_2.login = true;
+        
         Security instance = new Security();
-        byte[] expResult = null;
+        byte[] expResult = dec.decode("rO0ABXNyABNCYWNrRW5kLlBlcm1pc3Npb25zepm518yjtlYCAAhaAAVhZG1pbloACmV4YW1TZXR0ZXJaABBleGFtVmV0Q29tbWl0dGVlWgARZXh0ZXJuYWxNb2RlcmF0b3JaABFpbnRlcm5hbE1vZGVyYXRvcloABWxvZ2luWgAGb2ZmaWNlTAAGdXNlclBLdAASTGphdmEvbGFuZy9TdHJpbmc7eHABAAAAAAEAdAAA");
         byte[] result = instance.convertObjectToByteArray(instance_2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(Arrays.equals(expResult, result));
     }
 
     /**
@@ -111,13 +113,10 @@ public class SecurityTest extends TestCase {
      */
     public void testConvertByteArrayToObject() {
         System.out.println("convertByteArrayToObject");
-        byte[] bytes = null;
+        byte[] bytes = dec.decode("rO0ABXNyABNCYWNrRW5kLlBlcm1pc3Npb25zepm518yjtlYCAAhaAAVhZG1pbloACmV4YW1TZXR0ZXJaABBleGFtVmV0Q29tbWl0dGVlWgARZXh0ZXJuYWxNb2RlcmF0b3JaABFpbnRlcm5hbE1vZGVyYXRvcloABWxvZ2luWgAGb2ZmaWNlTAAGdXNlclBLdAASTGphdmEvbGFuZy9TdHJpbmc7eHABAAAAAAEAdAAA");
         Security instance = new Security();
-        Object expResult = null;
-        Object result = instance.convertByteArrayToObject(bytes);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Permissions result = (Permissions) instance.convertByteArrayToObject(bytes);
+        assertTrue(result.admin);
     }
 
     /**
@@ -125,14 +124,11 @@ public class SecurityTest extends TestCase {
      */
     public void testXorByteArrays() {
         System.out.println("xorByteArrays");
-        byte[] a = null;
-        byte[] b = null;
+        byte[] a = new byte[] {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
+        byte[] b = new byte[] {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
         Security instance = new Security();
-        byte[] expResult = null;
+        byte[] expResult = new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         byte[] result = instance.xorByteArrays(a, b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(Arrays.equals(expResult, result));
     }
-    
 }

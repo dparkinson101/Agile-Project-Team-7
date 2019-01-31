@@ -58,6 +58,8 @@ public class Security {
         byte[] byteBase64 = xorByteArrays(permBytes, sessionVarBytes);
 
         base64 = enc.encodeToString(byteBase64);
+        
+        System.out.println("Produced base64: " + base64);
 
         return base64;
     }
@@ -100,6 +102,8 @@ public class Security {
                 // ignore close exception
             }
         }
+        
+        System.out.println("Byte Array Produced: "+enc.encodeToString(bytes));
 
         return bytes;
     }

@@ -50,7 +50,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- FONT AWESOME !-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -244,6 +244,8 @@
                                 <input type="hidden" name="examPK" value="<%= pk%>"/>
                                 <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
                             </form>
+                            <br>
+                            <button class="btn btn-info btn-lg btn-block" href=""><i class="fas fa-hotdog"></i> View Comments </button>
                             <br>
                         </div>
                         <br>

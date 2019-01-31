@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package BackEnd;
-
 import java.util.Date;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -18,7 +17,7 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+ 
 public class Database {
 
     private Connection conn;
@@ -35,7 +34,7 @@ public class Database {
         }
     }
 
-
+ 
     public Connection connect() {
 
         try {
@@ -58,7 +57,7 @@ public class Database {
         }
     }
 
-
+ 
     public ResultSet executeQuery(String query) {
         try {
             this.connect();
@@ -75,7 +74,7 @@ public class Database {
         }
     }
 
-
+ 
     public boolean updateQuery(String query) {
         try {
             this.connect();
@@ -93,26 +92,26 @@ public class Database {
         }
     }
 
+    
+    
 
-
-
-
-
-
-
+ 
+    
+    
+    
         public void updatelog(String query) {
         try {
             this.connect();
             Statement state = conn.createStatement();
             Date date = new Date();
             state.executeUpdate("insert into audit_log(log_entry, date_time)values("+query+","+date+");");
-        }
-        catch (SQLException ex)
+        } 
+        catch (SQLException ex) 
         {
-
+              
         }
     }
-
+    
     public void movetoexamvettingcommite(String pk) {
 
         try {
@@ -214,7 +213,7 @@ public class Database {
         }
     }
 
-
+ 
     public String checkLogin(String username, String password) {
         try {
             this.connect();
@@ -297,7 +296,7 @@ public class Database {
         }
     }
 
-
+    
     public String getusername(String pk) {
         try {
             String sql = "select username from users where user_pk =" + pk + ";";
@@ -423,16 +422,16 @@ public class Database {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
       public String download_comments1(String pk) {
         try {
             String sql = "select commentssssss from comments where comments_pk ="+pk+" ;";
@@ -448,12 +447,12 @@ public class Database {
             return "0";
         }
     }
-
-
-
+    
+    
+    
           public String download_comments2(String pk) {
         try {
-            String sql = "select commentssssss from comments where comments_pk ="+pk+" ;";
+            String sql = "select commentssssss from comments where comments_pk ="+pk+1+" ;";
             Statement state = conn.createStatement();
 
             ResultSet rs = state.executeQuery(sql);
@@ -466,7 +465,7 @@ public class Database {
             return "0";
         }
     }
-
+          
       public int exam_rows() {
         try {
             String sql = "select count(*) from exams;";
@@ -482,8 +481,8 @@ int a = rs.getInt(1);
             return -1;
         }
     }
-
-
+    
+    
       public String download_comments3(String pk) {
         try {
             String sql = "select commentssssss from comments where comments_pk ="+pk+2+" ;";
@@ -499,10 +498,10 @@ int a = rs.getInt(1);
             return "0";
         }
     }
-
-
-
-
+    
+    
+    
+    
     public String getexternal(String pk) {
         try {
             String sql = "select ext_exam_pk from External_Examiner where user_user_pk =" + pk + ";";

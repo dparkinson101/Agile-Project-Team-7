@@ -30,7 +30,7 @@
 				rs.first();
 				username = rs.getString("username");
 			}
-			if(cookie.getName().equals("secretClass")){
+			if (cookie.getName().equals("secretClass")) {
 				base64 = cookie.getValue();
 			}
 		}
@@ -39,15 +39,14 @@
 	sessionVar = request.getSession().getId();
 	
 	Security secure = new Security();
-	try{
+	try {
 		Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
-	}
-	catch(Exception e){
+	} catch (Exception e) {
 		System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
 		request.changeSessionId();
 		
 		//Deletes Cookies
-		for(Cookie c : request.getCookies()){
+		for (Cookie c : request.getCookies()) {
 			Cookie cookie = new Cookie(c.getName(), "");
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
@@ -106,182 +105,156 @@
 				<i class="fas fa-user fa-lg"></i>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> <%=username %></a>
+				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> <%=username %>
+				</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="Log-in.jsp" onclick="deleteAllCookies()"><i class="fas fa-sign-out-alt"></i> Log out</a>
+				<a class="dropdown-item" href="Log-in.jsp" onclick="deleteAllCookies()"><i
+						class="fas fa-sign-out-alt"></i> Log out</a>
 			</div>
 		</li>
 	</ul>
 </nav>
 
-<%
-	//Connect to DB for printing to table
-	Database db = new Database();
-	db.connect();
-	
-	ResultSet rs = db.getallexams();
-	for (int i = 0; i < db.gettotalnumberofexams(); i++) {
+<div class="container">
+	<table class="table table-bordered">
+		<thead>
+		<tr>
+			<th scope="col">Module code / Exam setter</th>
+			<th scope="col">Internal moderator</th>
+			<th scope="col">Exam vetting committee</th>
+			<th scope="col">External moderator</th>
+		</tr>
 		
-		String colourExt;
-		rs.next();
-		String mc = rs.getString("module_code");
-		
-		String pk = rs.getString("exam_pk");
-		String examSetter = rs.getString("exam_setter_lect_pk");
-		String colourSet = db.colour1(pk);
-		String colourInt = db.colour2(pk);
-		String colourVet = db.colour3(pk);
-		colourExt = db.colour4(pk);
-
-
-%>
-
-<table class="table">
-	<thead>
-	<tr>
-		<th scope="col">Module code / Exam setter </th>
-		<th scope="col">Internal moderator</th>
-		<th scope="col">Exam vetting committee</th>
-		<th scope="col">External moderator</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-	
-	</tr>
-	</tbody>
-</table>
-
-
-<%--<table style="width:60%">
-	<tr>
-		<th>Exam Setter</th>
-		<th>Internal Moderator</th>
-		<th>Exam Vetting Comittee</th>
-		<th>External Moderator</th>
-	</tr>
-	<%
-		Database db = new Database();
-		db.connect();
-		
-		ResultSet rs = db.getallexams();
-		for (int i = 0; i < db.gettotalnumberofexams(); i++) {
+		</thead>
+		<tbody>
+		<%
+			//Connect to DB for printing to table
+			Database dab = new Database();
+			dab.connect();
 			
-			String colourExt;
-			rs.next();
-			String mc = rs.getString("module_code");
-			
-			String pk = rs.getString("exam_pk");
-			String examSetter = rs.getString("exam_setter_lect_pk");
-			String colourSet = db.colour1(pk);
-			String colourInt = db.colour2(pk);
-			String colourVet = db.colour3(pk);
-			colourExt = db.colour4(pk);
-	
-	
-	%>
-	<tr>
-		<td align="center" height="60" bgcolor="<%=colourSet%>"><% out.print(mc); %>
-			
-			<br>
-			<%
-				out.print(db.getusername(examSetter));
-			%>
+			ResultSet res = dab.getallexams();
+			for (int i = 0; i < dab.gettotalnumberofexams(); i++) {
+				
+				String colourExt;
+				res.next();
+				String mc = res.getString("module_code");
+				
+				String pk = res.getString("exam_pk");
+				String examSetter = res.getString("exam_setter_lect_pk");
+				String colourSet = dab.colour1(pk);
+				String colourInt = dab.colour2(pk);
+				String colourVet = dab.colour3(pk);
+				colourExt = dab.colour4(pk);
 		
-		</td>
-		<td align="center" bgcolor="<%=colourInt%>">
-			<%
-				if (colourInt.equals("red")) {
-			%>
-			<br>
-			<form action="UpdateChecker.java">
-				<select name="Examiner">
-					<%
-						
-						ResultSet ur = db.list_all_internal_modderators_username();
-						for (int j = 0; j < db.getRows(1); j++) {
-							ur.next();
-							String user = ur.getString("username");
+		
+		%>
+		<tr>
+			<td scope="row"><% out.print(mc.toUpperCase()); %><br><% out.print(dab.getusername(examSetter)); %></td>
+			<td bgcolor="<%=colourInt%>">
+				<% if (colourInt.equals("red")) { %>
+				<form action="UpdateChecker.java">
+					<select name="Examiner">
+						<%
+							
+							ResultSet ur = dab.list_all_internal_modderators_username();
+							for (int j = 0; j < dab.getRows(1); j++) {
+								ur.next();
+								String user = ur.getString("username");
 //
-					%>
-					<option name="Character" value="<%=user%>"><%=user%>
-					</option>
-					<%
-						}
-					%>
-				</select>
-				<input type="hidden" name="field" value="1"/>
-				<input type="hidden" name="pk" value=<%=pk%>/>
-				<input type="submit">
-			</form>
-			<%
-				} else {
-					out.print(db.get_username_from_exam_pk(pk, 1));
-				}
-			%>
-		</td>
-		<td align="center" bgcolor="<%=colourVet%>">
-			<%
-				if (colourVet.equals("red")) {
-			%>
-			<br>
-			<form action="adminTools.jsp">
-				<select name="Examiner">
-					<%
-						ResultSet ur = db.list_all_exam_vetting_commitey_username();
-						for (int j = 0; j < db.getRows(2); j++) {
-							ur.next();
-							String user = ur.getString("username");
-					%>
-					<option value="<%=user%>"><%=user%>
-					</option>
-					<%
-						}
-					%>
-				</select>
-				<input type="hidden" name="field" value="2"/>
-				<input type="hidden" name="pk" value="<%=pk%>"/>
-				<input type="submit">
-			</form>
-			<%
-				} else {
-					out.print(db.get_username_from_exam_pk(pk, 2));
-				}
-			%>
-		</td>
-		<td align="center" bgcolor="<%=colourExt%>">
-			<%
-				if (colourExt.equals("red")) {
-			%>
-			<br>
-			<form action="adminTools.jsp">
-				<select name="Examiner">
-					<%
-						ResultSet ur = db.list_all_external_examiners_username();
-						for (int j = 0; j < db.getRows(3); j++) {
-							ur.next();
-							String user = ur.getString("username");
-					%>
-					<option value="<%=user%>"><%=user%>
-					</option>
-					<%
-						}
-					%>
-				</select>
-				<input type="submit">
-				<input type="hidden" name="field" value="3"/>
-				<input type="hidden" name="pk" value="<%=pk%>"/>
-			</form>
-			<%
-				} else {
-					out.print(db.get_username_from_exam_pk(pk, 3));
-				}
-			%>
-		</td>
-	</tr>
-	<%
-		}
-	%>
-</table>--%>
+						%>
+						<option name="Character" value="<%=user%>"><%=user%>
+						</option>
+						<% } %>
+					</select>
+					<input type="hidden" name="field" value="1"/>
+					<input type="hidden" name="pk" value=<%=pk%>/>
+					<input type="submit">
+				</form>
+				<%
+					} else {
+						out.print(dab.get_username_from_exam_pk(pk, 1));
+					}
+				%>
+			</td>
+			<td bgcolor="<%=colourVet%>">
+				<% if (colourVet.equals("red")) { %>
+				<form action="adminTools.jsp">
+					<select name="Examiner">
+						<%
+							ResultSet ur = dab.list_all_exam_vetting_commitey_username();
+							for (int j = 0; j < dab.getRows(2); j++) {
+								ur.next();
+								String user = ur.getString("username");
+						%>
+						<option value="<%=user%>"><%=user%>
+						</option>
+						<%
+							}
+						%>
+					</select>
+					<input type="hidden" name="field" value="2"/>
+					<input type="hidden" name="pk" value="<%=pk%>"/>
+					<input type="submit">
+				</form>
+				<%
+					} else {
+						out.print(dab.get_username_from_exam_pk(pk, 2));
+					}
+				%>
+			</td>
+			<td bgcolor="<%=colourExt%>">
+				<% if (colourExt.equals("red")) { %>
+				<form action="adminTools.jsp">
+					<select name="Examiner">
+						<%
+							ResultSet ur = dab.list_all_external_examiners_username();
+							for (int j = 0; j < dab.getRows(3); j++) {
+								ur.next();
+								String user = ur.getString("username");
+						%>
+						<option value="<%=user%>"><%=user%>
+						</option>
+						<%
+							}
+						%>
+					</select>
+					<input type="submit">
+					<input type="hidden" name="field" value="3"/>
+					<input type="hidden" name="pk" value="<%=pk%>"/>
+				</form>
+				<%
+					} else {
+						out.print(dab.get_username_from_exam_pk(pk, 3));
+					}
+				%>
+			</td>
+		</tr>
+		<%
+			}
+		%>
+		
+		</tbody>
+	</table>
+	
+	<!-- KEY !-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+				<div style="width:30px;height: 30px;background-color: red; margin-right:10px;" class="float-left"></div>
+				<span> Not assigned</span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-md-4">
+				<div style="width:30px;height: 30px;background-color: yellow; margin-right:10px;" class="float-left"></div>
+				<span> In progress</span>
+			</div>
+			<div class="col-md-4">
+				<div style="width:30px;height: 30px;background-color: green; margin-right:10px;" class="float-left"></div>
+				<span> Completed</span>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
 </body>
 </html>

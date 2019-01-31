@@ -7,6 +7,7 @@ package BackEnd;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,11 +35,22 @@ public class createAccount extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         //Sets up variables for POST varaible info
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("fName");
+        String lastName = request.getParameter("sName");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = request.getParameter("pass");
+        String exSeta = request.getParameter("exSet");
+        String intMod = request.getParameter("intMod");
+        String exVet = request.getParameter("exVet");
+        String exMod = request.getParameter("exMod");
+        String schOff = request.getParameter("schOff");
 
+        System.out.println(exSeta);
+        System.out.println(intMod);
+        System.out.println(exVet);
+        System.out.println(exMod);
+        System.out.println(schOff);
+      
         try {
             //Creates / Stores Salted Hash of Password
             Base64.Encoder enc = Base64.getEncoder();
@@ -54,6 +66,34 @@ public class createAccount extends HttpServlet {
             boolean created;
             try {
                 db.updateQuery("INSERT INTO users (username, password, salt) VALUES ('" + email + "', '" + enc.encodeToString(saltedHash) + "', '" + enc.encodeToString(salt) + "');");
+        //    out.println(db.user_rows());
+        
+            
+        
+                if(exSeta != null){
+                  db.updateQuery("INSERT INTO exam_setter (lect_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }
+                if(intMod != null)
+               {
+             //      out.println(db.user_rows());
+                  db.updateQuery("INSERT INTO internal_moderator (int_mod_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }
+                if(exVet != null)
+               {
+                //   out.println(db.user_rows());
+                  db.updateQuery("INSERT INTO exmvetcomit (exmVet_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }      
+                if(exMod != null)
+               {
+                //   out.println(db.user_rows());
+                  db.updateQuery("INSERT INTO external_examiner (ext_exam_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }
+                if(schOff != null)
+               {
+                  out.println("11111");
+                  db.updateQuery("INSERT INTO school_office (school_office_pk, user_user_pk)values("+db.user_rows()+","+db.user_rows()+");");
+               }  
+               out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 created = true;
             } catch (Exception e) {
                 created = false;
@@ -75,7 +115,7 @@ public class createAccount extends HttpServlet {
                 }
                 out.println("</body>");
                 out.println("</html>");
-                response.sendRedirect("Log-in.jsp");
+                response.sendRedirect("index.jsp");
             }
             catch(Exception e){
                 System.out.println("ERROR PRINTING HTML");

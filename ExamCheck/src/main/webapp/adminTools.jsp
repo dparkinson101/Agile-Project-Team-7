@@ -57,16 +57,16 @@
                         
                             <br>
                             <%
-                                out.print(examSetter);
+                                out.print(db.getusername(examSetter));
                             %> 
 
                 </td>
-                <td align="center" bgcolor=<%out.print(colourInt);%>>Smith
+                <td align="center" bgcolor=<%out.print(colourInt);%>>
                     <%
-                        if(!colourInt.equals("green")){
+                        if(colourInt.equals("red")){
                     %>
                     <br>
-                    <form action="adminTools.jsp">
+                    <form action="UpdateChecker.java">
                             <select name="Examiner">
                             <%
                                 ResultSet ur = db.list_all_internal_modderators_username();                                
@@ -74,20 +74,22 @@
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
-                            <option value=<%out.print(user);%>><%out.print(user);%></option>
+                            <option name="Character" value=<%out.print(user);%>>  <%out.print(user);%></option>
                             <%
                                 }
                             %>
                             </select>
+                            <input type="hidden" name="field" value="1" />
+                            <input type="hidden" name="pk" value=<%out.println(pk);%> />
                             <input type="submit">
                         </form>                     
                     <%
-                        }
+                        }else{out.print(db.get_username_from_exam_pk(pk, 1));}
                     %>
                 </td> 
-                <td align="center" bgcolor=<%out.print(colourVet);%>>50
+                <td align="center" bgcolor=<%out.print(colourVet);%>>
                     <%
-                        if(!colourVet.equals("green")){
+                        if(colourVet.equals("red")){
                     %>
                     <br>
                     <form action="adminTools.jsp">
@@ -103,15 +105,17 @@
                                 }
                             %>
                             </select>
+                            <input type="hidden" name="field" value="2" />
+                            <input type="hidden" name="pk" value=<%out.println(pk);%> />
                             <input type="submit">
                         </form>                        
                     <%
-                        }
+                        }else{out.print(db.get_username_from_exam_pk(pk, 2));}
                     %>
                 </td>
-                <td align="center" bgcolor=<%out.print(colourExt);%>>Cart
+                <td align="center" bgcolor=<%out.print(colourExt);%>>
                     <%
-                        if(!colourExt.equals("green")){
+                        if(colourExt.equals("red")){
                     %>
                     <br>
                     <form action="adminTools.jsp">
@@ -128,9 +132,11 @@
                             %>
                             </select>
                             <input type="submit">
+                            <input type="hidden" name="field" value="3" />
+                            <input type="hidden" name="pk" value=<%out.println(pk);%> />
                         </form>                        
                     <%
-                        }
+                        }else{out.print(db.get_username_from_exam_pk(pk, 3));}
                     %>
                 </td>
             </tr>

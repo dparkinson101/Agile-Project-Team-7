@@ -245,7 +245,10 @@
                                 <button class="btn btn-info btn-lg btn-block fa fa-download mx-auto" type="submit"> Download Exam </button>
                             </form>
                             <br>
-                            <button class="btn btn-info btn-lg btn-block" href=""><i class="fas fa-hotdog"></i> View Comments </button>
+                            <form action="commentsPage.jsp" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="btn btn-info btn-lg btn-block fas fa-hotdog mx-auto" type="submit"> View Comments </button>
+                            </form>
                             <br>
                         </div>
                         <br>

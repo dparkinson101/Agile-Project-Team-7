@@ -20,10 +20,6 @@
         <servlet-name>AddComments</servlet-name>
         <servlet-class>BackEnd.AddComments</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>showDate</servlet-name>
-        <servlet-class>showDate.showDate</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>createAccount</servlet-name>
         <url-pattern>/createAccount</url-pattern>
@@ -43,10 +39,6 @@
     <servlet-mapping>
         <servlet-name>AddComments</servlet-name>
         <url-pattern>/AddComments</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>showDate</servlet-name>
-        <url-pattern>/showDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

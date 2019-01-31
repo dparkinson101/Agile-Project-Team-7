@@ -65,12 +65,10 @@
                 </div>
                 <%
                     Cookie[] cookies = request.getCookies();
-                    if (cookies != null) {
-                        for (Cookie c : cookies) {
-                            if (c.getName().equals("login")) {
-                                if (c.getValue().equals("false")) {
-                                    out.println("<p class='text-danger text-center'> Incorrect Login Credentials, <br> Please try again</p>");
-                                }
+                    for (Cookie c : cookies) {
+                        if (c.getName().equals("login")) {
+                            if (c.getValue().equals("false")) {
+                                out.println("<p class='text-danger text-center'> Incorrect Login Credentials, <br> Please try again</p>");
                             }
                         }
                     }

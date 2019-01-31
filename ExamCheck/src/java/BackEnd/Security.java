@@ -64,10 +64,6 @@ public class Security {
 
     public Object convertEncodedBase64ToObject(String base64, String sessionVar) {
         Object obj;
-        
-        if(base64 == null || sessionVar == null || base64.equals("") || sessionVar.equals("")){
-            return null;
-        }
 
         byte[] encodedBytes = dec.decode(base64);
         byte[] sessionVarBytes = sessionVar.getBytes();

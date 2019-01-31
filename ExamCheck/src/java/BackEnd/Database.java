@@ -187,7 +187,7 @@ public class Database {
     
     
     
-    public String getapkfromtheusernamebecausefuckmethatswhy(String name,int number) {
+    public String getapkfromtheusername(String name,int number) {
 
          try {
                     String sql ="A";
@@ -244,16 +244,16 @@ else {return false;}
     
     
     
-        public void setmods(String pk,String newpk,int number,String name) {
+        public void setmods(String pk,int number,String name) {
 
         try {
 
             Statement state = conn.createStatement();
             String sql = "A";
             
-         if(number ==1){sql = "update exams set ExmVetComit_exmVet_pk="+getapkfromtheusernamebecausefuckmethatswhy(name, number)+" where exam_pk = " + pk + ";";}
-if(number ==2){sql =   "update exams set internal_moderator_int_mod_pk="+getapkfromtheusernamebecausefuckmethatswhy(name, number)+" where exam_pk = " + pk + ";";}
-  if(number ==3){ sql = "update exams set External_Examiner_ext_exam_pk="+getapkfromtheusernamebecausefuckmethatswhy(name, number)+" where exam_pk = " + pk + ";";}  
+         if(number ==1){sql = "update exams set ExmVetComit_exmVet_pk="+getapkfromtheusername(name, number)+" where exam_pk = " + pk + ";";}
+if(number ==2){sql =   "update exams set internal_moderator_int_mod_pk="+getapkfromtheusername(name, number)+" where exam_pk = " + pk + ";";}
+  if(number ==3){ sql = "update exams set External_Examiner_ext_exam_pk="+getapkfromtheusername(name, number)+" where exam_pk = " + pk + ";";}  
 
 
             

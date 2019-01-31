@@ -33,7 +33,7 @@ public class UpdateChecker extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String user = request.getParameter("user");
-        String field = request.getParameter("field");
+        int field = Integer.parseInt(request.getParameter("field"));
         String pk = request.getParameter("pk");
         
         out.println(user);
@@ -44,6 +44,7 @@ public class UpdateChecker extends HttpServlet {
         Database db = new Database();
         db.connect();
         
+        db.setmods(pk, field, user);
         
         response.sendRedirect("adminTools.jsp");
         try (PrintWriter out = response.getWriter()) {

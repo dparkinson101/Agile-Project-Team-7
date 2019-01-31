@@ -21,10 +21,6 @@
         <servlet-class>BackEnd.AddComments</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewUser</servlet-name>
-        <servlet-class>BackEnd.NewUser</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UpdateChecker</servlet-name>
         <servlet-class>BackEnd.UpdateChecker</servlet-class>
     </servlet>
@@ -47,10 +43,6 @@
     <servlet-mapping>
         <servlet-name>AddComments</servlet-name>
         <url-pattern>/AddComments</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewUser</servlet-name>
-        <url-pattern>/NewUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateChecker</servlet-name>

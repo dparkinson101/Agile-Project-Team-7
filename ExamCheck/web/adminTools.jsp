@@ -114,7 +114,7 @@
                                     ur.next();
                                     String user = ur.getString("username");
                             %>
-                            <option name="Character" value=<%out.print(user);%>><%out.print(user);%></option>
+                            <option name="Character" value=<%out.print(user);%>>  <%out.print(user);%></option>
                             <%
                                 }
                             %>

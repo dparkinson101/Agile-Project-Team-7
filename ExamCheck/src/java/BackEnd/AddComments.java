@@ -35,11 +35,12 @@ public class AddComments extends HttpServlet {
         String comment = request.getParameter("comment");
         int stage = Integer.parseInt(request.getParameter("stage"));
         
-        DateFormat dateFormat = new SimpleDateFormat("DD/mm/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy HH:mm:ss");
         Date date = new Date();
         String currentDateTime = dateFormat.format(date);
 
         Database db = new Database();
+        db.connect();
         try {
             System.out.println(comment);
             System.out.println(pk);
@@ -52,6 +53,7 @@ public class AddComments extends HttpServlet {
             }
 
             response.sendRedirect("index.jsp");
+            db.close();
         } catch (IOException e) {
             e.getMessage();
         }

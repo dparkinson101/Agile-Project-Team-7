@@ -228,7 +228,7 @@
 					<h4 class="card-title">Add new user</h4>
 				</div>
 				<div class="card-body">
-					<form id="newUser" action="">
+					<form id="newUser" action="createAccount" method="POST">
 						<div class="form-group">
 							<label for="firstName">First name(s)</label>
 							<input type="text" class="form-control" id="firstName" required>

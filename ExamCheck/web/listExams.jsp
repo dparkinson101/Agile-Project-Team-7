@@ -165,376 +165,479 @@
             int count = Integer.getInteger(result);
              */
         %>
-
-        <div class="accordion">
-            <% if (permsInstance.examSetter) {
-                    int noOfExams = Integer.parseInt(db.number_examslinkedtopk(creds));%>
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Exam Setter
-                        </button>
-                </div>
-                <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
-
-
-                    <%
-                        ResultSet rs = db.info_examslinkedtopk(creds);
-                        for (int i = 0; i < noOfExams; i++) {
-                            int no = i;
-
-                            if (rs.next()) {
-
-                                String mc = rs.getString("module_code");
-                                String title = rs.getString("title");
-                                String onlineorpaper;
-                                if ("0".equals(rs.getString("online_or_paper"))) {
-                                    onlineorpaper = "Online Exam";
-                                } else {
-                                    onlineorpaper = "Written Exam";
-                                }
-                                String resit;
-                                if ("0".equals(rs.getString("resit"))) {
-                                    resit = "Main Exam";
-                                } else {
-                                    resit = "Resit Exam";
-                                }
-                                String exam = rs.getString("exam");
-                                String grade;
-                                if ("0".equals(rs.getString("grade"))) {
-                                    grade = "Undergraduate Exam";
-                                } else {
-                                    grade = "Postgraduate Exam";
-                                }
-                                String pk = rs.getString("exam_pk");
-
-                    %>
-                    <div class="card-body">
-                        <h5><% out.print("Exam Number: " + no); %></h5>
-                        <h5><p class="mb-1">Module Code: </h5><% out.print(mc); %></p>
-                        <h5><p class="mb-1">Title:</h5> <% out.print(title); %></p>
-                        <h5><p class="mb-1">Online or Paper:</h5> <% out.print(onlineorpaper); %></p>
-                        <h5><p class="mb-1">Type:</h5> <% out.print(resit); %></p>
-                        <h5><p class="mb-1">Exam:</h5> <% out.print(exam); %></p>
-                        <h5><p class="mb-1">Grade:</h5> <% out.print(grade);%></p>
-
-                        <form action="FileDownload" method="POST">
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <button class="fa fa-download" type="submit"> Download exam </button>
-                        </form>
-                        <br>
+        <div class="container">
+            <div class="accordion">
+                <% if (permsInstance.examSetter) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopk(creds));%>
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Exam Setter
+                            </button>
                     </div>
-                    <br>
-                    <%}
-                        } %>
-                </div>
-            </div>
-            <%}%>
-            <% if (permsInstance.internalModerator) {
-                    int noOfExams = Integer.parseInt(db.number_examslinkedtopkintmod(creds));%>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Internal Moderator
-                        </button>
-                </div>
-                <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion">
-
-                    <% for (int i = 0; i < noOfExams; i++) {
-                            int no = i;
-                            ResultSet rs = db.info_examslinkedtopkintmod(creds);
-                            if (rs.next()) {
-                                String mc = rs.getString("module_code");
-                                String title = rs.getString("title");
-                                String onlineorpaper;
-                                if ("0".equals(rs.getString("online_or_paper"))) {
-                                    onlineorpaper = "Online Exam";
-                                } else {
-                                    onlineorpaper = "Written Exam";
-                                }
-                                String resit;
-                                if ("0".equals(rs.getString("resit"))) {
-                                    resit = "Main Exam";
-                                } else {
-                                    resit = "Resit Exam";
-                                }
-                                String exam = rs.getString("exam");
-                                String grade;
-                                if ("0".equals(rs.getString("grade"))) {
-                                    grade = "Undergraduate Exam";
-                                } else {
-                                    grade = "Postgraduate Exam";
-                                }
-                                String pk = String.valueOf(rs.getInt("exam_pk"));
-                    %>
-                    <div class="card-body">
-                        <h5><% out.print("Exam Number: " + no); %></h5>
-                        <h5><p class="mb-1">Module Code: </h5><% out.print(mc); %></p>
-                        <h5><p class="mb-1">Title:</h5> <% out.print(title); %></p>
-                        <h5><p class="mb-1">Online or Paper:</h5> <% out.print(onlineorpaper); %></p>
-                        <h5><p class="mb-1">Type:</h5> <% out.print(resit); %></p>
-                        <h5><p class="mb-1">Exam:</h5> <% out.print(exam); %></p>
-                        <h5><p class="mb-1">Grade:</h5> <% out.print(grade);%></p>
+                    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
 
 
-                        <form action="FileDownload" method="POST">
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <button class="fa fa-download" type="submit"> Download exam </button>
-                        </form>
-                        <br>
-
-                        <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
-                            <h5>Upload Revised Exam</h5>
-                            <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
-                        </form>
-                        <form id="comment<%= pk%>" action="AddComments" method="post">
-                            <input type="hidden" name="examPK" value="<%= pk%>">
-                            <input type="hidden" name="stage" value=1>
-                            <br>Comment On Exam: <br>
-                            <textarea name="comment"></textarea> <br> <br>
-                        </form>
-                        <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
-                    </div>
-                    <br>
-                    <%}
-                        }%>
-
-                </div>
-            </div>
-            <%} %>
-            <% if (permsInstance.examVetCommittee) {
-                    int noOfExams = Integer.parseInt(db.number_examslinkedtopkvetcommit(creds));%>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Exam Vetting Committee
-                        </button>
-                </div>
-                <div id="collapseThree" class="collapse hide" aria-labelledby="headingThree" data-parent="#accordion">
-                    <% for (int i = 0; i < noOfExams; i++) {
-                            int no = i;
-                            ResultSet rs = db.info_examslinkedtopkvetcommit(creds);
-                            if (rs.next()) {
-                                String mc = rs.getString("module_code");
-                                String title = rs.getString("title");
-                                String onlineorpaper;
-                                if ("0".equals(rs.getString("online_or_paper"))) {
-                                    onlineorpaper = "Online Exam";
-                                } else {
-                                    onlineorpaper = "Written Exam";
-                                }
-                                String resit;
-                                if ("0".equals(rs.getString("resit"))) {
-                                    resit = "Main Exam";
-                                } else {
-                                    resit = "Resit Exam";
-                                }
-                                String exam = rs.getString("exam");
-                                String grade;
-                                if ("0".equals(rs.getString("grade"))) {
-                                    grade = "Undergraduate Exam";
-                                } else {
-                                    grade = "Postgraduate Exam";
-                                }
-                                String pk = rs.getString("exam_pk");
-                    %>
-                    <div class="card-body">
-                        <h5><% out.print("Exam Number: " + no); %></h5>
-                        <h5><p class="mb-1">Module Code: </h5><% out.print(mc); %></p>
-                        <h5><p class="mb-1">Title:</h5> <% out.print(title); %></p>
-                        <h5><p class="mb-1">Online or Paper:</h5> <% out.print(onlineorpaper); %></p>
-                        <h5><p class="mb-1">Type:</h5> <% out.print(resit); %></p>
-                        <h5><p class="mb-1">Exam:</h5> <% out.print(exam); %></p>
-                        <h5><p class="mb-1">Grade:</h5> <% out.print(grade);%></p>
-
-
-                        <form action="FileDownload" method="POST">
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <button class="fa fa-download" type="submit"> Download exam </button>
-                        </form>
-                        <br>
-
-                        <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
-                            <h5>Upload Revised Exam</h5>
-                            <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
-                        </form>
-                        <form id="comment<%= pk%>" action="AddComments" method="post">
-                            <input type="hidden" name="examPK" value="<%= pk%>">
-                            <input type="hidden" name="stage" value=2>
-                            <br>Comment On Exam: <br>
-                            <textarea name="comment"></textarea> <br> <br>
-                        </form>
-                        <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
-                    </div>
-                    <br>
-                    <%}
-                        } %>
-
-                </div>
-            </div>
-            <%} %>
-            <% if (permsInstance.externalModerator) {
-                    int noOfExams = Integer.parseInt(db.number_examslinkedtopkextmod(creds));
-            %>
-            <div class="card">
-                <div class="card-header" id="headingFour">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            External Moderator
-                        </button>
-                </div>
-                <div id="collapseFour" class="collapse hide" aria-labelledby="headingFour" data-parent="#accordion">
-                    <% for (int i = 0; i < 5; i++) {
-                            int no = i;
-                            ResultSet rs = db.info_examslinkedtopkextmod(creds);
-                            if (rs.next()) {
-                                String mc = rs.getString("module_code");
-                                String title = rs.getString("title");
-                                String onlineorpaper;
-                                if ("0".equals(rs.getString("online_or_paper"))) {
-                                    onlineorpaper = "Online Exam";
-                                } else {
-                                    onlineorpaper = "Written Exam";
-                                }
-                                String resit;
-                                if ("0".equals(rs.getString("resit"))) {
-                                    resit = "Main Exam";
-                                } else {
-                                    resit = "Resit Exam";
-                                }
-                                String exam = rs.getString("exam");
-                                String grade;
-                                if ("0".equals(rs.getString("grade"))) {
-                                    grade = "Undergraduate Exam";
-                                } else {
-                                    grade = "Postgraduate Exam";
-                                }
-                                String pk = rs.getString("exam_pk");
-                    %>
-                    <div class="card-body">
-                        <h5><% out.print("Exam Number: " + no); %></h5>
-                        <h5><p class="mb-1">Module Code: </h5><% out.print(mc); %></p>
-                        <h5><p class="mb-1">Title:</h5> <% out.print(title); %></p>
-                        <h5><p class="mb-1">Online or Paper:</h5> <% out.print(onlineorpaper); %></p>
-                        <h5><p class="mb-1">Type:</h5> <% out.print(resit); %></p>
-                        <h5><p class="mb-1">Exam:</h5> <% out.print(exam); %></p>
-                        <h5><p class="mb-1">Grade:</h5> <% out.print(grade);%></p>
-
-
-                        <form action="FileDownload" method="POST">
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <button class="fa fa-download" type="submit"> Download exam </button>
-                        </form>
-                        <br>
-
-                        <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
-                            <h5>Upload Revised Exam</h5>
-                            <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
-                        </form>
-                        <form id="comment<%= pk%>" action="AddComments" method="post">
-                            <input type="hidden" name="examPK" value="<%= pk%>">
-                            <input type="hidden" name="stage" value=3>
-                            <br>Comment On Exam: <br>
-                            <textarea name="comment"></textarea> <br> <br>
-                        </form>
-                        <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
-
-                    </div>
-                    <br>
-                    <%}
-                        } %>
-
-                </div>
-            </div>
-            <%} %>
-            <% if (permsInstance.office) {
-                    int noOfExams = Integer.parseInt(db.number_of_completed_exams(creds));%>%>
-            <div class="card">
-                <div class="card-header" id="headingFive">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            School Office
-                        </button>
-                </div>
-                <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordion">
-                    <% for (int i = 0; i < noOfExams; i++) {
-                            int no = i;
-
+                        <%
                             ResultSet rs = db.info_examslinkedtopk(creds);
-                            if (rs.next()) {
-                                String mc = rs.getString("module_code");
-                                String title = rs.getString("title");
-                                String onlineorpaper;
-                                if ("0".equals(rs.getString("online_or_paper"))) {
-                                    onlineorpaper = "Online Exam";
-                                } else {
-                                    onlineorpaper = "Written Exam";
-                                }
-                                String resit;
-                                if ("0".equals(rs.getString("resit"))) {
-                                    resit = "Main Exam";
-                                } else {
-                                    resit = "Resit Exam";
-                                }
-                                String exam = rs.getString("exam");
-                                String grade;
-                                if ("0".equals(rs.getString("grade"))) {
-                                    grade = "Undergraduate Exam";
-                                } else {
-                                    grade = "Postgraduate Exam";
-                                }
-                                String pk = rs.getString("exam_pk");
+                            for (int i = 1; i <= noOfExams; i++) {
+                                int no = i;
 
-                    %>
-                    <div class="card-body">
-                        <h5><% out.print("Exam Number: " + no); %></h5>
-                        <h5><p class="mb-1">Module Code: </h5><% out.print(mc); %></p>
-                        <h5><p class="mb-1">Title:</h5> <% out.print(title); %></p>
-                        <h5><p class="mb-1">Online or Paper:</h5> <% out.print(onlineorpaper); %></p>
-                        <h5><p class="mb-1">Type:</h5> <% out.print(resit); %></p>
-                        <h5><p class="mb-1">Exam:</h5> <% out.print(exam); %></p>
-                        <h5><p class="mb-1">Grade:</h5> <% out.print(grade);%></p>
+                                if (rs.next()) {
 
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper;
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
+                                    } else {
+                                        onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
+                                    } else {
+                                        resit = "Resit Exam";
+                                    }
+                                    String exam = rs.getString("exam");
+                                    String grade;
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
+                                    } else {
+                                        grade = "Postgraduate Exam";
+                                    }
+                                    String pk = rs.getString("exam_pk");
 
-                        <form action="FileDownload" method="POST">
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <button class="fa fa-download" type="submit"> Download exam </button>
-                        </form>
+                        %>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Exam Number</th>
+                                        <th scope="col">Module Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Exam</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> <% out.print(no); %></th>
+                                        <td> <% out.print(mc.toUpperCase()); %> </td>
+                                        <td> <% out.print(title); %> </td>
+                                        <td> <% out.print(onlineorpaper); %> </td>
+                                        <td> <% out.print(resit); %> </td>
+                                        <td> <% if (exam == "1") {
+                                                out.print("Exam");
+                                            } else {
+                                                out.print("Exam Soultions");
+                                            } %> </td>
+                                        <td> <% out.print(grade);%> </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
+                            </form>
+                            <br>
+                        </div>
                         <br>
-
-                        <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
-                            <h5>Upload Revised Exam</h5>
-                            <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                            <input type="hidden" name="examPK" value="<%= pk%>"/>
-                            <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
-                        </form>
-                        <form id="comment<%= pk%>" action="AddComments" method="post">
-                            <input type="hidden" name="examPK" value="<%= pk%>">
-                            <br>Comment On Exam: <br>
-                            <textarea name="comment"></textarea> <br> <br>
-                        </form>
-                        <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+                        <%}
+                            } %>
                     </div>
-                    <br>
-                    <%}
-                        } %>
                 </div>
+                <%}%>
+                <% if (permsInstance.internalModerator) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopkintmod(creds));%>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Internal Moderator
+                            </button>
+                    </div>
+                    <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion">
+
+                        <%                                 ResultSet rs = db.info_examslinkedtopkintmod(creds);
+
+                            for (int i = 1; i <= noOfExams; i++) {
+                                int no = i;
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper;
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
+                                    } else {
+                                        onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
+                                    } else {
+                                        resit = "Resit Exam";
+                                    }
+                                    String exam = rs.getString("exam");
+                                    String grade;
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
+                                    } else {
+                                        grade = "Postgraduate Exam";
+                                    }
+                                    String pk = String.valueOf(rs.getInt("exam_pk"));
+                        %>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Exam Number</th>
+                                        <th scope="col">Module Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Exam</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> <% out.print(no); %></th>
+                                        <td> <% out.print(mc.toUpperCase()); %> </td>
+                                        <td> <% out.print(title); %> </td>
+                                        <td> <% out.print(onlineorpaper); %> </td>
+                                        <td> <% out.print(resit); %> </td>
+                                        <td> <% if (exam == "1") {
+                                                out.print("Exam");
+                                            } else {
+                                                out.print("Exam Soultions");
+                                            } %> </td>
+                                        <td> <% out.print(grade);%> </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=1>
+                                <br>Comment On Exam: <br>
+                                <textarea name="comment"></textarea> <br> <br>
+                            </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+                        </div>
+                        <br>
+                        <%}
+                            }%>
+
+                    </div>
+                </div>
+                <%} %>
+                <% if (permsInstance.examVetCommittee) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopkvetcommit(creds));%>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Exam Vetting Committee
+                            </button>
+                    </div>
+                    <div id="collapseThree" class="collapse hide" aria-labelledby="headingThree" data-parent="#accordion">
+                        <%                                 ResultSet rs = db.info_examslinkedtopkvetcommit(creds);
+
+                            for (int i = 1; i <= noOfExams; i++) {
+                                int no = i;
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper;
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
+                                    } else {
+                                        onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
+                                    } else {
+                                        resit = "Resit Exam";
+                                    }
+                                    String exam = rs.getString("exam");
+                                    String grade;
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
+                                    } else {
+                                        grade = "Postgraduate Exam";
+                                    }
+                                    String pk = rs.getString("exam_pk");
+                        %>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Exam Number</th>
+                                        <th scope="col">Module Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Exam</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> <% out.print(no); %></th>
+                                        <td> <% out.print(mc.toUpperCase()); %> </td>
+                                        <td> <% out.print(title); %> </td>
+                                        <td> <% out.print(onlineorpaper); %> </td>
+                                        <td> <% out.print(resit); %> </td>
+                                        <td> <% if (exam == "1") {
+                                                out.print("Exam");
+                                            } else {
+                                                out.print("Exam Soultions");
+                                            } %> </td>
+                                        <td> <% out.print(grade);%> </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=2>
+                                <br>Comment On Exam: <br>
+                                <textarea name="comment"></textarea> <br> <br>
+                            </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+                        </div>
+                        <br>
+                        <%}
+                            } %>
+
+                    </div>
+                </div>
+                <%} %>
+                <% if (permsInstance.externalModerator) {
+                        int noOfExams = Integer.parseInt(db.number_examslinkedtopkextmod(creds));
+                %>
+                <div class="card">
+                    <div class="card-header" id="headingFour">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                External Moderator
+                            </button>
+                    </div>
+                    <div id="collapseFour" class="collapse hide" aria-labelledby="headingFour" data-parent="#accordion">
+                        <%                                 ResultSet rs = db.info_examslinkedtopkextmod(creds);
+                            for (int i = 1; i <= noOfExams; i++) {
+                                int no = i;
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper;
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
+                                    } else {
+                                        onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
+                                    } else {
+                                        resit = "Resit Exam";
+                                    }
+                                    String exam = rs.getString("exam");
+                                    String grade;
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
+                                    } else {
+                                        grade = "Postgraduate Exam";
+                                    }
+                                    String pk = rs.getString("exam_pk");
+                        %>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Exam Number</th>
+                                        <th scope="col">Module Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Exam</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> <% out.print(no); %></th>
+                                        <td> <% out.print(mc.toUpperCase()); %> </td>
+                                        <td> <% out.print(title); %> </td>
+                                        <td> <% out.print(onlineorpaper); %> </td>
+                                        <td> <% out.print(resit); %> </td>
+                                        <td> <% out.print(exam); %> </td>
+                                        <td> <% out.print(grade);%> </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
+                                <input type="hidden" name="stage" value=3>
+                                <br>Comment On Exam: <br>
+                                <textarea name="comment"></textarea> <br> <br>
+                            </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+
+                        </div>
+                        <br>
+                        <%}
+                            } %>
+
+                    </div>
+                </div>
+                <%} %>
+                <% if (permsInstance.office) {
+                        int noOfExams = Integer.parseInt(db.number_of_completed_exams(creds));%>
+                <div class="card">
+                    <div class="card-header" id="headingFive">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                School Office
+                            </button>
+                    </div>
+                    <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordion">
+                        <%                                 ResultSet rs = db.info_examslinkedtopkintmod(creds);
+
+                            for (int i = 1; i <= noOfExams; i++) {
+                                int no = i;
+
+                                if (rs.next()) {
+                                    String mc = rs.getString("module_code");
+                                    String title = rs.getString("title");
+                                    String onlineorpaper;
+                                    if ("0".equals(rs.getString("online_or_paper"))) {
+                                        onlineorpaper = "Online Exam";
+                                    } else {
+                                        onlineorpaper = "Written Exam";
+                                    }
+                                    String resit;
+                                    if ("0".equals(rs.getString("resit"))) {
+                                        resit = "Main Exam";
+                                    } else {
+                                        resit = "Resit Exam";
+                                    }
+                                    String exam = rs.getString("exam");
+                                    String grade;
+                                    if ("0".equals(rs.getString("grade"))) {
+                                        grade = "Undergraduate Exam";
+                                    } else {
+                                        grade = "Postgraduate Exam";
+                                    }
+                                    String pk = rs.getString("exam_pk");
+
+                        %>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Exam Number</th>
+                                        <th scope="col">Module Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Online or Paper</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Exam</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> <% out.print(no); %></th>
+                                        <td> <% out.print(mc.toUpperCase()); %> </td>
+                                        <td> <% out.print(title); %> </td>
+                                        <td> <% out.print(onlineorpaper); %> </td>
+                                        <td> <% out.print(resit); %> </td>
+                                        <td> <% out.print(exam); %> </td>
+                                        <td> <% out.print(grade);%> </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <form action="FileDownload" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="fa fa-download" type="submit"> Download exam </button>
+                            </form>
+                            <br>
+
+                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
+                                <h5>Upload Revised Exam</h5>
+                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
+                            </form>
+                            <form id="comment<%= pk%>" action="AddComments" method="post">
+                                <input type="hidden" name="examPK" value="<%= pk%>">
+                                <br>Comment On Exam: <br>
+                                <textarea name="comment"></textarea> <br> <br>
+                            </form>
+                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+                        </div>
+                        <br>
+                        <%}
+                            } %>
+                    </div>
+                </div>
+                <%}%>
+
+
             </div>
-            <%}%>
-
-
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

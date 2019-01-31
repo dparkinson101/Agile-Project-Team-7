@@ -180,6 +180,104 @@ public class Database {
         }
 
     }
+    
+    
+    
+    
+    
+    
+    
+    public String getapkfromtheusernamebecausefuckmethatswhy(String name,int number) {
+
+         try {
+                    String sql ="A";
+         if(number ==1){sql = "select exmVet_pk from exmvetcomit inner join users where  users.user_pk = exmvetcomit.exmVet_pk and users.username = \""+name+"\";";}
+if(number ==2){sql = "select int_mod_pk from internal_moderator inner join users where  users.user_pk = internal_moderator.int_mod_pk and users.username = \""+name+"\";";}
+  if(number ==3){sql = "select ext_exam_pk from external_examiner inner join users where  users.user_pk = external_examiner.ext_exam_pk and users.username = \""+name+"\";";}       
+            if(sql.equals("A")){return null;}
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            return null;
+        }    
+    }
+    
+    
+    
+    
+ //   returns tru if the username is not taken
+    
+       public boolean isusername_taken(String name) {
+
+         try {
+                    String sql ="select count(*) from users where username=\""+name+"\";";
+
+            Statement state = conn.createStatement();
+
+            ResultSet rs = state.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+if(rs.getString(1).equals("0")){return true;}
+else {return false;}
+         
+            
+
+        } catch (SQLException ex) {
+            return false;
+        }
+       }
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        public void setmods(String pk,String newpk,int number,String name) {
+
+        try {
+
+            Statement state = conn.createStatement();
+            String sql = "A";
+            
+         if(number ==1){sql = "update exams set ExmVetComit_exmVet_pk="+getapkfromtheusernamebecausefuckmethatswhy(name, number)+" where exam_pk = " + pk + ";";}
+if(number ==2){sql =   "update exams set internal_moderator_int_mod_pk="+getapkfromtheusernamebecausefuckmethatswhy(name, number)+" where exam_pk = " + pk + ";";}
+  if(number ==3){ sql = "update exams set External_Examiner_ext_exam_pk="+getapkfromtheusernamebecausefuckmethatswhy(name, number)+" where exam_pk = " + pk + ";";}  
+
+
+            
+            
+            //this.updatelog("exam :"+pk+" has been approved the school office can now download the exam");
+            state.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+
+            // handle any sql errors
+            System.out.println("SQLException: " + ex.getMessage());
+
+            System.out.println("SQLState: " + ex.getSQLState());
+
+            System.out.println("VendorError: " + ex.getErrorCode());
+
+        }
+
+    }
+    
+    
+    
+    
+    
 
     public void addcomment(String comments, String pk, String date, int pointer) {
 

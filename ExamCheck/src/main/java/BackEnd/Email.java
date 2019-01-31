@@ -72,17 +72,6 @@ public class Email {
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    public static void main(String[] args) {
-
-        Email email = new Email();
-        email.sendEmail(
-                "dparkinson@dundee.ac.uk",
-                "dundeeuniversityexamtool@gmail.com",
-                "Exam Check Sign Up",
-                "This worked"
-        );
-    }
-
     public Gmail getService() throws IOException, GeneralSecurityException, Exception {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();

@@ -44,9 +44,6 @@
     Security secure = new Security();
     try{
         Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
-        if(permissionsObject == null){
-            throw new NullPointerException("Permissions Object Null");
-        }
     }
     catch(Exception e){
         System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
@@ -61,7 +58,6 @@
         
         response.sendRedirect("Log-in.jsp");
     }
-    
 %>
 
 <html>
@@ -200,7 +196,7 @@
                         </div>
                         <a href="CreateExam.jsp" class="text-danger text-decoration-none">
                             <div class="card-footer">
-                                <span>View Exams</span>
+                                <span>Create a new exam</span>
                                 <i class="fa fa-arrow-circle-right fa-pull-right"></i>
                             </div>
                         </a>

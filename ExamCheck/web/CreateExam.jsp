@@ -140,34 +140,7 @@
                 <button type="submit" form="examDetails" value="submit" class="btn btn-block btn-success w-25 mx-auto">Assign</button>
             </form>
         </div>
-
-        <!--            <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Create a new Exam</h1>
-                        </div>
-                         /.col-lg-12 
-                    </div>
-                    <form action="FileUpload" method="post" id="examDetails" enctype="multipart/form-data">
-                        Module Code: <br>
-                        <input type="text" name="moduleCode" id="modCode"><br><br>
-                        Module Title: <br>
-                        <input type="text" name="moduleTitle" id="modTitle"><br><br>
-                        <br>
-                        <input type="radio" name="examType" value="0" id="onlineRad"> Online<br>  0=Online 1=Written 
-                        <input type="radio" name="examType" value="1" id="writtenRad"> Written<br>
-                        <br>
-                        <input type="radio" name="examChoice" value="0" id="mainRad"> Main Exam<br>  0=Main Exam 1=Resit Exam 
-                        <input type="radio" name="examChoice" value="1" id="resitRad"> Resit Exam<br>
-                        <br>
-                        <input type="radio" name="examLevel" value="0" id="UndergradRad"> Undergrad Exam<br>  0=Undergrad 1=Postgrad 
-                        <input type="radio" name="examLevel" value="1" id="PostgradRad"> Postgrad Exam<br>
-                        <br>
-                        <br>
-                        Select a file to upload: <br><br>
-                        <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                        <br>
-                        <button type="submit" form="examDetails" value="submit">Submit Exam</button>
-                    </form>-->
+        <br><br>
     </div>
 </body>
 </html>

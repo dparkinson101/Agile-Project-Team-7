@@ -4,3 +4,5 @@
 /ExamCheck/nbproject/private
 *.class
 *.lst
+build.xml
+nb-configuration.xml

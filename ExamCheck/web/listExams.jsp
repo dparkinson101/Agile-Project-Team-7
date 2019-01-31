@@ -233,7 +233,7 @@
                                         <td> <% if (exam == "1") {
                                                 out.print("Exam");
                                             } else {
-                                                out.print("Exam Soultions");
+                                                out.print("Exam Solutions");
                                             } %> </td>
                                         <td> <% out.print(grade);%> </td>
 
@@ -242,7 +242,7 @@
                             </table>
                             <form action="FileDownload" method="POST">
                                 <input type="hidden" name="examPK" value="<%= pk%>"/>
-                                <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download mx-auto" type="submit"> Download Exam </button>
                             </form>
                             <br>
                             <button class="btn btn-info btn-lg btn-block" href=""><i class="fas fa-hotdog"></i> View Comments </button>
@@ -316,7 +316,7 @@
                                         <td> <% if (exam == "1") {
                                                 out.print("Exam");
                                             } else {
-                                                out.print("Exam Soultions");
+                                                out.print("Exam Solutions");
                                             } %> </td>
                                         <td> <% out.print(grade);%> </td>
 
@@ -413,7 +413,7 @@
                                         <td> <% if (exam == "1") {
                                                 out.print("Exam");
                                             } else {
-                                                out.print("Exam Soultions");
+                                                out.print("Exam Solutions");
                                             } %> </td>
                                         <td> <% out.print(grade);%> </td>
 
@@ -553,8 +553,8 @@
                             </button>
                     </div>
                     <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordion">
-                        <%                                 ResultSet rs = db.info_examslinkedtopkintmod(creds);
-
+                        <%                                 
+                            ResultSet rs = db.get_done_exams();
                             for (int i = 1; i <= noOfExams; i++) {
                                 int no = i;
 
@@ -609,25 +609,12 @@
                                     </tr>
                                 </tbody>
                             </table>
-
+                                        <br>                
                             <form action="FileDownload" method="POST">
                                 <input type="hidden" name="examPK" value="<%= pk%>"/>
-                                <button class="fa fa-download" type="submit"> Download exam </button>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download mx-auto" type="submit"> Download Exam </button>
                             </form>
                             <br>
-
-                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
-                                <h5>Upload Revised Exam</h5>
-                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                                <input type="hidden" name="examPK" value="<%= pk%>"/>
-                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
-                            </form>
-                            <form id="comment<%= pk%>" action="AddComments" method="post">
-                                <input type="hidden" name="examPK" value="<%= pk%>">
-                                <br>Comment On Exam: <br>
-                                <textarea name="comment"></textarea> <br> <br>
-                            </form>
-                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
                         <br>
                         <%}

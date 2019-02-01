@@ -73,7 +73,8 @@
             }
         }
     }
-    int Ryan = 0;
+    
+if(permsInstance != null){
 %>
 <html>
     <head>
@@ -688,3 +689,5 @@
 
 </body>
 </html>
+
+<%}%>

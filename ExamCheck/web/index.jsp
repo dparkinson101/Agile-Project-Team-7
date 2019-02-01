@@ -112,15 +112,17 @@
                         <a class="dropdown-item" href="index.jsp"><i class="fa fa-text-height fa-fw"></i> Normal text size</a>
                     </div>
                 </li>
+                <% if(permsInstance.admin) { %>
                 <!-- Notifications !-->
                 <li class="nav-item dropdown" style="padding-right: 10px">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                         <i class="fas fa-bell fa-lg"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#"><i class="fas fa-comment"></i> No new comments</a>
+                        <a class="dropdown-item" href="AuditLog.jsp"><i class="fas fa-comment"></i> View Audit Log</a>
                     </div>
                 </li>
+                <%  }  %>
                 <!-- User !-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -169,7 +171,7 @@
                             </a>
                         </div>
                     </div>
-                    <% if (permsInstance.internalModerator || permsInstance.examVetCommittee || permsInstance.externalModerator) { %>
+                    <% if (permsInstance.examSetter || permsInstance.internalModerator || permsInstance.examVetCommittee || permsInstance.externalModerator) { %>
                     <!-- In Progress Exams !-->
                     <div class="col-sm-4">
                         <div class="card border-warning">

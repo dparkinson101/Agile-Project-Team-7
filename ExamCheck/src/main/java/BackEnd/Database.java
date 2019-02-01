@@ -152,6 +152,8 @@ public class Database {
         }
 
     }
+    
+    
 
     public void finish_exam(String pk) {
 
@@ -299,10 +301,20 @@ if(number ==2){sql =   "update exams set internal_moderator_int_mod_pk="+getapkf
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
-            // handle any sql errors
-            System.out.println("SQLException: " + ex.getMessage());
+           try {
+         String sql=  " UPDATE `18agileteam7db`.`comments`SET`comments_pk` = " + pk + pointer + ",`commentssssss` = \"" + comments + "\",`Attribute_3` = \"" + date + "\",`exams_exam_pk` = " + pk + " WHERE `comments_pk` = " + pk + ";";
+
+            
+            Statement state = conn.createStatement();
+            
+            state.executeUpdate(sql);
+           }
+              catch (SQLException exe) {
+                  
+            System.out.println("SQLExceptionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
+            }
         }
     }
 

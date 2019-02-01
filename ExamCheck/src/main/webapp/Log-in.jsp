@@ -65,7 +65,7 @@
                 </div>
                 <%
                     Cookie[] cookies = request.getCookies();
-                    if (cookies == null) {
+                    if (cookies != null) {
                         for (Cookie c : cookies) {
                             if (c.getName().equals("login")) {
                                 if (c.getValue().equals("false")) {

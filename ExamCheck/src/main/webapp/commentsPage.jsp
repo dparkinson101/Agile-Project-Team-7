@@ -3,15 +3,56 @@
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
 --%>
+<%@page import="BackEnd.Security"%>
+<%@page import="BackEnd.Permissions"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    //CODE FOR COOKIE CHECKING
+    String base64 = "";
+
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie c : cookies) {
+            if (c.getName().equals("secretClass")) {
+                base64 = c.getValue();
+            }
+        }
+    }
+
+    String sessionVar = request.getSession().getId();
+    Permissions permsInstance = null;
+
+    Security secure = new Security();
+    try {
+        permsInstance = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if (permsInstance == null) {
+            throw new NullPointerException("Perms Object Returned is Null");
+        }
+    } catch (NullPointerException e) {
+        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        request.changeSessionId();
+
+        //Deletes Cookies
+        if (request.getCookies() != null) {
+            for (Cookie c : request.getCookies()) {
+                Cookie cookie = new Cookie(c.getName(), "");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+        response.sendRedirect("Log-in.jsp");
+    }
+%>
+
 <%
     HttpSession spoons = request.getSession();
     String username = (String) spoons.getAttribute("email");
     String perms = "";
-    Cookie[] cookies = request.getCookies();
     if (cookies != null) {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("permissions")) {

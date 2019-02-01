@@ -4,12 +4,51 @@
     Author     : Douglas
 --%>
 
+<%@page import="BackEnd.Security"%>
+<%@page import="BackEnd.Permissions"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%
-    String email = request.getParameter("email");
+    //CODE FOR COOKIE CHECKING
+    String base64 = "";
+
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie c : cookies) {
+            if (c.getName().equals("secretClass")) {
+                base64 = c.getValue();
+            }
+        }
+    }
+
+    String sessionVar = request.getSession().getId();
+    Permissions permsInstance = null;
+
+    Security secure = new Security();
+    try {
+        permsInstance = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if (permsInstance == null) {
+            throw new NullPointerException("Perms Object Returned is Null");
+        }
+    } catch (NullPointerException e) {
+        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
+        request.changeSessionId();
+
+        //Deletes Cookies
+        if (request.getCookies() != null) {
+            for (Cookie c : request.getCookies()) {
+                Cookie cookie = new Cookie(c.getName(), "");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+        response.sendRedirect("Log-in.jsp");
+    }
 %>
+
+<%String email = request.getParameter("email");%>
 
 <html>
     <head>
@@ -20,7 +59,7 @@
         <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
         <!-- FONT AWESOME !-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Account</title>
     </head>

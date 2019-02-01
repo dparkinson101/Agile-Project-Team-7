@@ -6,23 +6,31 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+    String email = request.getParameter("email");
+%>
+
 <html>
     <head>
+        <!-- JQUERY !-->
+        <script src="./vendor/jquery/jquery.min.js"></script>
+        <!-- BOOTSTRAP !-->
+        <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+        <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- FONT AWESOME !-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Account</title>
     </head>
-    <body>
+    <body style="text-align: center;">
         <h1>Create New Account</h1>
         <br><br>
         <form action="createAccount" method="POST">
-            <h6>First Name:</h6>
-            <input type="text" name="firstName"/>
-            <br>
-            <h6>Last Name</h6>
-            <input type="text" name="lastName"/>
-            <br>
             <h6>Dundee University Email</h6>
-            <input type="text" name="email"/>
+            <h6><%= email%></h6>
+            <input type="hidden" name="email" value="<%= email%>"/>
             <br>
             <h6>Password</h6>
             <input type="password" name="password"/>

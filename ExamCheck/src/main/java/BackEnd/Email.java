@@ -80,6 +80,23 @@ public class Email {
                 .build();
         return service;
     }
+    
+    public static void main(String[]  args){
+        Email e = new Email();
+        e.sendCreateAccountEmail("dparkinson@dundee.ac.uk", "Please sign up for your exam check account: ", "http://localhost:8080/ExamCheck/");
+    }
+    
+    public boolean sendCreateAccountEmail(String to, String body, String PageContext){
+        String link = PageContext+"createAccount.jsp?email="+to;
+        String from = "dundeeuniversityexamtool@gmail.com";
+        String subject = "Exam Check: Account Sign Up";
+        
+        body += ("\n " + link);
+        
+        sendEmail(to, from, subject, body);
+        
+        return true;
+    }
 
     public boolean sendEmail(String to, String from, String subject, String body) {
 

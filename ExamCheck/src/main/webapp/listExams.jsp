@@ -387,8 +387,11 @@ if(permsInstance != null){
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <p> Do you want to move to the next stage? </p> <br>
-                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
-                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br>                             
+                                <select name="ryan">
+                                  <option value="Yes">Yes</option>
+                                  <option value="No">No</option>
+                                </select>
+                                <br><br>
                             </form>
                             <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
@@ -488,8 +491,11 @@ if(permsInstance != null){
                                 <textarea name="comment"></textarea> <br> <br>
                                 
                                 <p> Do you want to move to the next stage? </p>
-                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
-                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br> <br>
+                                <select name="ryan">
+                                  <option value="Yes">Yes</option>
+                                  <option value="No">No</option>
+                                </select> 
+                                <br><br>
                                 
                                 <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                             </form>
@@ -586,8 +592,11 @@ if(permsInstance != null){
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
                                 <p> Do you want to move to the next stage? </p> <br>
-                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
-                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br>
+                                <select name="ryan">
+                                  <option value="Yes">Yes</option>
+                                  <option value="No">No</option>
+                                </select>
+                                <br><br>
                             </form>
                             <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
 

@@ -39,10 +39,10 @@ public class AddComments extends HttpServlet {
         //int ryan = Integer.parseInt(request.getParameter("ryan"));
         String ryan = request.getParameter("ryan");
         System.out.println(ryan);
-        if(ryan.equals("yes")){
+        if(ryan.equals("Yes")){
             stage = pointer;
         }
-        else if(ryan.equals("no"))
+        else if(ryan.equals("No"))
         {
             System.out.println(ryan);
             stage = 0;

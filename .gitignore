@@ -2,6 +2,8 @@
 /ExamCheck/target/
 /ExamCheck/nbproject/
 /ExamCheck/nbproject/private
+/ExamCheck/.idea/
+/ExamCheck/dist/
 *.class
 *.lst
 build.xml

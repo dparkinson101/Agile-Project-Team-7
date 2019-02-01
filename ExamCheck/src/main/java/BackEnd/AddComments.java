@@ -31,15 +31,29 @@ public class AddComments extends HttpServlet {
      */
     public void processComment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        int stage = 0;
         String pk = request.getParameter("examPK");
         String comment = request.getParameter("comment");
-        int stage = Integer.parseInt(request.getParameter("stage"));
-        
-        DateFormat dateFormat = new SimpleDateFormat("DD/mm/yyyy HH:mm:ss");
+        int pointer = Integer.parseInt(request.getParameter("stage"));
+        //int ryan = Integer.parseInt(request.getParameter("ryan"));
+        String ryan = request.getParameter("ryan");
+        System.out.println(ryan);
+        if(ryan.equals("yes")){
+            stage = pointer;
+        }
+        else if(ryan.equals("no"))
+        {
+            System.out.println(ryan);
+            stage = 0;
+        }
+        System.out.println(stage);
+        DateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy HH:mm:ss");
         Date date = new Date();
         String currentDateTime = dateFormat.format(date);
 
         Database db = new Database();
+        db.connect();
         try {
             System.out.println(comment);
             System.out.println(pk);
@@ -52,6 +66,7 @@ public class AddComments extends HttpServlet {
             }
 
             response.sendRedirect("index.jsp");
+            db.close();
         } catch (IOException e) {
             e.getMessage();
         }

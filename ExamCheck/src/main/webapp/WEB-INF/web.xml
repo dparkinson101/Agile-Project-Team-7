@@ -3,7 +3,6 @@
     <welcome-file-list>
         <welcome-file>Log-in.jsp</welcome-file>
     </welcome-file-list>
-
     <servlet>
         <servlet-name>createAccount</servlet-name>
         <servlet-class>BackEnd.createAccount</servlet-class>
@@ -28,6 +27,14 @@
         <servlet-name>UpdateChecker</servlet-name>
         <servlet-class>BackEnd.UpdateChecker</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showDate</servlet-name>
+        <servlet-class>BackEnd.showDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendReply</servlet-name>
+        <servlet-class>BackEnd.SendReply</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>createAccount</servlet-name>
         <url-pattern>/createAccount</url-pattern>
@@ -51,6 +58,14 @@
     <servlet-mapping>
         <servlet-name>UpdateChecker</servlet-name>
         <url-pattern>/UpdateChecker</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showDate</servlet-name>
+        <url-pattern>/showDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendReply</servlet-name>
+        <url-pattern>/SendReply</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

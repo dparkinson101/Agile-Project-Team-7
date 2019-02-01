@@ -40,10 +40,14 @@
 	}
 	
 	sessionVar = request.getSession().getId();
-	
+	Permissions permissionsObject = null;
+        
 	Security secure = new Security();
 	try {
-		Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+		permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+                if(permissionsObject == null){
+                    throw new NullPointerException("The permissions object returned was null");
+                }
 	} catch (Exception e) {
 		System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
 		request.changeSessionId();

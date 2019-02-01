@@ -65,7 +65,7 @@ public class loginManagerTest extends TestCase {
 
         verify(response).addCookie(captor.capture());
 
-        final List<Cookie> cookies = captor.getValue();
+        final List<Cookie> cookies = (List<Cookie>) captor.getValue();
 
         for (Cookie c : cookies) {
             if (c.getName().equals("secretClass")) {
@@ -76,6 +76,7 @@ public class loginManagerTest extends TestCase {
 
     /**
      * Test of doGet method, of class loginManager.
+     * @throws java.lang.Exception
      */
     public void testDoGet() throws Exception {
         System.out.println("doGet");

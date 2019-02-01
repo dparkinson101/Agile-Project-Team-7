@@ -34,6 +34,7 @@
             }
         }
     }
+    int Ryan = 0;
 %>
 <html>
     <head>
@@ -345,6 +346,9 @@
                                 <input type="hidden" name="stage" value=1>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
+                                <p> Do you want to move to the next stage? </p> <br>
+                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
+                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br>                             
                             </form>
                             <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
@@ -442,8 +446,14 @@
                                 <input type="hidden" name="stage" value=2>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
+                                
+                                <p> Do you want to move to the next stage? </p>
+                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
+                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br> <br>
+                                
+                                <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                             </form>
-                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+                            
                         </div>
                         <br>
                         <%}
@@ -535,6 +545,9 @@
                                 <input type="hidden" name="stage" value=3>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
+                                <p> Do you want to move to the next stage? </p> <br>
+                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
+                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br>
                             </form>
                             <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
 

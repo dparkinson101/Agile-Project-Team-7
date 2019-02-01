@@ -55,9 +55,10 @@ public class FileUploadUpdate extends HttpServlet {
         }
 
         String examPK = request.getParameter("examPK");
-
+        
         out.println(examPK);
         out.println(docType);
+        
 
         //Connect to database
         Database db = new Database();

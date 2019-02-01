@@ -94,10 +94,6 @@ public class loginManager extends HttpServlet {
             String sessionVar = request.getSession().getId();
             
             String encodedInstance = secure.convertObjectToEncodedBase64(permsInstance, sessionVar);
-            
-            HttpSession spoons = request.getSession();
-            spoons.setAttribute("email", email);
-            spoons.setAttribute("perms", permsInstance);
 
             Cookie login = new Cookie("login", String.valueOf(loggedIn));
             Cookie credentials = new Cookie("user", loginResults);

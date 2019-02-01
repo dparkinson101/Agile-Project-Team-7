@@ -40,10 +40,14 @@
     }
 
     sessionVar = request.getSession().getId();
+    Permissions permsInstance = null;
 
     Security secure = new Security();
     try {
-        Permissions permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        permsInstance = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
+        if(permsInstance == null){
+            throw new NullPointerException("Perms Object Returned is Null");
+        }
     } catch (Exception e) {
         System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
         request.changeSessionId();
@@ -58,8 +62,6 @@
         response.sendRedirect("Log-in.jsp");
     }
     
-    HttpSession spoons = request.getSession();
-    Permissions permsInstance = (Permissions) spoons.getAttribute("perms");
 
 %>
 

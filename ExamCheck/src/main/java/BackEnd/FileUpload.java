@@ -60,6 +60,7 @@ public class FileUpload extends HttpServlet {
         String examType = request.getParameter("examType");
         String examChoice = request.getParameter("examChoice");
         String examLevel = request.getParameter("examLevel");
+        String userPK = request.getParameter("userPK");
 
         //out.println(filePath);
         out.println(moduleCode);
@@ -79,7 +80,7 @@ public class FileUpload extends HttpServlet {
         //InputStream inputStream = new FileInputStream(new File(filePath));
         //out.println(inputStream);
         //db.updateQuery("INSERT INTO `18agileteam7db`.`entity_1`(`PK`,`test`)VALUES(134,null);");
-        db.blobin(fileContent, moduleCode, examLevel, "34", moduleTitle, examType, examChoice, "1", Integer.toString(examPK), docType);
+        db.blobin(fileContent, moduleCode, examLevel, String.valueOf(examPK), moduleTitle, examType, examChoice, userPK, Integer.toString(examPK), docType);
         out.println("end");
         response.sendRedirect("index.jsp");
 

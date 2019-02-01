@@ -44,6 +44,8 @@
         }
         response.sendRedirect("Log-in.jsp");
     }
+    
+if(permsInstance != null){
 %>
 
 <html>
@@ -179,6 +181,7 @@
                         });
                     </script>
                 </div>
+                <input type="hidden" name="userPK" value="<%= permsInstance.userPK%>">
                 <button type="submit" form="examDetails" value="submit" class="btn btn-block btn-success w-25 mx-auto">Assign</button>
             </form>
         </div>
@@ -213,3 +216,4 @@
     </div>
 </body>
 </html>
+<%}%>

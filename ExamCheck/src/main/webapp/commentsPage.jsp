@@ -3,42 +3,30 @@
     Created on : 23-Jan-2019, 14:05:30
     Author     : stevenshearer
 --%>
-<%@page import="BackEnd.Security"%>
-<%@page import="BackEnd.Permissions"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="BackEnd.Database"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    String base64 = "";
+    HttpSession spoons = request.getSession();
+    String username = (String) spoons.getAttribute("email");
+    String perms = "";
     Cookie[] cookies = request.getCookies();
-    for (Cookie c : cookies) {
-        if (c.getName().equals("secretClass")) {
-            base64 = c.getValue();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("permissions")) {
+                perms = cookie.getValue();
+            }
         }
     }
-
-    String sessionVar = request.getSession().getId();
-    Permissions permissionsObject = null;
-
-    Security secure = new Security();
-    try {
-        permissionsObject = (Permissions) secure.convertEncodedBase64ToObject(base64, sessionVar);
-        if (permissionsObject == null) {
-            throw new NullPointerException("The permissions object returned was null");
+    String creds = "";
+    Cookie[] cookies2 = request.getCookies();
+    if (cookies2 != null) {
+        for (Cookie cookie2 : cookies2) {
+            if (cookie2.getName().equals("user")) {
+                creds = cookie2.getValue();
+            }
         }
-    } catch (Exception e) {
-        System.out.println("Error Getting Permissions Object: The Session Variable May Have Changed!");
-        request.changeSessionId();
-
-        //Deletes Cookies
-        for (Cookie c : request.getCookies()) {
-            Cookie cookie = new Cookie(c.getName(), "");
-            cookie.setMaxAge(0);
-            response.addCookie(cookie);
-        }
-
-        response.sendRedirect("Log-in.jsp");
     }
 
     Database db = new Database();
@@ -213,14 +201,15 @@
             </tr>
             <tr>
                 <td><%
-                    String pk = db.download_comments1(permissionsObject.userPK);
+                    //Database db = new Database();
+                    //db.connect();
+                    String pk = db.download_comments1(creds);
                     out.println(pk);%>
                 </td><td><%
-                    String pkk = db.download_comments2(permissionsObject.userPK);
+                    String pkk = db.download_comments2(creds);
                     out.println(pkk);%>
-                </td><td>
-                    <% String k = db.download_comments3(permissionsObject.userPK);
-                        out.println(k);%>
+                </td><td><% String k = db.download_comments3(creds);
+                    out.println(k);%>
                 </td></tr>
             <tr>
                 <td><button onclick="showIntMod()">Reply to Internal Moderator</button></td>
@@ -232,7 +221,7 @@
                     <textarea type="text" name="inputComment" id="inputComment" rows="4" cols="50">
                     </textarea>
                     <input hidden name="value" value="1"/>
-                    <input hidden name="pk" value="<%=permissionsObject.userPK%>"/>
+                    <input hidden name="pk" value="<%=creds%>"/>
                     <input name="Submit"  type="submit" value="Send"/>
                 </form>
             </td>
@@ -242,7 +231,7 @@
                     <textarea type="text" name="inputComment" id="inputComment" rows="4" cols="50">
                     </textarea>
                     <input hidden name="value" value="2"/>
-                    <input hidden name="pk" value="<%=permissionsObject.userPK%>"/>
+                    <input hidden name="pk" value="<%=creds%>"/>
                     <input name="Submit"  type="submit" value="Send"/>
                 </form>
             </td>
@@ -252,7 +241,7 @@
                     <textarea type="text" name="inputComment" id="inputComment" rows="4" cols="50">
                     </textarea>
                     <input hidden name="value" value="3"/>
-                    <input hidden name="pk" value="<%=permissionsObject.userPK%>"/>
+                    <input hidden name="pk" value="<%=creds%>"/>
                     <input name="Submit"  type="submit" value="Send"/>
                 </form>
             </td>

@@ -34,6 +34,7 @@
             }
         }
     }
+    int Ryan = 0;
 %>
 <html>
     <head>
@@ -50,7 +51,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- FONT AWESOME !-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -233,7 +234,7 @@
                                         <td> <% if (exam == "1") {
                                                 out.print("Exam");
                                             } else {
-                                                out.print("Exam Soultions");
+                                                out.print("Exam Solutions");
                                             } %> </td>
                                         <td> <% out.print(grade);%> </td>
 
@@ -242,7 +243,12 @@
                             </table>
                             <form action="FileDownload" method="POST">
                                 <input type="hidden" name="examPK" value="<%= pk%>"/>
-                                <button class="btn btn-info btn-lg btn-block fa fa-download" type="submit"> Download Exam </button>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download mx-auto" type="submit"> Download Exam </button>
+                            </form>
+                            <br>
+                            <form action="commentsPage.jsp" method="POST">
+                                <input type="hidden" name="examPK" value="<%= pk%>"/>
+                                <button class="btn btn-info btn-lg btn-block fas fa-hotdog mx-auto" type="submit"> View Comments </button>
                             </form>
                             <br>
                         </div>
@@ -314,7 +320,7 @@
                                         <td> <% if (exam == "1") {
                                                 out.print("Exam");
                                             } else {
-                                                out.print("Exam Soultions");
+                                                out.print("Exam Solutions");
                                             } %> </td>
                                         <td> <% out.print(grade);%> </td>
 
@@ -340,6 +346,9 @@
                                 <input type="hidden" name="stage" value=1>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
+                                <p> Do you want to move to the next stage? </p> <br>
+                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
+                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br>                             
                             </form>
                             <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
@@ -411,7 +420,7 @@
                                         <td> <% if (exam == "1") {
                                                 out.print("Exam");
                                             } else {
-                                                out.print("Exam Soultions");
+                                                out.print("Exam Solutions");
                                             } %> </td>
                                         <td> <% out.print(grade);%> </td>
 
@@ -437,8 +446,14 @@
                                 <input type="hidden" name="stage" value=2>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
+                                
+                                <p> Do you want to move to the next stage? </p>
+                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
+                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br> <br>
+                                
+                                <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                             </form>
-                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
+                            
                         </div>
                         <br>
                         <%}
@@ -530,6 +545,9 @@
                                 <input type="hidden" name="stage" value=3>
                                 <br>Comment On Exam: <br>
                                 <textarea name="comment"></textarea> <br> <br>
+                                <p> Do you want to move to the next stage? </p> <br>
+                                <input type="radio" id="ryan1" name="ryan" value="no">no<br>
+                                <input type="radio" id="ryan2" name="ryan" value="yes">yes<br>
                             </form>
                             <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
 
@@ -551,8 +569,8 @@
                             </button>
                     </div>
                     <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordion">
-                        <%                                 ResultSet rs = db.info_examslinkedtopkintmod(creds);
-
+                        <%                                 
+                            ResultSet rs = db.get_done_exams();
                             for (int i = 1; i <= noOfExams; i++) {
                                 int no = i;
 
@@ -607,25 +625,12 @@
                                     </tr>
                                 </tbody>
                             </table>
-
+                                        <br>                
                             <form action="FileDownload" method="POST">
                                 <input type="hidden" name="examPK" value="<%= pk%>"/>
-                                <button class="fa fa-download" type="submit"> Download exam </button>
+                                <button class="btn btn-info btn-lg btn-block fa fa-download mx-auto" type="submit"> Download Exam </button>
                             </form>
                             <br>
-
-                            <form id="fileUpload<%= pk%>" action="FileUploadUpdate" method="POST" enctype="multipart/form-data">
-                                <h5>Upload Revised Exam</h5>
-                                <input type="file" name="fileToUpload" accept=".docx, .pdf"/>
-                                <input type="hidden" name="examPK" value="<%= pk%>"/>
-                                <!--<button class="fa fa-pencil" type="submit"> Update exam </button>-->
-                            </form>
-                            <form id="comment<%= pk%>" action="AddComments" method="post">
-                                <input type="hidden" name="examPK" value="<%= pk%>">
-                                <br>Comment On Exam: <br>
-                                <textarea name="comment"></textarea> <br> <br>
-                            </form>
-                            <button onclick="submitForms('fileUpload<%= pk%>', 'comment<%= pk%>')">Submit Exam Review</button>
                         </div>
                         <br>
                         <%}
